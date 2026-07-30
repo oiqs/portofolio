@@ -1,7 +1,7 @@
 <header class="border-b border-ink/5 backdrop-blur-md sticky top-0 z-50 bg-paper/80">
     <div class="max-w-6xl mx-auto px-6 md:px-10 py-6 flex items-center justify-between">
         <a href="{{ url('/') }}" class="font-display text-xl tracking-wide group">
-            Nama Kamu<span class="text-accent transition-transform inline-block group-hover:scale-125">.</span>
+            oIQs<span class="text-accent transition-transform inline-block group-hover:scale-125">.</span>
         </a>
 
         <div class="flex items-center gap-6">

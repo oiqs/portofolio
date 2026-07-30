@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -19,8 +20,7 @@ class ContactController extends Controller
             'message' => 'required|string|max:2000',
         ]);
 
-        // Sementara data belum dikirim ke mana-mana / disimpan.
-        // Nanti bisa ditambahkan: Mail::send(...) atau simpan ke database.
+        Contact::create($validated);
 
         return redirect('/contact')->with('success', 'Pesan kamu berhasil dikirim. Terima kasih!');
     }

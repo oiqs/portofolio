@@ -13,8 +13,7 @@
             Mari <span class="italic text-accent">berbicara.</span>
         </h1>
         <p class="text-muted text-lg leading-relaxed mb-12">
-            Ada project, kolaborasi, atau sekadar ingin diskusi? Kirim pesan lewat form,
-            atau langsung hubungi saya lewat media di bawah.
+            Punya rekomendasi tempat healing menarik, destinasi traveling seru, atau sekadar ingin sapa dan berdiskusi? Kirim pesan lewat form di bawah!
         </p>
 
         <div class="space-y-6 text-sm">
@@ -25,9 +24,9 @@
             <p class="flex flex-col gap-2">
                 <span class="text-muted tracking-widest uppercase text-xs">Sosial Media</span>
                 <span class="flex gap-4">
-                    <a href="#" class="text-lg hover:text-accent transition-colors">GitHub</a>
+                    <a href="https://instagram.com" target="_blank" class="text-lg hover:text-accent transition-colors">Instagram</a>
                     <span class="text-muted">&bull;</span>
-                    <a href="#" class="text-lg hover:text-accent transition-colors">LinkedIn</a>
+                    <a href="https://wa.me" target="_blank" class="text-lg hover:text-accent transition-colors">WhatsApp</a>
                 </span>
             </p>
         </div>
@@ -69,7 +68,7 @@
                 <label for="message" class="block text-sm font-medium tracking-wide mb-3">Pesan Anda</label>
                 <textarea name="message" id="message" rows="6"
                     class="w-full px-5 py-4 rounded-xl border border-ink/10 bg-transparent focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none transition-all resize-none placeholder:text-muted/50"
-                    placeholder="Ceritakan tentang proyek atau ide Anda...">{{ old('message') }}</textarea>
+                    placeholder="Bagikan tempat healing favorit Anda atau pesan hangat lainnya...">{{ old('message') }}</textarea>
                 @error('message')
                     <p class="text-sm text-red-400 mt-2">{{ $message }}</p>
                 @enderror
