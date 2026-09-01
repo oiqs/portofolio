@@ -13,22 +13,79 @@
 }
 
 @layer base {
-  /* LIGHT MODE (Mewah, Tajam, Sangat Jelas Dibaca) */
+  /* LIGHT & DARK BASE THEMES */
   :root {
-    --app-paper: #F5F3EF;        /* Cream Warm Alabaster (Kesan Editorial / Luxury Linen) */
-    --app-ink: #0E131F;          /* Deep Midnight Obsidian (Kontras tinggi & sangat jelas) */
-    --app-muted: #3D4756;        /* Deep Slate Gray (Tulisan sekunder tajam & mudah dibaca) */
-    --app-accent: #9E7412;       /* Rich Antique Bronze Gold (Aksen emas tua yang elegan & tidak pucat) */
-    --app-accent-dark: #7A580B;  /* Dark Espresso Gold */
+    --app-paper: #F5F3EF;        /* Cream Warm Alabaster */
+    --app-ink: #0E131F;          /* Deep Midnight Obsidian */
+    --app-muted: #3D4756;        /* Deep Slate Gray */
   }
   
-  /* DARK MODE (Obsidian Gold Elegant) */
   .dark {
     --app-paper: #0C0E12;        /* Deep Velvet Obsidian */
     --app-ink: #F4F5F7;          /* Platinum Ivory White */
     --app-muted: #9CA3AF;        /* Refined Silver Gray */
-    --app-accent: #E0B84C;       /* Radiant Champagne Gold */
-    --app-accent-dark: #B89326;  /* Deep Gold */
+  }
+
+  /* --- COLOR ACCENT PALETTES --- */
+  
+  /* 1. GOLD (Default - Luxury Antique Gold) */
+  :root, html[data-color="gold"] {
+    --app-accent: #9E7412;
+    --app-accent-dark: #7A580B;
+  }
+  .dark, html.dark[data-color="gold"] {
+    --app-accent: #E0B84C;
+    --app-accent-dark: #B89326;
+  }
+
+  /* 2. SAPPHIRE BLUE */
+  html[data-color="blue"] {
+    --app-accent: #1E50A2;
+    --app-accent-dark: #14356E;
+  }
+  html.dark[data-color="blue"] {
+    --app-accent: #3B82F6;
+    --app-accent-dark: #1D4ED8;
+  }
+
+  /* 3. EMERALD GREEN */
+  html[data-color="emerald"] {
+    --app-accent: #15803D;
+    --app-accent-dark: #166534;
+  }
+  html.dark[data-color="emerald"] {
+    --app-accent: #10B981;
+    --app-accent-dark: #059669;
+  }
+
+  /* 4. ROYAL VIOLET */
+  html[data-color="violet"] {
+    --app-accent: #7E22CE;
+    --app-accent-dark: #6B21A8;
+  }
+  html.dark[data-color="violet"] {
+    --app-accent: #A855F7;
+    --app-accent-dark: #7E22CE;
+  }
+
+  /* 5. CRIMSON RUBY */
+  html[data-color="crimson"] {
+    --app-accent: #C2410C;
+    --app-accent-dark: #9A3412;
+  }
+  html.dark[data-color="crimson"] {
+    --app-accent: #F97316;
+    --app-accent-dark: #C2410C;
+  }
+
+  /* 6. OCEAN TEAL */
+  html[data-color="teal"] {
+    --app-accent: #0F766E;
+    --app-accent-dark: #115E59;
+  }
+  html.dark[data-color="teal"] {
+    --app-accent: #14B8A6;
+    --app-accent-dark: #0D9488;
   }
 
   body {
