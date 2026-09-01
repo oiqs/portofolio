@@ -13,8 +13,10 @@
             document.documentElement.classList.remove('dark');
         }
 
-        if (localStorage.colorTheme) {
-            document.documentElement.setAttribute('data-color', localStorage.colorTheme);
+        if (localStorage.publicColorTheme) {
+            document.documentElement.setAttribute('data-color', localStorage.publicColorTheme);
+        } else {
+            document.documentElement.setAttribute('data-color', 'gold');
         }
     </script>
 </head>
@@ -43,8 +45,8 @@
 
         function setColorTheme(color) {
             document.documentElement.setAttribute('data-color', color);
-            localStorage.colorTheme = color;
-            window.dispatchEvent(new CustomEvent('color-theme-changed', { detail: color }));
+            localStorage.publicColorTheme = color;
+            window.dispatchEvent(new CustomEvent('public-color-theme-changed', { detail: color }));
         }
     </script>
 </body>

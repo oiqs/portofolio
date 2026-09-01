@@ -12,8 +12,10 @@
             document.documentElement.classList.remove('dark');
         }
 
-        if (localStorage.colorTheme) {
-            document.documentElement.setAttribute('data-color', localStorage.colorTheme);
+        if (localStorage.adminColorTheme) {
+            document.documentElement.setAttribute('data-color', localStorage.adminColorTheme);
+        } else {
+            document.documentElement.setAttribute('data-color', 'gold');
         }
     </script>
 </head>
@@ -121,27 +123,27 @@
                             <span class="text-[10px] text-accent font-semibold px-2 py-0.5 rounded-full bg-accent/10">6 Pilihan</span>
                         </div>
                         <div class="grid grid-cols-3 gap-2.5">
-                            <button onclick="selectColorTheme('gold')" class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
+                            <button onclick="selectAdminColorTheme('gold')" class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
                                 <span class="w-6 h-6 rounded-full bg-[#E0B84C] shadow-md ring-2 ring-offset-2 ring-transparent group-hover:ring-[#E0B84C]"></span>
                                 <span class="text-[11px] font-medium text-ink">Emas</span>
                             </button>
-                            <button onclick="selectColorTheme('blue')" class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
+                            <button onclick="selectAdminColorTheme('blue')" class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
                                 <span class="w-6 h-6 rounded-full bg-[#3B82F6] shadow-md ring-2 ring-offset-2 ring-transparent group-hover:ring-[#3B82F6]"></span>
                                 <span class="text-[11px] font-medium text-ink">Biru</span>
                             </button>
-                            <button onclick="selectColorTheme('emerald')" class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
+                            <button onclick="selectAdminColorTheme('emerald')" class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
                                 <span class="w-6 h-6 rounded-full bg-[#10B981] shadow-md ring-2 ring-offset-2 ring-transparent group-hover:ring-[#10B981]"></span>
                                 <span class="text-[11px] font-medium text-ink">Hijau</span>
                             </button>
-                            <button onclick="selectColorTheme('violet')" class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
+                            <button onclick="selectAdminColorTheme('violet')" class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
                                 <span class="w-6 h-6 rounded-full bg-[#A855F7] shadow-md ring-2 ring-offset-2 ring-transparent group-hover:ring-[#A855F7]"></span>
                                 <span class="text-[11px] font-medium text-ink">Ungu</span>
                             </button>
-                            <button onclick="selectColorTheme('crimson')" class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
+                            <button onclick="selectAdminColorTheme('crimson')" class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
                                 <span class="w-6 h-6 rounded-full bg-[#F97316] shadow-md ring-2 ring-offset-2 ring-transparent group-hover:ring-[#F97316]"></span>
                                 <span class="text-[11px] font-medium text-ink">Merah</span>
                             </button>
-                            <button onclick="selectColorTheme('teal')" class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
+                            <button onclick="selectAdminColorTheme('teal')" class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
                                 <span class="w-6 h-6 rounded-full bg-[#14B8A6] shadow-md ring-2 ring-offset-2 ring-transparent group-hover:ring-[#14B8A6]"></span>
                                 <span class="text-[11px] font-medium text-ink">Teal</span>
                             </button>
@@ -190,14 +192,14 @@
             if (menu) menu.classList.toggle('hidden');
         }
 
-        function setColorTheme(color) {
+        function setAdminColorTheme(color) {
             document.documentElement.setAttribute('data-color', color);
-            localStorage.colorTheme = color;
-            window.dispatchEvent(new CustomEvent('color-theme-changed', { detail: color }));
+            localStorage.adminColorTheme = color;
+            window.dispatchEvent(new CustomEvent('admin-color-theme-changed', { detail: color }));
         }
 
-        function selectColorTheme(color) {
-            setColorTheme(color);
+        function selectAdminColorTheme(color) {
+            setAdminColorTheme(color);
             const adminMenu = document.getElementById('admin-color-picker-menu');
             if (adminMenu) adminMenu.classList.add('hidden');
         }
