@@ -173,9 +173,6 @@
         </main>
     </div>
 
-    {{-- ALSO INCLUDE FLOATING COLOR PICKER IN BOTTOM LEFT --}}
-    <x-color-picker />
-
     <script>
         function toggleTheme() {
             if (document.documentElement.classList.contains('dark')) {
@@ -203,8 +200,6 @@
             setColorTheme(color);
             const adminMenu = document.getElementById('admin-color-picker-menu');
             if (adminMenu) adminMenu.classList.add('hidden');
-            const pickerMenu = document.getElementById('color-picker-menu');
-            if (pickerMenu) pickerMenu.classList.add('hidden');
         }
 
         document.addEventListener('click', function(e) {
