@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\LanguageController;
 
 // Admin Controllers
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
@@ -26,6 +27,9 @@ Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projec
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+// Language Switcher
+Route::get('/lang/{lang}', [LanguageController::class, 'switchLang'])->name('lang.switch');
 
 /*
 |--------------------------------------------------------------------------
