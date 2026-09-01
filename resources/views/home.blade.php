@@ -32,11 +32,11 @@
             <div>
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs font-bold tracking-[0.2em] uppercase mb-4">
                     <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
-                    Traveler & Healing Enthusiast
+                    {{ __('Traveler & Healing Enthusiast') }}
                 </div>
                 
                 <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
-                    Hello, I'm <br/>
+                    {{ __('Hello, I\'m') }} <br/>
                     <span class="text-accent italic font-normal">Thoriq Alfurqan M.L</span>
                 </h1>
             </div>
@@ -45,7 +45,7 @@
             <div class="w-16 h-1 bg-accent/80 rounded-full"></div>
             
             <p class="text-muted text-base sm:text-lg max-w-xl leading-relaxed">
-                Saya bukan ahli di bidang IT, melainkan seorang yang sangat menggemari <strong class="text-ink font-semibold">traveling</strong> dan <strong class="text-ink font-semibold">healing</strong>. Menjelajahi keindahan alam, menemukan tempat baru, dan menikmati ketenangan adalah passion utama saya.
+                {{ __('Saya bukan ahli di bidang IT, melainkan seorang yang sangat menggemari') }} <strong class="text-ink font-semibold">{{ __('traveling') }}</strong> {{ __('dan') }} <strong class="text-ink font-semibold">{{ __('healing') }}</strong>. {{ __('Menjelajahi keindahan alam, menemukan tempat baru, dan menikmati ketenangan adalah passion utama saya.') }}
             </p>
             
             {{-- Signature / Alias Badge --}}
@@ -59,11 +59,11 @@
             <div class="pt-4 flex flex-wrap gap-5 items-center">
                 <a href="{{ url('/projects') }}" 
                    class="px-8 py-3.5 rounded-full bg-accent text-paper font-medium text-sm tracking-wide hover:bg-accent-dark transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/20">
-                    Jelajahi Momen Trip
+                    {{ __('Jelajahi Momen Trip') }}
                 </a>
                 <a href="{{ url('/about') }}" 
                    class="px-8 py-3.5 rounded-full border border-ink/15 text-ink font-medium text-sm tracking-wide hover:border-accent hover:text-accent transition-all duration-300 hover:-translate-y-0.5">
-                    Tentang Saya
+                    {{ __('Tentang Saya') }}
                 </a>
                 
                 {{-- Social Icons --}}
@@ -85,7 +85,7 @@
 <section class="max-w-6xl mx-auto px-6 md:px-10 pb-24">
     {{-- Subtle Header / Divider --}}
     <div class="flex items-center gap-4 mb-10">
-        <span class="text-xs font-bold text-accent tracking-[0.25em] uppercase">Filosofi Perjalanan</span>
+        <span class="text-xs font-bold text-accent tracking-[0.25em] uppercase">{{ __('Filosofi Perjalanan') }}</span>
         <div class="h-[1px] flex-1 bg-gradient-to-r from-accent/30 via-ink/10 to-transparent"></div>
     </div>
 
@@ -107,12 +107,12 @@
                         </svg>
                     </div>
                 </div>
-                <h3 class="font-display text-2xl font-bold mb-2 group-hover:text-accent transition-colors">Traveling & Healing</h3>
-                <p class="text-sm text-muted leading-relaxed">Menjelajahi keindahan lanskap alam & destinasi pilihan untuk menyegarkan kembali pikiran.</p>
+                <h3 class="font-display text-2xl font-bold mb-2 group-hover:text-accent transition-colors">{{ __('Traveling & Healing') }}</h3>
+                <p class="text-sm text-muted leading-relaxed">{{ __('Menjelajahi keindahan lanskap alam & destinasi pilihan untuk menyegarkan kembali pikiran.') }}</p>
             </div>
             
             <div class="mt-8 pt-4 border-t border-ink/5 dark:border-white/5 flex items-center justify-between text-xs text-accent/80 font-medium">
-                <span>Jelajah & Eksplorasi</span>
+                <span>{{ __('Jelajah & Eksplorasi') }}</span>
             </div>
         </div>
 
@@ -130,12 +130,12 @@
                         </svg>
                     </div>
                 </div>
-                <h3 class="font-display text-2xl font-bold mb-2 group-hover:text-accent transition-colors">Ketenangan Suasana</h3>
-                <p class="text-sm text-muted leading-relaxed">Meresapi keheningan alam, suara gemericik air, dan momen rileks di setiap langkah perjalanan.</p>
+                <h3 class="font-display text-2xl font-bold mb-2 group-hover:text-accent transition-colors">{{ __('Ketenangan Suasana') }}</h3>
+                <p class="text-sm text-muted leading-relaxed">{{ __('Meresapi keheningan alam, suara gemericik air, dan momen rileks di setiap langkah perjalanan.') }}</p>
             </div>
             
             <div class="mt-8 pt-4 border-t border-ink/5 dark:border-white/5 flex items-center justify-between text-xs text-accent/80 font-medium">
-                <span>Kedamaian & Mindfulness</span>
+                <span>{{ __('Kedamaian & Mindfulness') }}</span>
             </div>
         </div>
 
@@ -154,12 +154,12 @@
                         </svg>
                     </div>
                 </div>
-                <h3 class="font-display text-2xl font-bold mb-2 group-hover:text-accent transition-colors">Cerita Perjalanan</h3>
-                <p class="text-sm text-muted leading-relaxed">Mengabadikan visual estetis, dokumentasi trip, serta memori indah sepanjang rute.</p>
+                <h3 class="font-display text-2xl font-bold mb-2 group-hover:text-accent transition-colors">{{ __('Cerita Perjalanan') }}</h3>
+                <p class="text-sm text-muted leading-relaxed">{{ __('Mengabadikan visual estetis, dokumentasi trip, serta memori indah sepanjang rute.') }}</p>
             </div>
             
             <div class="mt-8 pt-4 border-t border-ink/5 dark:border-white/5 flex items-center justify-between text-xs text-accent/80 font-medium">
-                <span>Visual & Dokumentasi</span>
+                <span>{{ __('Visual & Dokumentasi') }}</span>
             </div>
         </div>
 
@@ -170,11 +170,11 @@
 <section class="max-w-6xl mx-auto px-6 md:px-10 py-20 border-t border-ink/5">
     <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-14 gap-6">
         <div>
-            <p class="text-xs font-bold text-accent tracking-[0.2em] uppercase mb-2">Galeri Perjalanan</p>
-            <h2 class="font-display text-3xl sm:text-4xl font-bold">Momen Trip Pilihan</h2>
+            <p class="text-xs font-bold text-accent tracking-[0.2em] uppercase mb-2">{{ __('Galeri Perjalanan') }}</p>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold">{{ __('Momen Trip Pilihan') }}</h2>
         </div>
         <a href="{{ url('/projects') }}" class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-dark transition-colors tracking-wide group">
-            Lihat Semua Trip 
+            {{ __('Lihat Semua Trip') }} 
             <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
         </a>
     </div>
@@ -190,11 +190,11 @@
 <section class="max-w-6xl mx-auto px-6 md:px-10 py-28 text-center border-t border-ink/5">
     <div class="max-w-3xl mx-auto border border-ink/10 rounded-3xl p-10 md:p-16 bg-gradient-to-b from-ink/5 to-transparent relative overflow-hidden">
         <div class="absolute -top-24 -left-24 w-48 h-48 bg-accent/10 rounded-full blur-3xl pointer-events-none"></div>
-        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl mb-6 leading-tight font-bold">Punya rekomendasi spot healing seru?</h2>
-        <p class="text-muted text-base sm:text-lg mb-10 max-w-xl mx-auto">Saya selalu senang mendengar cerita perjalanan baru, menemukan destinasi alam yang tenang, atau bertukar rekomendasi tempat liburan.</p>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl mb-6 leading-tight font-bold">{{ __('Punya rekomendasi spot healing seru?') }}</h2>
+        <p class="text-muted text-base sm:text-lg mb-10 max-w-xl mx-auto">{{ __('Saya selalu senang mendengar cerita perjalanan baru, menemukan destinasi alam yang tenang, atau bertukar rekomendasi tempat liburan.') }}</p>
         <a href="{{ url('/contact') }}"
            class="inline-block px-10 py-4 rounded-full bg-accent text-paper hover:bg-accent-dark transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/20 font-medium tracking-wide">
-            Kirim Rekomendasi
+            {{ __('Kirim Rekomendasi') }}
         </a>
     </div>
 </section>
