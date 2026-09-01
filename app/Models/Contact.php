@@ -14,9 +14,14 @@ class Contact extends Model
         'email',
         'message',
         'is_read',
+        'is_replied',
+        'reply_message',
+        'replied_at',
     ];
 
     protected $casts = [
         'is_read' => 'boolean',
+        'is_replied' => 'boolean',
+        'replied_at' => 'datetime',
     ];
 }

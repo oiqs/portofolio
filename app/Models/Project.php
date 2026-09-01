@@ -19,6 +19,8 @@ class Project extends Model
         'problem',
         'solution',
         'impact',
+        'location_address',
+        'location_map_url',
         'demo_url',
         'github_url',
         'cover_image',

@@ -159,6 +159,35 @@
 
         <hr class="border-ink/10" />
 
+        {{-- BAGIAN 4: LOKASI & PETA WISATA (GOOGLE MAPS) --}}
+        <div>
+            <h3 class="font-display text-lg font-bold mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-accent"></span>
+                <span>Lokasi & Peta Wisata (Google Maps)</span>
+            </h3>
+
+            <div class="space-y-6">
+                <div>
+                    <label for="location_address" class="block text-xs font-semibold uppercase tracking-wider mb-2 text-muted">Alamat Lengkap Wisata / Destinasi</label>
+                    <input type="text" name="location_address" id="location_address" value="{{ old('location_address', $project->location_address) }}"
+                           class="w-full px-4 py-3 rounded-xl border border-ink/10 bg-transparent focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none transition-all text-sm placeholder:text-muted/40"
+                           placeholder="Contoh: Curug 7 Cilember, Megamendung, Cisarua, Kabupaten Bogor, Jawa Barat 16750">
+                    @error('location_address') <p class="text-xs text-red-400 mt-1">{{ $message }}</p> @enderror
+                </div>
+
+                <div>
+                    <label for="location_map_url" class="block text-xs font-semibold uppercase tracking-wider mb-2 text-muted">URL Google Maps (Link Share atau Embed Iframe)</label>
+                    <input type="text" name="location_map_url" id="location_map_url" value="{{ old('location_map_url', $project->location_map_url) }}"
+                           class="w-full px-4 py-3 rounded-xl border border-ink/10 bg-transparent focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none transition-all text-sm placeholder:text-muted/40"
+                           placeholder="Paste link https://www.google.com/maps/... atau embed iframe Google Maps di sini">
+                    <p class="text-[11px] text-muted mt-1.5">Tips: Anda bisa menyalin link Google Maps (Sematan peta / Bagikan lokasi) agar pengunjung bisa langsung melihat peta lokasi wisata di halaman detail.</p>
+                    @error('location_map_url') <p class="text-xs text-red-400 mt-1">{{ $message }}</p> @enderror
+                </div>
+            </div>
+        </div>
+
+        <hr class="border-ink/10" />
+
         <div class="flex items-center justify-between">
             <label class="flex items-center gap-3 cursor-pointer">
                 <input type="checkbox" name="is_featured" value="1" {{ old('is_featured', $project->is_featured) ? 'checked' : '' }}

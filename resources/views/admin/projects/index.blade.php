@@ -52,17 +52,19 @@
                                 <span class="px-3 py-1 rounded-full bg-ink/10 text-muted text-xs">Tidak</span>
                             @endif
                         </td>
-                        <td class="px-6 py-4 text-right space-x-2">
-                            <a href="{{ route('admin.projects.edit', $project) }}" class="px-3 py-1.5 rounded-lg border border-ink/15 text-xs font-semibold text-ink hover:border-accent hover:text-accent transition-colors">
-                                Edit
-                            </a>
-                            <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus trip ini?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="px-3 py-1.5 rounded-lg border border-red-500/20 text-xs font-semibold text-red-400 hover:bg-red-500/10 transition-colors">
-                                    Hapus
-                                </button>
-                            </form>
+                        <td class="px-6 py-4 text-right whitespace-nowrap align-middle">
+                            <div class="inline-flex items-center justify-end gap-2">
+                                <a href="{{ route('admin.projects.edit', $project) }}" class="px-3.5 py-1.5 rounded-xl bg-accent/10 border border-accent/30 text-xs font-semibold text-accent hover:bg-accent hover:text-paper transition-all">
+                                    Edit
+                                </a>
+                                <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" class="inline-block m-0" onsubmit="return confirm('Yakin ingin menghapus trip ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="px-3.5 py-1.5 rounded-xl bg-red-500/10 border border-red-500/20 text-xs font-semibold text-red-400 hover:bg-red-500 hover:text-white transition-all">
+                                        Hapus
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @empty

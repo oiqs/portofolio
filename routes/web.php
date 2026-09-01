@@ -32,7 +32,7 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 | Admin Auth Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login')->name('login');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
@@ -56,5 +56,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Contact Inbox
     Route::get('messages', [AdminContactController::class, 'index'])->name('messages.index');
     Route::get('messages/{message}', [AdminContactController::class, 'show'])->name('messages.show');
+    Route::post('messages/{message}/reply', [AdminContactController::class, 'reply'])->name('messages.reply');
     Route::delete('messages/{message}', [AdminContactController::class, 'destroy'])->name('messages.destroy');
 });
