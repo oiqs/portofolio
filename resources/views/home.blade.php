@@ -113,7 +113,6 @@
             
             <div class="mt-8 pt-4 border-t border-ink/5 dark:border-white/5 flex items-center justify-between text-xs text-accent/80 font-medium">
                 <span>Jelajah & Eksplorasi</span>
-                <span class="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">✦</span>
             </div>
         </div>
 
@@ -137,7 +136,6 @@
             
             <div class="mt-8 pt-4 border-t border-ink/5 dark:border-white/5 flex items-center justify-between text-xs text-accent/80 font-medium">
                 <span>Kedamaian & Mindfulness</span>
-                <span class="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">✦</span>
             </div>
         </div>
 
@@ -162,7 +160,6 @@
             
             <div class="mt-8 pt-4 border-t border-ink/5 dark:border-white/5 flex items-center justify-between text-xs text-accent/80 font-medium">
                 <span>Visual & Dokumentasi</span>
-                <span class="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">✦</span>
             </div>
         </div>
 
