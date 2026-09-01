@@ -4,7 +4,7 @@
             oIQs<span class="text-accent transition-transform inline-block group-hover:scale-125">.</span>
         </a>
 
-        <div class="flex items-center gap-3 md:gap-6">
+        <div class="flex items-center gap-4 md:gap-6">
             <nav class="hidden md:flex items-center gap-10 text-sm font-medium tracking-wide">
                 <a href="{{ url('/') }}" class="text-muted hover:text-accent transition-colors">Home</a>
                 <a href="{{ url('/about') }}" class="text-muted hover:text-accent transition-colors">About</a>
@@ -16,71 +16,6 @@
             </nav>
 
             <div class="flex items-center gap-2">
-                {{-- COLOR THEME SELECTOR DROPDOWN --}}
-                <div class="relative" id="color-palette-dropdown">
-                    <button onclick="toggleColorPicker(event)" 
-                            class="p-2 rounded-full border border-ink/10 text-muted hover:text-accent hover:border-accent transition-all duration-300 group flex items-center gap-1.5"
-                            aria-label="Pilih Warna Tema"
-                            title="Pilih Tema Warna">
-                        <svg class="w-5 h-5 text-accent transition-transform group-hover:rotate-12 duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l9.604-9.604a2.25 2.25 0 013.182 3.182l-9.604 9.604M10.5 8.197v4.072" />
-                        </svg>
-                        <span class="w-2.5 h-2.5 rounded-full bg-accent animate-pulse hidden sm:inline-block"></span>
-                    </button>
-
-                    {{-- DROPDOWN MENU --}}
-                    <div id="color-picker-menu" 
-                         class="hidden absolute right-0 mt-3 w-64 p-4 rounded-2xl bg-paper/95 backdrop-blur-xl border border-ink/15 shadow-2xl z-50 transition-all duration-300 transform origin-top-right">
-                        <div class="flex items-center justify-between mb-3 pb-2 border-b border-ink/10">
-                            <span class="text-xs font-bold tracking-wider uppercase text-muted">Tema Warna</span>
-                            <span class="text-[10px] text-accent font-semibold px-2 py-0.5 rounded-full bg-accent/10">6 Pilihan</span>
-                        </div>
-                        <div class="grid grid-cols-3 gap-2.5">
-                            {{-- GOLD --}}
-                            <button onclick="selectColorTheme('gold')" 
-                                    class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
-                                <span class="w-6 h-6 rounded-full bg-[#E0B84C] shadow-md ring-2 ring-offset-2 ring-transparent group-hover:ring-[#E0B84C] transition-all"></span>
-                                <span class="text-[11px] font-medium text-ink">Emas</span>
-                            </button>
-
-                            {{-- BLUE --}}
-                            <button onclick="selectColorTheme('blue')" 
-                                    class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
-                                <span class="w-6 h-6 rounded-full bg-[#3B82F6] shadow-md ring-2 ring-offset-2 ring-transparent group-hover:ring-[#3B82F6] transition-all"></span>
-                                <span class="text-[11px] font-medium text-ink">Biru</span>
-                            </button>
-
-                            {{-- EMERALD --}}
-                            <button onclick="selectColorTheme('emerald')" 
-                                    class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
-                                <span class="w-6 h-6 rounded-full bg-[#10B981] shadow-md ring-2 ring-offset-2 ring-transparent group-hover:ring-[#10B981] transition-all"></span>
-                                <span class="text-[11px] font-medium text-ink">Hijau</span>
-                            </button>
-
-                            {{-- VIOLET --}}
-                            <button onclick="selectColorTheme('violet')" 
-                                    class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
-                                <span class="w-6 h-6 rounded-full bg-[#A855F7] shadow-md ring-2 ring-offset-2 ring-transparent group-hover:ring-[#A855F7] transition-all"></span>
-                                <span class="text-[11px] font-medium text-ink">Ungu</span>
-                            </button>
-
-                            {{-- CRIMSON --}}
-                            <button onclick="selectColorTheme('crimson')" 
-                                    class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
-                                <span class="w-6 h-6 rounded-full bg-[#F97316] shadow-md ring-2 ring-offset-2 ring-transparent group-hover:ring-[#F97316] transition-all"></span>
-                                <span class="text-[11px] font-medium text-ink">Merah</span>
-                            </button>
-
-                            {{-- TEAL --}}
-                            <button onclick="selectColorTheme('teal')" 
-                                    class="group p-2.5 rounded-xl border border-ink/10 hover:border-accent bg-ink/5 hover:bg-ink/10 flex flex-col items-center gap-1.5 transition-all text-center">
-                                <span class="w-6 h-6 rounded-full bg-[#14B8A6] shadow-md ring-2 ring-offset-2 ring-transparent group-hover:ring-[#14B8A6] transition-all"></span>
-                                <span class="text-[11px] font-medium text-ink">Teal</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
                 {{-- DARK MODE TOGGLE --}}
                 <button onclick="toggleTheme()" class="p-2 rounded-full border border-ink/10 text-muted hover:text-accent hover:border-accent transition-colors group" aria-label="Toggle Dark Mode" title="Toggle Dark/Light Mode">
                     {{-- Sun Icon (Visible in Dark Mode) --}}
@@ -120,30 +55,8 @@
 </header>
 
 <script>
-    function toggleColorPicker(e) {
-        e.stopPropagation();
-        const menu = document.getElementById('color-picker-menu');
-        menu.classList.toggle('hidden');
-    }
-
-    function selectColorTheme(color) {
-        if (typeof setColorTheme === 'function') {
-            setColorTheme(color);
-        }
-        const menu = document.getElementById('color-picker-menu');
-        if (menu) menu.classList.add('hidden');
-    }
-
     function toggleMobileMenu() {
         const menu = document.getElementById('mobile-menu');
         if (menu) menu.classList.toggle('hidden');
     }
-
-    document.addEventListener('click', function(e) {
-        const dropdown = document.getElementById('color-palette-dropdown');
-        if (dropdown && !dropdown.contains(e.target)) {
-            const menu = document.getElementById('color-picker-menu');
-            if (menu) menu.classList.add('hidden');
-        }
-    });
 </script>

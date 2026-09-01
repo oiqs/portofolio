@@ -18,7 +18,7 @@
         }
     </script>
 </head>
-<body class="bg-paper text-ink transition-colors duration-500">
+<body class="bg-paper text-ink transition-colors duration-500 relative">
     <x-navbar />
 
     <main>
@@ -26,6 +26,9 @@
     </main>
 
     <x-footer />
+
+    {{-- FLOATING COLOR PICKER IN BOTTOM LEFT --}}
+    <x-color-picker />
     
     <script>
         function toggleTheme() {
