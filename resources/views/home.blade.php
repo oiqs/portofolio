@@ -8,33 +8,14 @@
 <section class="max-w-6xl mx-auto px-6 md:px-10 pt-20 pb-24 md:pt-28 md:pb-32">
     <div class="grid md:grid-cols-12 gap-12 lg:gap-16 items-center">
         
-        {{-- FOTO PROFIL (KIRI) --}}
+        {{-- FOTO PROFIL ID CARD BADGE (KIRI) --}}
         <div class="md:col-span-5 flex justify-center order-first md:order-none">
-            <div class="relative p-2.5 rounded-full border-2 border-accent/40 bg-ink/5 shadow-2xl shadow-accent/15 group max-w-[280px] sm:max-w-[340px] w-full">
-                {{-- Ambient Light Effect --}}
-                <div class="absolute inset-0 rounded-full bg-accent/20 blur-2xl opacity-40 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
-                
-                {{-- Frame Foto Bulat --}}
-                <div class="relative aspect-square rounded-full overflow-hidden border border-ink/10 bg-ink/10">
-                    <img src="{{ asset('images/profile.jpeg') }}" 
-                         alt="Foto Thoriq Alfurqan M.L" 
-                         class="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-paper/40 via-transparent to-transparent opacity-60"></div>
-                </div>
-
-                {{-- Decorative Line Accent --}}
-                <div class="absolute top-1/2 -right-4 w-8 h-[2px] bg-accent/60 hidden sm:block"></div>
-            </div>
+            <x-id-card-badge />
         </div>
 
         {{-- TEKS HERO (KANAN) --}}
         <div class="md:col-span-7 flex flex-col justify-center space-y-6">
             <div>
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs font-bold tracking-[0.2em] uppercase mb-4">
-                    <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
-                    {{ __('Traveler & Healing Enthusiast') }}
-                </div>
-                
                 <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
                     {{ __('Hello, I\'m') }} <br/>
                     <span class="text-accent italic font-normal">Thoriq Alfurqan M.L</span>

@@ -31,6 +31,9 @@
 
     {{-- FLOATING COLOR PICKER IN BOTTOM LEFT --}}
     <x-color-picker />
+
+    {{-- CUSTOM ANIMATED CURSOR --}}
+    <x-custom-cursor />
     
     <script>
         function toggleTheme() {

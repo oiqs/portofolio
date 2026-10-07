@@ -10,9 +10,9 @@
         
         {{-- FOTO PROFIL (KIRI) --}}
         <div class="md:col-span-5 flex flex-col items-center text-center">
-            <div class="relative p-2 rounded-full border-2 border-accent/30 bg-ink/5 shadow-2xl shadow-accent/10 group max-w-[260px] sm:max-w-[280px] w-full">
+            <div class="relative p-2.5 rounded-full border-2 border-accent/40 bg-ink/5 shadow-2xl shadow-accent/15 group max-w-[320px] sm:max-w-[380px] w-full">
                 {{-- Decorative Glow Ring --}}
-                <div class="absolute inset-0 rounded-full bg-accent/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+                <div class="absolute inset-0 rounded-full bg-accent/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
                 
                 {{-- Frame Foto Bulat --}}
                 <div class="relative aspect-square rounded-full overflow-hidden border border-ink/10 bg-ink/10">
@@ -21,12 +21,6 @@
                          class="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-paper/30 via-transparent to-transparent opacity-60"></div>
                 </div>
-            </div>
-
-            {{-- BADGES / QUICK INFO --}}
-            <div class="mt-6 flex flex-wrap justify-center gap-2 text-xs font-medium">
-                <span class="px-3 py-1.5 rounded-full border border-ink/10 bg-ink/5 text-muted">📍 {{ __('Indonesia') }}</span>
-                <span class="px-3 py-1.5 rounded-full border border-accent/30 bg-accent/10 text-accent">✈️ {{ __('Ready for Next Trip') }}</span>
             </div>
         </div>
 

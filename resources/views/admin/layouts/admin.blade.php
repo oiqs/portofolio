@@ -212,5 +212,8 @@
             }
         });
     </script>
+
+    {{-- CUSTOM ANIMATED CURSOR --}}
+    <x-custom-cursor />
 </body>
 </html>
