@@ -14,12 +14,12 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Admin User
+        // Admin User (Configure in .env for production: ADMIN_EMAIL & ADMIN_PASSWORD)
         User::updateOrCreate(
-            ['email' => 'admin@thoriq.com'],
+            ['email' => env('ADMIN_EMAIL', 'admin@thoriq.com')],
             [
                 'name' => 'Thoriq Alfurqan M.L',
-                'password' => Hash::make('password'),
+                'password' => Hash::make(env('ADMIN_PASSWORD', 'password')),
             ]
         );
 
@@ -37,8 +37,6 @@ class DatabaseSeeder extends Seeder
                 'impact' => 'Pikiran menjadi jauh lebih segar dan energi kembali terisi untuk menjalani hari.',
                 'location_address' => 'Curug 7 Cilember, Megamendung, Cisarua, Kabupaten Bogor, Jawa Barat 16750',
                 'location_map_url' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.090547631336!2d106.93605487499395!3d-6.635678493358826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69b671a5c6899b%3A0xb3ab3a8c7db7ec6b!2sCurug%207%20Cilember!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid',
-                'demo_url' => '#',
-                'github_url' => '#',
                 'is_featured' => true,
             ],
             [
@@ -53,8 +51,6 @@ class DatabaseSeeder extends Seeder
                 'impact' => 'Merasakan ketenangan hakiki dan pengalaman berkemah yang penuh kenangan indah.',
                 'location_address' => 'Taman Wisata Alam Gunung Pancar, Karang Tengah, Babakan Madang, Bogor, Jawa Barat 16810',
                 'location_map_url' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.6397368735235!2d106.90640397499342!3d-6.567085793426297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c73333333333%3A0x1111111111111111!2sGunung%20Pancar!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid',
-                'demo_url' => '#',
-                'github_url' => '#',
                 'is_featured' => true,
             ],
             [
@@ -69,8 +65,6 @@ class DatabaseSeeder extends Seeder
                 'impact' => 'Menghasilkan koleksi foto pemandangan indah dan kepuasan batin setelah melakukan perjalanan darat.',
                 'location_address' => 'Pantai Rancabuaya, Caringin, Kabupaten Garut, Jawa Barat 44154',
                 'location_map_url' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.762947123984!2d107.54589237499998!3d-7.556272992457497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e666060c5555555%3A0x8888888888888888!2sPantai%20Rancabuaya!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid',
-                'demo_url' => '#',
-                'github_url' => '#',
                 'is_featured' => true,
             ],
         ];

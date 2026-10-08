@@ -34,12 +34,10 @@ class ProjectController extends Controller
             'solution' => 'nullable|string',
             'impact' => 'nullable|string',
             'location_address' => 'nullable|string|max:500',
-            'location_map_url' => 'nullable|string',
-            'demo_url' => 'nullable|url',
-            'github_url' => 'nullable|url',
-            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:51200', // 50MB
+            'location_map_url' => 'nullable|url|max:1000',
+            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:5120', // 5MB limit
             'gallery_images' => 'nullable|array',
-            'gallery_images.*' => 'image|mimes:jpeg,png,jpg,webp,gif|max:51200', // 50MB
+            'gallery_images.*' => 'image|mimes:jpeg,png,jpg,webp,gif|max:5120', // 5MB limit
             'is_featured' => 'nullable|boolean',
         ]);
 
@@ -86,12 +84,10 @@ class ProjectController extends Controller
             'solution' => 'nullable|string',
             'impact' => 'nullable|string',
             'location_address' => 'nullable|string|max:500',
-            'location_map_url' => 'nullable|string',
-            'demo_url' => 'nullable|url',
-            'github_url' => 'nullable|url',
-            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:51200', // 50MB
+            'location_map_url' => 'nullable|url|max:1000',
+            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:5120', // 5MB limit
             'gallery_images' => 'nullable|array',
-            'gallery_images.*' => 'image|mimes:jpeg,png,jpg,webp,gif|max:51200', // 50MB
+            'gallery_images.*' => 'image|mimes:jpeg,png,jpg,webp,gif|max:5120', // 5MB limit
             'remove_gallery_images' => 'nullable|array',
             'is_featured' => 'nullable|boolean',
         ]);

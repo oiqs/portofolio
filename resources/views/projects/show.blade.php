@@ -27,7 +27,7 @@
 {{-- HEADER TRIP --}}
 <section class="max-w-6xl mx-auto px-6 md:px-10 pt-24 pb-16">
     <a href="{{ url('/projects') }}" class="text-sm font-semibold tracking-wide text-muted hover:text-accent transition-colors mb-10 inline-flex items-center gap-2 group px-4 py-2 rounded-full border border-ink/10 dark:border-white/10 bg-ink/5 dark:bg-white/5 w-fit">
-        <span class="group-hover:-translate-x-1 transition-transform">&larr;</span> Kembali ke Galeri Perjalanan
+        <span class="group-hover:-translate-x-1 transition-transform">&larr;</span> {{ __('Kembali ke Galeri Perjalanan') }}
     </a>
 
     <div class="grid md:grid-cols-5 gap-12 items-end">
@@ -48,18 +48,18 @@
 
         <div class="md:col-span-1 text-sm space-y-4 md:text-right border-t md:border-t-0 md:border-l border-ink/10 dark:border-white/10 pt-6 md:pt-0 md:pl-6">
             <div>
-                <p class="text-muted text-xs uppercase tracking-widest font-semibold mb-1">Tahun Trip</p>
+                <p class="text-muted text-xs uppercase tracking-widest font-semibold mb-1">{{ __('Tahun Trip') }}</p>
                 <p class="font-bold text-accent text-lg">{{ $project['year'] }}</p>
             </div>
             <div>
-                <p class="text-muted text-xs uppercase tracking-widest font-semibold mb-1">Kategori Destinasi</p>
+                <p class="text-muted text-xs uppercase tracking-widest font-semibold mb-1">{{ __('Kategori Destinasi') }}</p>
                 <p class="font-medium text-ink">{{ $project['role'] }}</p>
             </div>
             @if ($totalPhotoCount > 0)
             <div>
-                <p class="text-muted text-xs uppercase tracking-widest font-semibold mb-1">Total Dokumentasi</p>
+                <p class="text-muted text-xs uppercase tracking-widest font-semibold mb-1">{{ __('Total Dokumentasi') }}</p>
                 <span class="inline-block px-3 py-1 rounded-full bg-accent/10 border border-accent/30 text-accent font-bold text-xs">
-                    {{ $totalPhotoCount }} Foto HD
+                    {{ $totalPhotoCount }} {{ __('Foto HD') }}
                 </span>
             </div>
             @endif
@@ -85,7 +85,7 @@
                 <div class="absolute top-6 left-6 z-10">
                     <span class="px-4 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-white text-xs font-bold tracking-widest uppercase flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-                        Foto Sampul Utama
+                        {{ __('Foto Sampul Utama') }}
                     </span>
                 </div>
 
@@ -98,8 +98,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="text-sm font-bold">Pratinjau Mode Layar Penuh</p>
-                            <p class="text-xs text-white/70">Klik untuk melihat seluruh galeri {{ $totalPhotoCount }} foto</p>
+                            <p class="text-sm font-bold">{{ __('Pratinjau Mode Layar Penuh') }}</p>
+                            <p class="text-xs text-white/70">{{ __('Klik untuk melihat seluruh galeri foto') }}</p>
                         </div>
                     </div>
 
@@ -114,7 +114,7 @@
             <svg class="w-16 h-16 mb-4 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
             </svg>
-            <p class="font-display text-lg">Foto Sampul Perjalanan Belum Diunggah</p>
+            <p class="font-display text-lg">{{ __('Foto Sampul Perjalanan Belum Diunggah') }}</p>
         </div>
     @endif
 </section>
@@ -129,13 +129,13 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0c-.693.04-1.33.435-1.736 1.039l-.821 1.316z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
                 </svg>
-                Dokumentasi Visual
+                {{ __('Dokumentasi Visual') }}
             </div>
-            <h2 class="font-display text-3xl sm:text-4xl font-bold">Galeri Foto Traveling</h2>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold">{{ __('Galeri Foto Traveling') }}</h2>
         </div>
         
         <p class="text-xs text-muted font-medium bg-ink/5 dark:bg-white/5 border border-ink/10 dark:border-white/10 px-4 py-2 rounded-full w-fit">
-            💡 Klik foto mana saja untuk memperbesar & jelajah mode slide HD
+            💡 {{ __('Klik foto mana saja untuk memperbesar & jelajah mode slide HD') }}
         </p>
     </div>
 
@@ -175,7 +175,7 @@
 
                     <div class="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 flex items-center justify-between text-white">
                         <div>
-                            <p class="text-xs text-accent font-bold uppercase tracking-widest">Dokumentasi Momen</p>
+                            <p class="text-xs text-accent font-bold uppercase tracking-widest">{{ __('Dokumentasi Momen') }}</p>
                             <p class="text-sm font-semibold truncate">{{ $project['title'] }}</p>
                         </div>
                         <span class="text-[11px] font-mono opacity-70">oiq_s</span>
@@ -191,13 +191,13 @@
 <section class="max-w-6xl mx-auto px-6 md:px-10 py-24 border-t border-ink/10 dark:border-white/10 grid md:grid-cols-2 gap-16">
     <div class="space-y-4">
         <h2 class="font-display text-3xl font-bold flex items-center gap-4">
-            <span class="w-8 h-[2px] bg-accent"></span> Latar Belakang Trip
+            <span class="w-8 h-[2px] bg-accent"></span> {{ __('Latar Belakang Trip') }}
         </h2>
         <p class="text-muted text-base sm:text-lg leading-relaxed">{{ $project['problem'] }}</p>
     </div>
     <div class="space-y-4">
         <h2 class="font-display text-3xl font-bold flex items-center gap-4">
-            <span class="w-8 h-[2px] bg-accent"></span> Pengalaman Trip
+            <span class="w-8 h-[2px] bg-accent"></span> {{ __('Pengalaman Trip') }}
         </h2>
         <p class="text-muted text-base sm:text-lg leading-relaxed">{{ $project['solution'] }}</p>
     </div>
@@ -205,7 +205,7 @@
 
 {{-- TECH STACK / ELEMEN TRIP --}}
 <section class="max-w-6xl mx-auto px-6 md:px-10 py-24 border-t border-ink/10 dark:border-white/10">
-    <h2 class="font-display text-3xl font-bold mb-10 text-center">Fokus & Elemen Trip</h2>
+    <h2 class="font-display text-3xl font-bold mb-10 text-center">{{ __('Fokus & Elemen Trip') }}</h2>
     <div class="flex flex-wrap justify-center gap-3">
         @foreach ((array)$project['stack'] as $tech)
             <span class="px-6 py-3 rounded-full bg-ink/5 dark:bg-white/5 border border-ink/10 dark:border-white/10 text-xs sm:text-sm uppercase tracking-widest font-semibold hover:border-accent/40 transition-colors">{{ $tech }}</span>
@@ -215,7 +215,7 @@
 
 {{-- HASIL/IMPACT / CATATAN PERJALANAN --}}
 <section class="max-w-6xl mx-auto px-6 md:px-10 py-24 border-t border-ink/10 dark:border-white/10 text-center">
-    <h2 class="font-display text-3xl sm:text-4xl font-bold mb-6">Kesan & Catatan Perjalanan</h2>
+    <h2 class="font-display text-3xl sm:text-4xl font-bold mb-6">{{ __('Kesan & Catatan Perjalanan') }}</h2>
     <p class="text-muted text-base sm:text-lg leading-relaxed max-w-3xl mx-auto mb-8">{{ $project['impact'] }}</p>
 </section>
 
@@ -224,33 +224,36 @@
     $mapEmbedSrc = null;
     $mapDirectUrl = null;
     $addressText = $project['location_address'] ?? null;
+    $addressQuery = urlencode($addressText ?: $project['title']);
+
+    // Default safe fallback search URL
+    $mapDirectUrl = "https://www.google.com/maps/search/?api=1&query={$addressQuery}";
+    $mapEmbedSrc = "https://maps.google.com/maps?q={$addressQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed";
 
     if (!empty($project['location_map_url'])) {
         $rawUrl = trim($project['location_map_url']);
         
+        // Extract src if full iframe tag was pasted
         if (preg_match('/src="([^"]+)"/', $rawUrl, $matches)) {
-            $mapEmbedSrc = $matches[1];
-            $mapDirectUrl = $matches[1];
-        } elseif (str_contains($rawUrl, 'google.com/maps/embed')) {
-            $mapEmbedSrc = $rawUrl;
-            $mapDirectUrl = str_replace('/embed', '', $rawUrl);
-        } else {
-            $mapDirectUrl = $rawUrl;
-            $addressQuery = urlencode($addressText ?: $project['title']);
-            $mapEmbedSrc = "https://maps.google.com/maps?q={$addressQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed";
+            $rawUrl = $matches[1];
         }
-    } elseif (!empty($addressText)) {
-        $addressQuery = urlencode($addressText);
-        $mapEmbedSrc = "https://maps.google.com/maps?q={$addressQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed";
-        $mapDirectUrl = "https://www.google.com/maps/search/?api=1&query={$addressQuery}";
+
+        // Only accept validated Google Maps embed / direct URLs
+        if (str_starts_with($rawUrl, 'https://www.google.com/maps') || str_starts_with($rawUrl, 'https://maps.google.com') || str_starts_with($rawUrl, 'https://goo.gl/maps')) {
+            if (str_contains($rawUrl, 'google.com/maps/embed')) {
+                $mapEmbedSrc = $rawUrl;
+            } elseif (filter_var($rawUrl, FILTER_VALIDATE_URL)) {
+                $mapDirectUrl = $rawUrl;
+            }
+        }
     }
 @endphp
 
 @if (!empty($addressText) || !empty($mapEmbedSrc))
 <section class="max-w-6xl mx-auto px-6 md:px-10 py-24 border-t border-ink/10 dark:border-white/10">
     <div class="mb-12 text-center max-w-2xl mx-auto">
-        <p class="text-xs font-bold text-accent tracking-[0.25em] uppercase mb-2">Petunjuk Arah & Lokasi</p>
-        <h2 class="font-display text-3xl sm:text-4xl font-bold">Peta & Alamat Destinasi</h2>
+        <p class="text-xs font-bold text-accent tracking-[0.25em] uppercase mb-2">{{ __('Petunjuk Arah & Lokasi') }}</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold">{{ __('Peta & Alamat Destinasi') }}</h2>
     </div>
 
     <div class="grid lg:grid-cols-12 gap-8 items-stretch">
@@ -272,7 +275,7 @@
                         </p>
                     @else
                         <p class="text-muted text-base leading-relaxed">
-                            Alamat destinasi dapat dilihat pada peta interaktif di samping.
+                            {{ __('Alamat destinasi dapat dilihat pada peta interaktif di samping.') }}
                         </p>
                     @endif
                 </div>
@@ -285,7 +288,7 @@
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                         </svg>
-                        Buka di Google Maps
+                        {{ __('Buka di Google Maps') }}
                     </a>
                 </div>
             @endif
@@ -305,7 +308,7 @@
                 </iframe>
             @else
                 <div class="flex items-center justify-center h-full p-8 text-center text-muted">
-                    <p class="font-display">Peta lokasi tidak tersedia untuk destinasi ini.</p>
+                    <p class="font-display">{{ __('Peta lokasi tidak tersedia untuk destinasi ini.') }}</p>
                 </div>
             @endif
         </div>

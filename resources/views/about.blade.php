@@ -30,7 +30,7 @@
                 <p class="text-xs font-bold text-accent tracking-[0.2em] uppercase mb-3">{{ __('Tentang Saya') }}</p>
                 <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.15] mb-4">
                     {{ __('Cerita di balik') }} <br class="hidden sm:inline" />
-                    <span class="italic text-accent">Siganteng & Tanpan.</span>
+                    <span class="italic text-accent">{{ __('Setiap Perjalanan & Healing.') }}</span>
                 </h1>
                 <p class="text-xl font-display text-accent/90 italic">Thoriq Alfurqan M.L (oiq_s)</p>
             </div>

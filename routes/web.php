@@ -36,8 +36,8 @@ Route::get('/lang/{lang}', [LanguageController::class, 'switchLang'])->name('lan
 | Admin Auth Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login')->name('login');
-Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
+Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin/login', [AdminAuthController::class, 'login'])->middleware('throttle:5,1')->name('admin.login.submit');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
 /*

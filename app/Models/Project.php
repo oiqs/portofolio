@@ -21,8 +21,6 @@ class Project extends Model
         'impact',
         'location_address',
         'location_map_url',
-        'demo_url',
-        'github_url',
         'cover_image',
         'gallery_images',
         'is_featured',

@@ -19,8 +19,6 @@ return new class extends Migration
             $table->text('problem')->nullable();
             $table->text('solution')->nullable();
             $table->text('impact')->nullable();
-            $table->string('demo_url')->nullable();
-            $table->string('github_url')->nullable();
             $table->string('cover_image')->nullable();
             $table->boolean('is_featured')->default(true);
             $table->timestamps();

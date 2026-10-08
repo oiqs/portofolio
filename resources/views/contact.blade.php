@@ -19,14 +19,14 @@
         <div class="space-y-6 text-sm">
             <p class="flex flex-col gap-2">
                 <span class="text-muted tracking-widest uppercase text-xs">Email</span>
-                <a href="mailto:nama@email.com" class="text-lg hover:text-accent transition-colors">nama@email.com</a>
+                <a href="mailto:thoriq@oiqs.id" class="text-lg hover:text-accent transition-colors">thoriq@oiqs.id</a>
             </p>
             <p class="flex flex-col gap-2">
                 <span class="text-muted tracking-widest uppercase text-xs">{{ __('Sosial Media') }}</span>
                 <span class="flex gap-4">
-                    <a href="https://instagram.com" target="_blank" class="text-lg hover:text-accent transition-colors">Instagram</a>
+                    <a href="https://instagram.com/oiq_s" target="_blank" rel="noopener" class="text-lg hover:text-accent transition-colors">Instagram</a>
                     <span class="text-muted">&bull;</span>
-                    <a href="https://wa.me" target="_blank" class="text-lg hover:text-accent transition-colors">WhatsApp</a>
+                    <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="text-lg hover:text-accent transition-colors">WhatsApp</a>
                 </span>
             </p>
         </div>
