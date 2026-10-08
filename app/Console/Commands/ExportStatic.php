@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\File;
 class ExportStatic extends Command
 {
     protected $signature = 'app:export-static';
-    protected $description = 'Export public portfolio pages to static HTML for Vercel';
+    protected $description = 'Export public portfolio pages to static HTML for Vercel with bilingual support (ID & EN)';
 
     public function handle()
     {
-        $this->info('🚀 Starting Static Site Export for Vercel...');
+        $this->info('🚀 Starting Bilingual Static Site Export for Vercel...');
 
         // 1. Temporarily bypass hot reload if active
         $hotFile = public_path('hot');
@@ -33,7 +33,7 @@ class ExportStatic extends Command
             File::makeDirectory($distDir, 0755, true);
 
             // 3. Define pages to render
-            $pages = [
+            $basePages = [
                 '/' => 'index.html',
                 '/about' => 'about/index.html',
                 '/projects' => 'projects/index.html',
@@ -44,24 +44,37 @@ class ExportStatic extends Command
             $projects = Project::all();
             foreach ($projects as $project) {
                 if (!empty($project->slug)) {
-                    $pages['/projects/' . $project->slug] = 'projects/' . $project->slug . '/index.html';
+                    $basePages['/projects/' . $project->slug] = 'projects/' . $project->slug . '/index.html';
                 }
             }
 
-            // 4. Render and save each page
-            foreach ($pages as $uri => $relativePath) {
-                $this->line("Rendering: <info>{$uri}</info> -> dist/{$relativePath}");
+            // 4. Export both languages: 'id' (Indonesian, root) and 'en' (English, /en/)
+            $locales = ['id', 'en'];
 
-                $request = Request::create($uri, 'GET');
-                $response = app()->handle($request);
-                $html = $response->getContent();
+            foreach ($locales as $locale) {
+                $this->info("--- Generating locale: [{$locale}] ---");
 
-                // Clean and normalize URLs
-                $html = $this->cleanHtml($html, $uri);
+                config(['app.locale' => $locale]);
+                session(['locale' => $locale]);
+                app()->setLocale($locale);
 
-                $targetPath = $distDir . '/' . $relativePath;
-                File::ensureDirectoryExists(dirname($targetPath));
-                File::put($targetPath, $html);
+                foreach ($basePages as $uri => $relativePath) {
+                    $outPath = ($locale === 'en')
+                        ? $distDir . '/en/' . $relativePath
+                        : $distDir . '/' . $relativePath;
+
+                    $this->line("Rendering ({$locale}): <info>{$uri}</info> -> " . str_replace($distDir . '/', '', $outPath));
+
+                    $request = Request::create($uri, 'GET');
+                    $response = app()->handle($request);
+                    $html = $response->getContent();
+
+                    // Clean and normalize URLs for static hosting & language switching
+                    $html = $this->cleanHtml($html, $uri, $locale);
+
+                    File::ensureDirectoryExists(dirname($outPath));
+                    File::put($outPath, $html);
+                }
             }
 
             // 5. Copy public assets
@@ -90,7 +103,6 @@ class ExportStatic extends Command
                 $distStorage = $distDir . '/storage';
                 File::ensureDirectoryExists($distStorage);
 
-                // Collect only referenced images to keep size small and fast
                 $usedImages = [];
                 foreach ($projects as $p) {
                     if (!empty($p->cover_image)) {
@@ -116,7 +128,7 @@ class ExportStatic extends Command
                 }
             }
 
-            $this->info('✅ Static export completed successfully in dist/!');
+            $this->info('✅ Bilingual static export completed successfully in dist/!');
             return Command::SUCCESS;
         } finally {
             // Restore hot file if it was backed up
@@ -126,25 +138,32 @@ class ExportStatic extends Command
         }
     }
 
-    protected function cleanHtml(string $html, string $currentUri): string
+    protected function cleanHtml(string $html, string $currentUri, string $locale): string
     {
-        // Replace localhost URLs with root-relative URLs
+        // 1. Tag language switch links with unique placeholders FIRST
+        $html = str_replace([
+            'href="http://localhost/lang/id"',
+            'href="/lang/id"',
+            'href="http://localhost/lang/en"',
+            'href="/lang/en"',
+        ], [
+            'href="[[TOKEN_ID_LANG]]"',
+            'href="[[TOKEN_ID_LANG]]"',
+            'href="[[TOKEN_EN_LANG]]"',
+            'href="[[TOKEN_EN_LANG]]"',
+        ], $html);
+
+        // 2. Replace localhost asset and base URLs
         $html = str_replace([
             'http://localhost/build/',
             'http://localhost/images/',
             'http://localhost/storage/',
-            'http://localhost/about',
-            'http://localhost/projects',
-            'http://localhost/contact',
             'http://localhost/',
             'http://localhost',
         ], [
             '/build/',
             '/images/',
             '/storage/',
-            '/about',
-            '/projects',
-            '/contact',
             '/',
             '/',
         ], $html);
@@ -152,16 +171,42 @@ class ExportStatic extends Command
         // Replace any leftover http://localhost with /
         $html = preg_replace('#http://localhost/?#', '/', $html);
 
-        // Handle language switcher on static site (prevent 404)
-        $html = str_replace(
-            ['href="/lang/id"', 'href="/lang/en"'],
-            ['href="#" onclick="return false;"', 'href="#" onclick="alert(\'Versi bahasa Inggris segera hadir!\'); return false;"'],
-            $html
-        );
+        // 3. For English pages, prefix internal navigation links with /en
+        if ($locale === 'en') {
+            // Navbar logo
+            $html = str_replace('href="/" class="font-display', 'href="/en/" class="font-display', $html);
 
-        // Enhance Contact Form for static hosting (redirects to WhatsApp on submit)
+            // Nav links
+            $html = str_replace('href="/"', 'href="/en/"', $html);
+            $html = str_replace('href="/about"', 'href="/en/about"', $html);
+            $html = str_replace('href="/projects"', 'href="/en/projects"', $html);
+            $html = str_replace('href="/contact"', 'href="/en/contact"', $html);
+
+            // Project detail links (/projects/slug -> /en/projects/slug)
+            $html = preg_replace('#href="/projects/([a-z0-9\-]+)"#', 'href="/en/projects/$1"', $html);
+        }
+
+        // 4. Fill in the exact target destinations for language switching
+        $idTarget = ($currentUri === '/') ? '/' : $currentUri;
+        $enTarget = ($currentUri === '/') ? '/en/' : '/en' . $currentUri;
+
+        $html = str_replace('[[TOKEN_ID_LANG]]', $idTarget, $html);
+        $html = str_replace('[[TOKEN_EN_LANG]]', $enTarget, $html);
+
+        // 5. Enhance Contact Form for static hosting (redirects to WhatsApp on submit)
         if (str_contains($currentUri, 'contact')) {
-            $contactJs = <<<'HTML'
+            $isEn = ($locale === 'en');
+            $alertMsg = $isEn
+                ? 'Thank you! Your message has been forwarded to WhatsApp.'
+                : 'Terima kasih! Pesan Anda telah dialihkan ke WhatsApp.';
+            $promptMsg = $isEn
+                ? 'Please complete all form fields.'
+                : 'Mohon lengkapi semua kolom formulir.';
+            $waPrefix = $isEn
+                ? 'Hello Thoriq! I am '
+                : 'Halo Thoriq! Saya ';
+
+            $contactJs = <<<HTML
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.querySelector('form');
@@ -177,15 +222,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const message = messageInput ? messageInput.value.trim() : '';
 
             if (!name || !email || !message) {
-                alert('Mohon lengkapi semua kolom formulir.');
+                alert('{$promptMsg}');
                 return;
             }
 
-            const waText = encodeURIComponent("Halo Thoriq! Saya *" + name + "* (" + email + ").\n\nPesan:\n" + message);
+            const waText = encodeURIComponent("{$waPrefix}*" + name + "* (" + email + ").\\n\\nPesan:\\n" + message);
             const waUrl = "https://wa.me/6281234567890?text=" + waText;
             window.open(waUrl, '_blank');
 
-            // Tampilkan notifikasi sukses
             let alertBox = document.getElementById('static-contact-alert');
             if (!alertBox) {
                 alertBox = document.createElement('div');
@@ -193,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 alertBox.className = 'mb-8 px-6 py-5 rounded-2xl bg-accent/10 border border-accent/20 text-accent font-medium';
                 contactForm.parentNode.insertBefore(alertBox, contactForm);
             }
-            alertBox.textContent = 'Terima kasih ' + name + '! Pesan Anda telah dialihkan ke WhatsApp.';
+            alertBox.textContent = '{$alertMsg}';
             contactForm.reset();
         });
     }

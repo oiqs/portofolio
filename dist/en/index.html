@@ -23,7 +23,7 @@
     <header class="border-b border-ink/5 dark:border-white/5 backdrop-blur-xl sticky top-0 z-50 bg-paper/80 dark:bg-paper/80 transition-all duration-300">
     <div class="max-w-6xl mx-auto px-6 md:px-10 py-6 flex items-center justify-between">
         
-        <a href="/" class="font-display text-xl tracking-wide group hover-target flex items-center gap-0.5">
+        <a href="/en/" class="font-display text-xl tracking-wide group hover-target flex items-center gap-0.5">
             <span class="transition-colors duration-300 group-hover:text-accent">oIQs</span>
             <span class="text-accent transition-transform duration-500 inline-block group-hover:scale-150 group-hover:rotate-[360deg]">.</span>
         </a>
@@ -32,39 +32,39 @@
             
             <nav class="hidden md:flex items-center gap-10 text-sm font-medium tracking-wide">
                 
-                <a href="/" 
+                <a href="/en/" 
                    class="relative py-1 text-muted hover:text-accent transition-all duration-300 group hover-target flex items-center gap-1.5 text-accent font-semibold">
                     <span class="inline-block transition-transform duration-300 group-hover:-translate-y-0.5 group-active:translate-y-0">
-                        Beranda
+                        Home
                     </span>
                     
                     <span class="absolute bottom-0 left-0 h-0.5 bg-accent rounded-full transition-all duration-300 ease-out w-full shadow-[0_0_8px_var(--app-accent)]"></span>
                 </a>
 
                 
-                <a href="/about" 
+                <a href="/en/about" 
                    class="relative py-1 text-muted hover:text-accent transition-all duration-300 group hover-target flex items-center gap-1.5 ">
                     <span class="inline-block transition-transform duration-300 group-hover:-translate-y-0.5 group-active:translate-y-0">
-                        Tentang Saya
+                        About
                     </span>
                     
                     <span class="absolute bottom-0 left-0 h-0.5 bg-accent rounded-full transition-all duration-300 ease-out w-0 group-hover:w-full"></span>
                 </a>
 
                 
-                <a href="/projects" 
+                <a href="/en/projects" 
                    class="relative py-1 text-muted hover:text-accent transition-all duration-300 group hover-target flex items-center gap-1.5 ">
                     <span class="inline-block transition-transform duration-300 group-hover:-translate-y-0.5 group-active:translate-y-0">
-                        Galeri &amp; Trip
+                        Projects
                     </span>
                     
                     <span class="absolute bottom-0 left-0 h-0.5 bg-accent rounded-full transition-all duration-300 ease-out w-0 group-hover:w-full"></span>
                 </a>
 
                 
-                <a href="/contact"
+                <a href="/en/contact"
                    class="px-6 py-2.5 rounded-full bg-ink text-paper dark:bg-white dark:text-paper-dark hover:bg-accent dark:hover:bg-accent hover:text-paper transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_var(--app-accent)] active:scale-95 hover-target font-semibold">
-                    Kontak
+                    Contact
                 </a>
             </nav>
 
@@ -75,8 +75,8 @@
                             class="px-3 py-1.5 rounded-full border border-ink/10 text-muted hover:text-accent hover:border-accent text-xs font-semibold tracking-wider transition-all duration-300 flex items-center gap-1.5 hover-target group active:scale-95"
                             aria-label="Pilih Bahasa"
                             title="Pilih Bahasa / Change Language">
-                                                    <span>🇮🇩</span>
-                            <span>ID</span>
+                                                    <span>🇬🇧</span>
+                            <span>EN</span>
                                                 <svg class="w-3.5 h-3.5 text-muted group-hover:text-accent transition-transform duration-300 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                         </svg>
@@ -85,16 +85,16 @@
                     <div id="lang-picker-menu" 
                          class="hidden absolute right-0 mt-2 w-44 p-2 rounded-2xl bg-paper/95 dark:bg-paper/95 backdrop-blur-xl border border-ink/15 dark:border-white/15 shadow-2xl z-50 transition-all duration-300 origin-top-right transform scale-95 opacity-0">
                         <div class="text-[10px] font-bold tracking-wider uppercase text-muted px-3 py-1.5 border-b border-ink/10 mb-1">
-                            Bahasa
+                            Language
                         </div>
                         <a href="/" 
-                           class="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium hover:bg-ink/5 dark:hover:bg-white/5 transition-colors text-accent font-bold bg-accent/10">
+                           class="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium hover:bg-ink/5 dark:hover:bg-white/5 transition-colors text-ink dark:text-white">
                             <span class="flex items-center gap-2"><span>🇮🇩</span> Bahasa Indonesia</span>
-                                                            <span class="text-accent font-bold">✓</span>
                                                     </a>
                         <a href="/en/" 
-                           class="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium hover:bg-ink/5 dark:hover:bg-white/5 transition-colors text-ink dark:text-white">
+                           class="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium hover:bg-ink/5 dark:hover:bg-white/5 transition-colors text-accent font-bold bg-accent/10">
                             <span class="flex items-center gap-2"><span>🇬🇧</span> English</span>
+                                                            <span class="text-accent font-bold">✓</span>
                                                     </a>
                     </div>
                 </div>
@@ -134,25 +134,25 @@
 
     
     <div id="mobile-menu" class="hidden md:hidden overflow-hidden transition-all duration-400 ease-in-out max-h-0 opacity-0 border-t border-ink/5 bg-paper/95 dark:bg-paper/95 backdrop-blur-xl px-6 py-4 flex flex-col gap-3">
-        <a href="/" class="text-muted hover:text-accent font-medium py-1.5 transition-colors flex items-center justify-between text-accent font-bold">
-            <span>Beranda</span>
+        <a href="/en/" class="text-muted hover:text-accent font-medium py-1.5 transition-colors flex items-center justify-between text-accent font-bold">
+            <span>Home</span>
             <span class="text-xs">&rarr;</span>
         </a>
-        <a href="/about" class="text-muted hover:text-accent font-medium py-1.5 transition-colors flex items-center justify-between ">
-            <span>Tentang Saya</span>
+        <a href="/en/about" class="text-muted hover:text-accent font-medium py-1.5 transition-colors flex items-center justify-between ">
+            <span>About</span>
             <span class="text-xs">&rarr;</span>
         </a>
-        <a href="/projects" class="text-muted hover:text-accent font-medium py-1.5 transition-colors flex items-center justify-between ">
-            <span>Galeri &amp; Trip</span>
+        <a href="/en/projects" class="text-muted hover:text-accent font-medium py-1.5 transition-colors flex items-center justify-between ">
+            <span>Projects</span>
             <span class="text-xs">&rarr;</span>
         </a>
-        <a href="/contact" class="text-muted hover:text-accent font-medium py-1.5 transition-colors flex items-center justify-between ">
-            <span>Kontak</span>
+        <a href="/en/contact" class="text-muted hover:text-accent font-medium py-1.5 transition-colors flex items-center justify-between ">
+            <span>Contact</span>
             <span class="text-xs">&rarr;</span>
         </a>
         <div class="flex items-center gap-4 pt-2 border-t border-ink/10">
-            <a href="/" class="text-xs font-semibold px-3 py-1.5 rounded-full transition-all bg-accent text-paper">🇮🇩 Indonesia</a>
-            <a href="/en/" class="text-xs font-semibold px-3 py-1.5 rounded-full transition-all text-muted bg-ink/5">🇬🇧 English</a>
+            <a href="/" class="text-xs font-semibold px-3 py-1.5 rounded-full transition-all text-muted bg-ink/5">🇮🇩 Indonesia</a>
+            <a href="/en/" class="text-xs font-semibold px-3 py-1.5 rounded-full transition-all bg-accent text-paper">🇬🇧 English</a>
         </div>
     </div>
 </header>
@@ -535,7 +535,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="md:col-span-7 flex flex-col justify-center space-y-6">
             <div>
                 <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
-                    Halo, Saya <br/>
+                    Hello, I&#039;m <br/>
                     <span class="text-accent italic font-normal">Thoriq Alfurqan M.L</span>
                 </h1>
             </div>
@@ -544,7 +544,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="w-16 h-1 bg-accent/80 rounded-full"></div>
             
             <p class="text-muted text-base sm:text-lg max-w-xl leading-relaxed">
-                Saya bukan ahli di bidang IT, melainkan seorang yang sangat menggemari <strong class="text-ink font-semibold">traveling</strong> dan <strong class="text-ink font-semibold">healing</strong>. Menjelajahi keindahan alam, menemukan tempat baru, dan menikmati ketenangan adalah passion utama saya.
+                I am not an IT expert, but someone who is deeply passionate about <strong class="text-ink font-semibold">traveling</strong> and <strong class="text-ink font-semibold">healing</strong>. Exploring natural beauty, discovering new places, and enjoying peace is my main passion.
             </p>
             
             
@@ -556,13 +556,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             
             <div class="pt-4 flex flex-wrap gap-5 items-center">
-                <a href="/projects" 
+                <a href="/en/projects" 
                    class="px-8 py-3.5 rounded-full bg-accent text-paper font-medium text-sm tracking-wide hover:bg-accent-dark transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/20">
-                    Jelajahi Momen Trip
+                    Explore Trip Moments
                 </a>
-                <a href="/about" 
+                <a href="/en/about" 
                    class="px-8 py-3.5 rounded-full border border-ink/15 text-ink font-medium text-sm tracking-wide hover:border-accent hover:text-accent transition-all duration-300 hover:-translate-y-0.5">
-                    Tentang Saya
+                    About Me
                 </a>
                 
                 
@@ -584,7 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <section class="max-w-6xl mx-auto px-6 md:px-10 pb-24">
     
     <div class="flex items-center gap-4 mb-10">
-        <span class="text-xs font-bold text-accent tracking-[0.25em] uppercase">Filosofi Perjalanan</span>
+        <span class="text-xs font-bold text-accent tracking-[0.25em] uppercase">Travel Philosophy</span>
         <div class="h-[1px] flex-1 bg-gradient-to-r from-accent/30 via-ink/10 to-transparent"></div>
     </div>
 
@@ -607,11 +607,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
                 <h3 class="font-display text-2xl font-bold mb-2 group-hover:text-accent transition-colors">Traveling &amp; Healing</h3>
-                <p class="text-sm text-muted leading-relaxed">Menjelajahi keindahan lanskap alam &amp; destinasi pilihan untuk menyegarkan kembali pikiran.</p>
+                <p class="text-sm text-muted leading-relaxed">Exploring natural landscapes &amp; handpicked destinations to refresh the mind.</p>
             </div>
             
             <div class="mt-8 pt-4 border-t border-ink/5 dark:border-white/5 flex items-center justify-between text-xs text-accent/80 font-medium">
-                <span>Jelajah &amp; Eksplorasi</span>
+                <span>Explore &amp; Discover</span>
             </div>
         </div>
 
@@ -629,12 +629,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         </svg>
                     </div>
                 </div>
-                <h3 class="font-display text-2xl font-bold mb-2 group-hover:text-accent transition-colors">Ketenangan Suasana</h3>
-                <p class="text-sm text-muted leading-relaxed">Meresapi keheningan alam, suara gemericik air, dan momen rileks di setiap langkah perjalanan.</p>
+                <h3 class="font-display text-2xl font-bold mb-2 group-hover:text-accent transition-colors">Peaceful Ambience</h3>
+                <p class="text-sm text-muted leading-relaxed">Immersing in nature&#039;s quiet, sound of streams, and relaxing moments on every journey.</p>
             </div>
             
             <div class="mt-8 pt-4 border-t border-ink/5 dark:border-white/5 flex items-center justify-between text-xs text-accent/80 font-medium">
-                <span>Kedamaian &amp; Mindfulness</span>
+                <span>Peace &amp; Mindfulness</span>
             </div>
         </div>
 
@@ -653,12 +653,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         </svg>
                     </div>
                 </div>
-                <h3 class="font-display text-2xl font-bold mb-2 group-hover:text-accent transition-colors">Cerita Perjalanan</h3>
-                <p class="text-sm text-muted leading-relaxed">Mengabadikan visual estetis, dokumentasi trip, serta memori indah sepanjang rute.</p>
+                <h3 class="font-display text-2xl font-bold mb-2 group-hover:text-accent transition-colors">Travel Stories</h3>
+                <p class="text-sm text-muted leading-relaxed">Capturing aesthetic visuals, trip documentations, and beautiful memories along the route.</p>
             </div>
             
             <div class="mt-8 pt-4 border-t border-ink/5 dark:border-white/5 flex items-center justify-between text-xs text-accent/80 font-medium">
-                <span>Visual &amp; Dokumentasi</span>
+                <span>Visuals &amp; Documentation</span>
             </div>
         </div>
 
@@ -669,17 +669,17 @@ document.addEventListener('DOMContentLoaded', () => {
 <section class="max-w-6xl mx-auto px-6 md:px-10 py-20 border-t border-ink/5">
     <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-14 gap-6">
         <div>
-            <p class="text-xs font-bold text-accent tracking-[0.2em] uppercase mb-2">Galeri Perjalanan</p>
-            <h2 class="font-display text-3xl sm:text-4xl font-bold">Momen Trip Pilihan</h2>
+            <p class="text-xs font-bold text-accent tracking-[0.2em] uppercase mb-2">Travel Gallery</p>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold">Featured Trip Moments</h2>
         </div>
-        <a href="/projects" class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-dark transition-colors tracking-wide group">
-            Lihat Semua Trip 
+        <a href="/en/projects" class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-dark transition-colors tracking-wide group">
+            View All Trips 
             <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
         </a>
     </div>
 
     <div class="grid md:grid-cols-3 gap-8">
-                    <a href="/projects/jelajah-curug-bogor"
+                    <a href="/en/projects/jelajah-curug-bogor"
    class="group block bg-ink/5 dark:bg-white/[0.03] border border-ink/10 dark:border-white/10 rounded-3xl overflow-hidden hover:border-accent/40 hover:bg-ink/[0.08] dark:hover:bg-white/[0.06] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-accent/10 flex flex-col justify-between">
     <div>
         <div class="aspect-[4/3] bg-ink/10 dark:bg-white/5 overflow-hidden relative">
@@ -687,7 +687,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <svg class="w-12 h-12 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                     </svg>
-                    <span class="text-xs font-medium">Foto Perjalanan</span>
+                    <span class="text-xs font-medium">Travel Photo</span>
                 </div>
             
             
@@ -729,10 +729,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
         
         <span class="text-xs font-semibold text-accent group-hover:translate-x-1 transition-transform duration-300 flex items-center gap-1">
-            Lihat &rarr;
+            View &rarr;
         </span>
     </div>
-</a>                    <a href="/projects/camping-gunung-pancar"
+</a>                    <a href="/en/projects/camping-gunung-pancar"
    class="group block bg-ink/5 dark:bg-white/[0.03] border border-ink/10 dark:border-white/10 rounded-3xl overflow-hidden hover:border-accent/40 hover:bg-ink/[0.08] dark:hover:bg-white/[0.06] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-accent/10 flex flex-col justify-between">
     <div>
         <div class="aspect-[4/3] bg-ink/10 dark:bg-white/5 overflow-hidden relative">
@@ -740,7 +740,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <svg class="w-12 h-12 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                     </svg>
-                    <span class="text-xs font-medium">Foto Perjalanan</span>
+                    <span class="text-xs font-medium">Travel Photo</span>
                 </div>
             
             
@@ -782,10 +782,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
         
         <span class="text-xs font-semibold text-accent group-hover:translate-x-1 transition-transform duration-300 flex items-center gap-1">
-            Lihat &rarr;
+            View &rarr;
         </span>
     </div>
-</a>                    <a href="/projects/road-trip-pantai-selatan"
+</a>                    <a href="/en/projects/road-trip-pantai-selatan"
    class="group block bg-ink/5 dark:bg-white/[0.03] border border-ink/10 dark:border-white/10 rounded-3xl overflow-hidden hover:border-accent/40 hover:bg-ink/[0.08] dark:hover:bg-white/[0.06] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-accent/10 flex flex-col justify-between">
     <div>
         <div class="aspect-[4/3] bg-ink/10 dark:bg-white/5 overflow-hidden relative">
@@ -793,7 +793,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <svg class="w-12 h-12 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                     </svg>
-                    <span class="text-xs font-medium">Foto Perjalanan</span>
+                    <span class="text-xs font-medium">Travel Photo</span>
                 </div>
             
             
@@ -835,7 +835,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
         
         <span class="text-xs font-semibold text-accent group-hover:translate-x-1 transition-transform duration-300 flex items-center gap-1">
-            Lihat &rarr;
+            View &rarr;
         </span>
     </div>
 </a>            </div>
@@ -845,11 +845,11 @@ document.addEventListener('DOMContentLoaded', () => {
 <section class="max-w-6xl mx-auto px-6 md:px-10 py-28 text-center border-t border-ink/5">
     <div class="max-w-3xl mx-auto border border-ink/10 rounded-3xl p-10 md:p-16 bg-gradient-to-b from-ink/5 to-transparent relative overflow-hidden">
         <div class="absolute -top-24 -left-24 w-48 h-48 bg-accent/10 rounded-full blur-3xl pointer-events-none"></div>
-        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl mb-6 leading-tight font-bold">Punya rekomendasi spot healing seru?</h2>
-        <p class="text-muted text-base sm:text-lg mb-10 max-w-xl mx-auto">Saya selalu senang mendengar cerita perjalanan baru, menemukan destinasi alam yang tenang, atau bertukar rekomendasi tempat liburan.</p>
-        <a href="/contact"
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl mb-6 leading-tight font-bold">Have a great healing spot recommendation?</h2>
+        <p class="text-muted text-base sm:text-lg mb-10 max-w-xl mx-auto">I&#039;m always excited to hear new travel stories, discover peaceful nature destinations, or exchange vacation spot recommendations.</p>
+        <a href="/en/contact"
            class="inline-block px-10 py-4 rounded-full bg-accent text-paper hover:bg-accent-dark transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/20 font-medium tracking-wide">
-            Kirim Rekomendasi
+            Send Recommendation
         </a>
     </div>
 </section>
@@ -858,11 +858,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <footer class="border-t border-ink/5 mt-0 bg-ink/5">
     <div class="max-w-6xl mx-auto px-6 md:px-10 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
-        <p class="text-sm text-muted tracking-wide">© 2026 Thoriq Alfurqan M.L (oiq_s). Dibuat dengan cinta &amp; apresiasi alam.</p>
+        <p class="text-sm text-muted tracking-wide">© 2026 Thoriq Alfurqan M.L (oiq_s). Made with love &amp; appreciation for nature.</p>
         <div class="flex gap-8 text-sm tracking-wide">
             <a href="https://instagram.com/oiq_s" target="_blank" rel="noopener" class="text-muted hover:text-accent transition-colors">Instagram</a>
             <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="text-muted hover:text-accent transition-colors">WhatsApp</a>
-            <a href="/contact" class="text-muted hover:text-accent transition-colors">Kontak</a>
+            <a href="/en/contact" class="text-muted hover:text-accent transition-colors">Contact</a>
         </div>
     </div>
 </footer>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thoriq Alfurqan M.L (oiq_s) — Portfolio</title>
+    <title>Galeri Perjalanan — Thoriq Alfurqan M.L</title>
     <link rel="preload" as="style" href="/build/assets/app-tIhJ_Fsl.css" /><link rel="modulepreload" as="script" href="/build/assets/app-CIomGrQN.js" /><link rel="stylesheet" href="/build/assets/app-tIhJ_Fsl.css" /><script type="module" src="/build/assets/app-CIomGrQN.js"></script>    <script>
         // On page load or when changing themes, inline script avoids FOUC
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -23,7 +23,7 @@
     <header class="border-b border-ink/5 dark:border-white/5 backdrop-blur-xl sticky top-0 z-50 bg-paper/80 dark:bg-paper/80 transition-all duration-300">
     <div class="max-w-6xl mx-auto px-6 md:px-10 py-6 flex items-center justify-between">
         
-        <a href="/" class="font-display text-xl tracking-wide group hover-target flex items-center gap-0.5">
+        <a href="/en/" class="font-display text-xl tracking-wide group hover-target flex items-center gap-0.5">
             <span class="transition-colors duration-300 group-hover:text-accent">oIQs</span>
             <span class="text-accent transition-transform duration-500 inline-block group-hover:scale-150 group-hover:rotate-[360deg]">.</span>
         </a>
@@ -32,39 +32,39 @@
             
             <nav class="hidden md:flex items-center gap-10 text-sm font-medium tracking-wide">
                 
-                <a href="/" 
+                <a href="/en/" 
+                   class="relative py-1 text-muted hover:text-accent transition-all duration-300 group hover-target flex items-center gap-1.5 ">
+                    <span class="inline-block transition-transform duration-300 group-hover:-translate-y-0.5 group-active:translate-y-0">
+                        Home
+                    </span>
+                    
+                    <span class="absolute bottom-0 left-0 h-0.5 bg-accent rounded-full transition-all duration-300 ease-out w-0 group-hover:w-full"></span>
+                </a>
+
+                
+                <a href="/en/about" 
+                   class="relative py-1 text-muted hover:text-accent transition-all duration-300 group hover-target flex items-center gap-1.5 ">
+                    <span class="inline-block transition-transform duration-300 group-hover:-translate-y-0.5 group-active:translate-y-0">
+                        About
+                    </span>
+                    
+                    <span class="absolute bottom-0 left-0 h-0.5 bg-accent rounded-full transition-all duration-300 ease-out w-0 group-hover:w-full"></span>
+                </a>
+
+                
+                <a href="/en/projects" 
                    class="relative py-1 text-muted hover:text-accent transition-all duration-300 group hover-target flex items-center gap-1.5 text-accent font-semibold">
                     <span class="inline-block transition-transform duration-300 group-hover:-translate-y-0.5 group-active:translate-y-0">
-                        Beranda
+                        Projects
                     </span>
                     
                     <span class="absolute bottom-0 left-0 h-0.5 bg-accent rounded-full transition-all duration-300 ease-out w-full shadow-[0_0_8px_var(--app-accent)]"></span>
                 </a>
 
                 
-                <a href="/about" 
-                   class="relative py-1 text-muted hover:text-accent transition-all duration-300 group hover-target flex items-center gap-1.5 ">
-                    <span class="inline-block transition-transform duration-300 group-hover:-translate-y-0.5 group-active:translate-y-0">
-                        Tentang Saya
-                    </span>
-                    
-                    <span class="absolute bottom-0 left-0 h-0.5 bg-accent rounded-full transition-all duration-300 ease-out w-0 group-hover:w-full"></span>
-                </a>
-
-                
-                <a href="/projects" 
-                   class="relative py-1 text-muted hover:text-accent transition-all duration-300 group hover-target flex items-center gap-1.5 ">
-                    <span class="inline-block transition-transform duration-300 group-hover:-translate-y-0.5 group-active:translate-y-0">
-                        Galeri &amp; Trip
-                    </span>
-                    
-                    <span class="absolute bottom-0 left-0 h-0.5 bg-accent rounded-full transition-all duration-300 ease-out w-0 group-hover:w-full"></span>
-                </a>
-
-                
-                <a href="/contact"
+                <a href="/en/contact"
                    class="px-6 py-2.5 rounded-full bg-ink text-paper dark:bg-white dark:text-paper-dark hover:bg-accent dark:hover:bg-accent hover:text-paper transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_var(--app-accent)] active:scale-95 hover-target font-semibold">
-                    Kontak
+                    Contact
                 </a>
             </nav>
 
@@ -75,8 +75,8 @@
                             class="px-3 py-1.5 rounded-full border border-ink/10 text-muted hover:text-accent hover:border-accent text-xs font-semibold tracking-wider transition-all duration-300 flex items-center gap-1.5 hover-target group active:scale-95"
                             aria-label="Pilih Bahasa"
                             title="Pilih Bahasa / Change Language">
-                                                    <span>🇮🇩</span>
-                            <span>ID</span>
+                                                    <span>🇬🇧</span>
+                            <span>EN</span>
                                                 <svg class="w-3.5 h-3.5 text-muted group-hover:text-accent transition-transform duration-300 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                         </svg>
@@ -85,16 +85,16 @@
                     <div id="lang-picker-menu" 
                          class="hidden absolute right-0 mt-2 w-44 p-2 rounded-2xl bg-paper/95 dark:bg-paper/95 backdrop-blur-xl border border-ink/15 dark:border-white/15 shadow-2xl z-50 transition-all duration-300 origin-top-right transform scale-95 opacity-0">
                         <div class="text-[10px] font-bold tracking-wider uppercase text-muted px-3 py-1.5 border-b border-ink/10 mb-1">
-                            Bahasa
+                            Language
                         </div>
-                        <a href="/" 
-                           class="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium hover:bg-ink/5 dark:hover:bg-white/5 transition-colors text-accent font-bold bg-accent/10">
-                            <span class="flex items-center gap-2"><span>🇮🇩</span> Bahasa Indonesia</span>
-                                                            <span class="text-accent font-bold">✓</span>
-                                                    </a>
-                        <a href="/en/" 
+                        <a href="/projects" 
                            class="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium hover:bg-ink/5 dark:hover:bg-white/5 transition-colors text-ink dark:text-white">
+                            <span class="flex items-center gap-2"><span>🇮🇩</span> Bahasa Indonesia</span>
+                                                    </a>
+                        <a href="/en/projects" 
+                           class="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium hover:bg-ink/5 dark:hover:bg-white/5 transition-colors text-accent font-bold bg-accent/10">
                             <span class="flex items-center gap-2"><span>🇬🇧</span> English</span>
+                                                            <span class="text-accent font-bold">✓</span>
                                                     </a>
                     </div>
                 </div>
@@ -134,25 +134,25 @@
 
     
     <div id="mobile-menu" class="hidden md:hidden overflow-hidden transition-all duration-400 ease-in-out max-h-0 opacity-0 border-t border-ink/5 bg-paper/95 dark:bg-paper/95 backdrop-blur-xl px-6 py-4 flex flex-col gap-3">
-        <a href="/" class="text-muted hover:text-accent font-medium py-1.5 transition-colors flex items-center justify-between text-accent font-bold">
-            <span>Beranda</span>
+        <a href="/en/" class="text-muted hover:text-accent font-medium py-1.5 transition-colors flex items-center justify-between ">
+            <span>Home</span>
             <span class="text-xs">&rarr;</span>
         </a>
-        <a href="/about" class="text-muted hover:text-accent font-medium py-1.5 transition-colors flex items-center justify-between ">
-            <span>Tentang Saya</span>
+        <a href="/en/about" class="text-muted hover:text-accent font-medium py-1.5 transition-colors flex items-center justify-between ">
+            <span>About</span>
             <span class="text-xs">&rarr;</span>
         </a>
-        <a href="/projects" class="text-muted hover:text-accent font-medium py-1.5 transition-colors flex items-center justify-between ">
-            <span>Galeri &amp; Trip</span>
+        <a href="/en/projects" class="text-muted hover:text-accent font-medium py-1.5 transition-colors flex items-center justify-between text-accent font-bold">
+            <span>Projects</span>
             <span class="text-xs">&rarr;</span>
         </a>
-        <a href="/contact" class="text-muted hover:text-accent font-medium py-1.5 transition-colors flex items-center justify-between ">
-            <span>Kontak</span>
+        <a href="/en/contact" class="text-muted hover:text-accent font-medium py-1.5 transition-colors flex items-center justify-between ">
+            <span>Contact</span>
             <span class="text-xs">&rarr;</span>
         </a>
         <div class="flex items-center gap-4 pt-2 border-t border-ink/10">
-            <a href="/" class="text-xs font-semibold px-3 py-1.5 rounded-full transition-all bg-accent text-paper">🇮🇩 Indonesia</a>
-            <a href="/en/" class="text-xs font-semibold px-3 py-1.5 rounded-full transition-all text-muted bg-ink/5">🇬🇧 English</a>
+            <a href="/projects" class="text-xs font-semibold px-3 py-1.5 rounded-full transition-all text-muted bg-ink/5">🇮🇩 Indonesia</a>
+            <a href="/en/projects" class="text-xs font-semibold px-3 py-1.5 rounded-full transition-all bg-accent text-paper">🇬🇧 English</a>
         </div>
     </div>
 </header>
@@ -213,473 +213,31 @@
 </script>
     <main>
         
-
-<section class="max-w-6xl mx-auto px-6 md:px-10 pt-20 pb-24 md:pt-28 md:pb-32">
-    <div class="grid md:grid-cols-12 gap-12 lg:gap-16 items-center">
-        
-        
-        <div class="md:col-span-5 flex justify-center order-first md:order-none">
-            <div class="relative flex flex-col items-center justify-center select-none py-2 w-full max-w-[420px] mx-auto" id="id-card-wrapper">
-    
-    
-    <div class="relative z-20 flex flex-col items-center pointer-events-none w-full" id="reel-anchor">
-        
-        
-        <div class="relative flex justify-center items-center -mt-6 mb-0.5">
-            
-            <div class="w-8 sm:w-9 h-18 sm:h-22 bg-gradient-to-b from-accent/90 via-accent to-accent-dark shadow-lg transform -rotate-12 translate-x-3.5 origin-top border-x border-white/30 dark:border-white/20 rounded-t-sm flex items-center justify-center text-[9px] font-bold text-white/90 tracking-widest uppercase select-none overflow-hidden">
-                <span class="[writing-mode:vertical-lr] rotate-180 opacity-90 font-mono tracking-wider">OIQS</span>
-            </div>
-            
-            
-            <div class="w-8 sm:w-9 h-18 sm:h-22 bg-gradient-to-b from-accent/90 via-accent to-accent-dark shadow-lg transform rotate-12 -translate-x-3.5 origin-top border-x border-white/30 dark:border-white/20 rounded-t-sm flex items-center justify-center text-[9px] font-bold text-white/90 tracking-widest uppercase select-none overflow-hidden">
-                <span class="[writing-mode:vertical-lr] opacity-90 font-mono tracking-wider">TRIP</span>
-            </div>
-
-            
-            <div class="absolute bottom-0 z-30 w-10 h-5 rounded-sm bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 border border-slate-400 shadow-md flex flex-col items-center justify-center">
-                <div class="w-8 h-1 bg-slate-500/40 rounded-sm border-t border-slate-600/50"></div>
-                <div class="w-8 h-1 bg-slate-500/40 rounded-sm border-t border-slate-600/50 mt-0.5"></div>
-            </div>
-        </div>
-
-        
-        <div class="relative z-20 flex flex-col items-center -mt-0.5">
-            
-            <div class="w-6 h-3 rounded-t-full border-2 border-slate-300 bg-gradient-to-b from-slate-200 via-slate-100 to-slate-400 shadow-sm"></div>
-            
-            <div class="w-4.5 h-5 -mt-1 rounded-b-md bg-gradient-to-b from-slate-100 via-slate-300 to-slate-500 border border-slate-400 shadow-md flex items-center justify-center">
-                <div class="w-1.5 h-3 bg-slate-600/50 rounded-full border border-slate-400/40"></div>
-            </div>
-        </div>
-        
-        
-        <div class="relative z-20 -mt-1 flex flex-col items-center">
-            
-            <div class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-b from-slate-100 via-slate-300 to-slate-500 dark:from-slate-200 dark:via-slate-400 dark:to-slate-700 p-1 border border-slate-300 dark:border-slate-500 shadow-2xl flex items-center justify-center" id="reel-button">
-                
-                
-                <div class="absolute -right-1 top-1/2 -translate-y-1/2 w-2 h-10 bg-gradient-to-r from-slate-300 to-slate-500 rounded-r-md border border-slate-400 shadow-sm"></div>
-
-                
-                <div class="w-full h-full rounded-full bg-gradient-to-b from-slate-900 via-slate-800 to-slate-950 p-1.5 border border-slate-700/80 shadow-inner flex items-center justify-center relative overflow-hidden">
-                    
-                    
-                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/25 to-transparent rounded-full pointer-events-none"></div>
-
-                    
-                    <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-accent/90 via-accent to-accent-dark border-2 border-white/80 dark:border-white/90 shadow-md flex items-center justify-center text-white">
-                        
-                        <svg class="w-5 h-5 text-white drop-shadow-sm" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 13.5l1.8-4.5 4.5-1.8-1.8 4.5-4.5 1.8z" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-
-            
-            <div class="w-4 h-3.5 -mt-1 bg-gradient-to-b from-slate-300 via-slate-100 to-slate-500 rounded-b-md border border-slate-400 shadow-md flex items-center justify-center relative z-20" id="reel-exit-hole">
-                <div class="w-2 h-2 rounded-full bg-slate-950 border border-slate-700 shadow-inner flex items-center justify-center">
-                    <div class="w-1 h-1 rounded-full bg-black"></div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    
-    <svg class="absolute inset-0 w-full h-full pointer-events-none overflow-visible z-15" id="reel-svg-overlay">
-        <defs>
-            <filter id="cord-shadow" x="-30%" y="-30%" width="160%" height="160%">
-                <feDropShadow dx="1.5" dy="2.5" stdDeviation="1.2" flood-opacity="0.5" />
-            </filter>
-        </defs>
-        
-        <line id="reel-nylon-cord" 
-              x1="0" y1="0" x2="0" y2="0" 
-              stroke="#0F172A" stroke-width="2.8" stroke-linecap="round" 
-              class="dark:stroke-slate-100" 
-              filter="url(#cord-shadow)" />
-    </svg>
-
-    
-    <div id="draggable-id-card" 
-         class="relative z-10 w-full max-w-[340px] sm:max-w-[400px] cursor-grab active:cursor-grabbing origin-top transition-shadow duration-300 mt-2">
-        
-        
-        <div class="absolute -top-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none" id="card-strap-attachment">
-            
-            <div class="w-5 sm:w-6 h-12 bg-white/50 dark:bg-white/20 backdrop-blur-md border border-white/70 dark:border-white/40 rounded-t-sm rounded-b-md flex flex-col items-center justify-between py-1 shadow-lg relative">
-                
-                
-                <div class="w-3.5 h-3.5 rounded-full bg-gradient-to-b from-slate-100 via-slate-300 to-slate-500 border border-slate-400 shadow-md flex items-center justify-center relative z-10">
-                    <div class="w-1.5 h-1.5 rounded-full bg-slate-700"></div>
-                </div>
-                
-                
-                <div class="w-full h-[1px] bg-white/60"></div>
-
-                
-                <div class="w-3.5 h-3.5 rounded-full bg-gradient-to-b from-slate-200 via-slate-400 to-slate-600 border border-slate-500 shadow-inner flex items-center justify-center">
-                    <div class="w-1 h-1 rounded-full bg-slate-800"></div>
-                </div>
-            </div>
-        </div>
-
-        
-        <div class="relative rounded-[2rem] p-4 sm:p-5 bg-white/20 dark:bg-slate-900/40 backdrop-blur-xl border-2 border-white/50 dark:border-white/20 shadow-2xl shadow-black/30 overflow-hidden group pt-7">
-            
-            
-            <div class="absolute top-3 left-1/2 -translate-x-1/2 w-12 h-3.5 rounded-full bg-slate-900/70 dark:bg-slate-950/80 border border-white/40 dark:border-white/20 shadow-inner flex items-center justify-center pointer-events-none">
-                <div class="w-10 h-2 rounded-full bg-black/60 border border-black/80"></div>
-            </div>
-
-            
-            <div class="absolute top-1/3 left-0 w-2 h-7 rounded-r-md bg-slate-400/40 dark:bg-white/30"></div>
-            <div class="absolute top-1/3 right-0 w-2 h-7 rounded-l-md bg-slate-400/40 dark:bg-white/30"></div>
-            <div class="absolute bottom-1/3 left-0 w-2 h-7 rounded-r-md bg-slate-400/40 dark:bg-white/30"></div>
-            <div class="absolute bottom-1/3 right-0 w-2 h-7 rounded-l-md bg-slate-400/40 dark:bg-white/30"></div>
-
-            
-            <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/15 to-transparent pointer-events-none group-hover:opacity-100 transition-opacity duration-500"></div>
-
-            
-            <div class="rounded-2xl p-5 sm:p-6 bg-paper dark:bg-slate-950 border border-ink/10 dark:border-white/10 shadow-inner text-center relative overflow-hidden flex flex-col items-center">
-                
-                
-                <div class="w-full py-1.5 px-3.5 rounded-xl bg-gradient-to-r from-accent/30 via-accent/10 to-accent/30 border border-accent/20 mb-4 flex items-center justify-between">
-                    <span class="text-[10px] font-bold tracking-widest uppercase text-accent">RA TRIP RA SMILE</span>
-                    <div class="flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-                        <span class="text-[9px] font-bold uppercase text-accent tracking-wider">VERIFIED</span>
-                    </div>
-                </div>
-
-                
-                <div class="relative w-48 h-48 sm:w-60 sm:h-60 rounded-2xl overflow-hidden border-2 border-accent/40 shadow-xl mb-4 group/photo">
-                    <img src="/images/profile.jpeg" 
-                         alt="Foto Thoriq Alfurqan M.L" 
-                         class="w-full h-full object-cover filter grayscale contrast-110 group-hover/photo:grayscale-0 group-hover/photo:scale-105 transition-all duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                    <span class="absolute bottom-2.5 left-3 px-3 py-0.5 rounded-md bg-black/60 text-white text-[11px] font-mono tracking-wider">@oiq_s</span>
-                </div>
-
-                
-                <h3 class="font-display text-xl sm:text-2xl font-bold tracking-tight text-ink dark:text-white leading-tight">
-                    Thoriq Alfurqan M.L
-                </h3>
-                <p class="text-xs sm:text-sm font-semibold text-accent mt-1">Traveler & Healing Enthusiast</p>
-
-                
-                <div class="mt-5 pt-4 border-t border-ink/10 dark:border-white/10 w-full flex items-center justify-between">
-                    <div class="flex gap-0.5 items-center h-5 opacity-70">
-                        <div class="w-0.5 h-full bg-ink dark:bg-white"></div>
-                        <div class="w-1 h-full bg-ink dark:bg-white"></div>
-                        <div class="w-0.5 h-full bg-ink dark:bg-white"></div>
-                        <div class="w-1.5 h-full bg-ink dark:bg-white"></div>
-                        <div class="w-0.5 h-full bg-ink dark:bg-white"></div>
-                        <div class="w-1 h-full bg-ink dark:bg-white"></div>
-                        <div class="w-0.5 h-full bg-ink dark:bg-white"></div>
-                        <div class="w-1.5 h-full bg-ink dark:bg-white"></div>
-                    </div>
-                    <span class="text-[10px] font-mono text-muted">ID: 2026-OIQS-8890</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const card = document.getElementById('draggable-id-card');
-    const wrapper = document.getElementById('id-card-wrapper');
-    const exitHole = document.getElementById('reel-exit-hole');
-    const attachment = document.getElementById('card-strap-attachment');
-    const cordLine = document.getElementById('reel-nylon-cord');
-
-    if (!card || !wrapper || !cordLine) return;
-
-    let isDragging = false;
-    let startX = 0, startY = 0;
-    let currentX = 0, currentY = 0;
-    let targetX = 0, targetY = 0;
-
-    // Physics spring parameters
-    let vx = 0, vy = 0;
-    let rotation = 0, vr = 0;
-    const stiffness = 0.15;
-    const damping = 0.84;
-
-    // Ambient Idle Sway Parameters
-    let time = 0;
-
-    // Mouse & Touch down
-    function onStart(e) {
-        isDragging = true;
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-        startX = clientX - currentX;
-        startY = clientY - currentY;
-
-        card.style.cursor = 'grabbing';
-    }
-
-    // Mouse & Touch move
-    function onMove(e) {
-        if (!isDragging) return;
-
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-        targetX = clientX - startX;
-        targetY = clientY - startY;
-
-        // Expanded max drag distance to allow pulling far across screen (650px radius)
-        const maxDist = 650;
-        const dist = Math.hypot(targetX, targetY);
-        if (dist > maxDist) {
-            targetX = (targetX / dist) * maxDist;
-            targetY = (targetY / dist) * maxDist;
-        }
-
-        // Calculate dynamic tilt rotation angle based on horizontal displacement
-        rotation = targetX * 0.12;
-    }
-
-    // Mouse & Touch release
-    function onEnd() {
-        if (!isDragging) return;
-        isDragging = false;
-        card.style.cursor = 'grab';
-        targetX = 0;
-        targetY = 0;
-    }
-
-    // Event Listeners
-    card.addEventListener('mousedown', onStart);
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseup', onEnd);
-
-    card.addEventListener('touchstart', onStart, { passive: true });
-    window.addEventListener('touchmove', onMove, { passive: true });
-    window.addEventListener('touchend', onEnd);
-
-    // Update SVG Nylon Cord Coordinates in Real Time
-    function updateCordSVG() {
-        if (!wrapper || !exitHole || !attachment || !cordLine) return;
-
-        const wrapperRect = wrapper.getBoundingClientRect();
-        const exitRect = exitHole.getBoundingClientRect();
-        const attachRect = attachment.getBoundingClientRect();
-
-        // Calculate exact center coordinates relative to wrapper SVG
-        const x1 = (exitRect.left + exitRect.width / 2) - wrapperRect.left;
-        const y1 = (exitRect.top + exitRect.height / 2) - wrapperRect.top;
-
-        const x2 = (attachRect.left + attachRect.width / 2) - wrapperRect.left;
-        const y2 = (attachRect.top + attachRect.height / 2) - wrapperRect.top;
-
-        cordLine.setAttribute('x1', x1);
-        cordLine.setAttribute('y1', y1);
-        cordLine.setAttribute('x2', x2);
-        cordLine.setAttribute('y2', y2);
-    }
-
-    // Main Physics Animation Loop
-    function updatePhysics() {
-        if (isDragging) {
-            // Smoothly move towards drag target
-            currentX += (targetX - currentX) * 0.35;
-            currentY += (targetY - currentY) * 0.35;
-        } else {
-            // Spring recoil return physics back to origin (0, 0)
-            const ax = (0 - currentX) * stiffness;
-            const ay = (0 - currentY) * stiffness;
-            vx = (vx + ax) * damping;
-            vy = (vy + ay) * damping;
-
-            currentX += vx;
-            currentY += vy;
-
-            // Pendulum rotational spring return
-            const ar = (-currentX * 0.15 - rotation) * stiffness;
-            vr = (vr + ar) * damping;
-            rotation += vr;
-
-            // Ambient gentle idle sway when stationary
-            time += 0.04;
-            if (Math.abs(currentX) < 1 && Math.abs(currentY) < 1) {
-                rotation += Math.sin(time) * 0.15;
-            }
-        }
-
-        // Apply 3D Transform to ID Card
-        card.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) rotate(${rotation}deg)`;
-
-        // Update SVG retractable cord string
-        updateCordSVG();
-
-        requestAnimationFrame(updatePhysics);
-    }
-
-    requestAnimationFrame(updatePhysics);
-});
-</script>
-        </div>
-
-        
-        <div class="md:col-span-7 flex flex-col justify-center space-y-6">
-            <div>
-                <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
-                    Halo, Saya <br/>
-                    <span class="text-accent italic font-normal">Thoriq Alfurqan M.L</span>
-                </h1>
-            </div>
-            
-            
-            <div class="w-16 h-1 bg-accent/80 rounded-full"></div>
-            
-            <p class="text-muted text-base sm:text-lg max-w-xl leading-relaxed">
-                Saya bukan ahli di bidang IT, melainkan seorang yang sangat menggemari <strong class="text-ink font-semibold">traveling</strong> dan <strong class="text-ink font-semibold">healing</strong>. Menjelajahi keindahan alam, menemukan tempat baru, dan menikmati ketenangan adalah passion utama saya.
-            </p>
-            
-            
-            <div class="flex items-center gap-4 pt-2">
-                <div class="font-display italic text-2xl sm:text-3xl text-accent/90">
-                    AS <span class="font-bold underline decoration-accent/40 underline-offset-8">oiq_s</span>
-                </div>
-            </div>
-
-            
-            <div class="pt-4 flex flex-wrap gap-5 items-center">
-                <a href="/projects" 
-                   class="px-8 py-3.5 rounded-full bg-accent text-paper font-medium text-sm tracking-wide hover:bg-accent-dark transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/20">
-                    Jelajahi Momen Trip
-                </a>
-                <a href="/about" 
-                   class="px-8 py-3.5 rounded-full border border-ink/15 text-ink font-medium text-sm tracking-wide hover:border-accent hover:text-accent transition-all duration-300 hover:-translate-y-0.5">
-                    Tentang Saya
-                </a>
-                
-                
-                <div class="flex gap-4 items-center text-accent/80 pl-2">
-                    <a href="https://instagram.com/oiq_s" target="_blank" rel="noopener" class="hover:text-accent hover:scale-110 transition-all duration-300" aria-label="Instagram">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                    </a>
-                    <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="hover:text-accent hover:scale-110 transition-all duration-300" aria-label="WhatsApp">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-
-<section class="max-w-6xl mx-auto px-6 md:px-10 pb-24">
-    
-    <div class="flex items-center gap-4 mb-10">
-        <span class="text-xs font-bold text-accent tracking-[0.25em] uppercase">Filosofi Perjalanan</span>
-        <div class="h-[1px] flex-1 bg-gradient-to-r from-accent/30 via-ink/10 to-transparent"></div>
-    </div>
-
-    
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        
-        <div class="relative group p-8 rounded-3xl border border-ink/10 bg-gradient-to-b from-ink/[0.04] to-ink/[0.01] dark:from-white/[0.03] dark:to-transparent backdrop-blur-md transition-all duration-500 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-xl hover:shadow-accent/5 overflow-hidden flex flex-col justify-between">
-            <div class="absolute -right-8 -top-8 w-28 h-28 bg-accent/10 rounded-full blur-2xl group-hover:bg-accent/20 transition-all duration-500 pointer-events-none"></div>
-            
-            <div>
-                <div class="flex items-center justify-between mb-8">
-                    <span class="font-display text-3xl font-bold text-accent/40 group-hover:text-accent transition-colors">01</span>
-                    <div class="w-11 h-11 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent group-hover:scale-110 group-hover:bg-accent group-hover:text-paper transition-all duration-500 shadow-sm">
-                        
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 13.5l1.8-4.5 4.5-1.8-1.8 4.5-4.5 1.8z" />
-                        </svg>
-                    </div>
-                </div>
-                <h3 class="font-display text-2xl font-bold mb-2 group-hover:text-accent transition-colors">Traveling &amp; Healing</h3>
-                <p class="text-sm text-muted leading-relaxed">Menjelajahi keindahan lanskap alam &amp; destinasi pilihan untuk menyegarkan kembali pikiran.</p>
-            </div>
-            
-            <div class="mt-8 pt-4 border-t border-ink/5 dark:border-white/5 flex items-center justify-between text-xs text-accent/80 font-medium">
-                <span>Jelajah &amp; Eksplorasi</span>
-            </div>
-        </div>
-
-        
-        <div class="relative group p-8 rounded-3xl border border-ink/10 bg-gradient-to-b from-ink/[0.04] to-ink/[0.01] dark:from-white/[0.03] dark:to-transparent backdrop-blur-md transition-all duration-500 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-xl hover:shadow-accent/5 overflow-hidden flex flex-col justify-between">
-            <div class="absolute -right-8 -top-8 w-28 h-28 bg-accent/10 rounded-full blur-2xl group-hover:bg-accent/20 transition-all duration-500 pointer-events-none"></div>
-            
-            <div>
-                <div class="flex items-center justify-between mb-8">
-                    <span class="font-display text-3xl font-bold text-accent/40 group-hover:text-accent transition-colors">02</span>
-                    <div class="w-11 h-11 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent group-hover:scale-110 group-hover:bg-accent group-hover:text-paper transition-all duration-500 shadow-sm">
-                        
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.684a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
-                    </div>
-                </div>
-                <h3 class="font-display text-2xl font-bold mb-2 group-hover:text-accent transition-colors">Ketenangan Suasana</h3>
-                <p class="text-sm text-muted leading-relaxed">Meresapi keheningan alam, suara gemericik air, dan momen rileks di setiap langkah perjalanan.</p>
-            </div>
-            
-            <div class="mt-8 pt-4 border-t border-ink/5 dark:border-white/5 flex items-center justify-between text-xs text-accent/80 font-medium">
-                <span>Kedamaian &amp; Mindfulness</span>
-            </div>
-        </div>
-
-        
-        <div class="relative group p-8 rounded-3xl border border-ink/10 bg-gradient-to-b from-ink/[0.04] to-ink/[0.01] dark:from-white/[0.03] dark:to-transparent backdrop-blur-md transition-all duration-500 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-xl hover:shadow-accent/5 overflow-hidden flex flex-col justify-between">
-            <div class="absolute -right-8 -top-8 w-28 h-28 bg-accent/10 rounded-full blur-2xl group-hover:bg-accent/20 transition-all duration-500 pointer-events-none"></div>
-            
-            <div>
-                <div class="flex items-center justify-between mb-8">
-                    <span class="font-display text-3xl font-bold text-accent/40 group-hover:text-accent transition-colors">03</span>
-                    <div class="w-11 h-11 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent group-hover:scale-110 group-hover:bg-accent group-hover:text-paper transition-all duration-500 shadow-sm">
-                        
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                    </div>
-                </div>
-                <h3 class="font-display text-2xl font-bold mb-2 group-hover:text-accent transition-colors">Cerita Perjalanan</h3>
-                <p class="text-sm text-muted leading-relaxed">Mengabadikan visual estetis, dokumentasi trip, serta memori indah sepanjang rute.</p>
-            </div>
-            
-            <div class="mt-8 pt-4 border-t border-ink/5 dark:border-white/5 flex items-center justify-between text-xs text-accent/80 font-medium">
-                <span>Visual &amp; Dokumentasi</span>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-
-<section class="max-w-6xl mx-auto px-6 md:px-10 py-20 border-t border-ink/5">
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-14 gap-6">
+<section class="max-w-6xl mx-auto px-6 md:px-10 pt-24 pb-16">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-            <p class="text-xs font-bold text-accent tracking-[0.2em] uppercase mb-2">Galeri Perjalanan</p>
-            <h2 class="font-display text-3xl sm:text-4xl font-bold">Momen Trip Pilihan</h2>
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs font-bold tracking-[0.2em] uppercase mb-4">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+                Travel Documentation
+            </div>
+            
+            <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] max-w-3xl">
+                Curated Travel Destinations &amp; Moments
+            </h1>
         </div>
-        <a href="/projects" class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-dark transition-colors tracking-wide group">
-            Lihat Semua Trip 
-            <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
-        </a>
-    </div>
 
-    <div class="grid md:grid-cols-3 gap-8">
-                    <a href="/projects/jelajah-curug-bogor"
+        <div class="shrink-0 bg-ink/5 dark:bg-white/5 border border-ink/10 dark:border-white/10 px-5 py-3 rounded-2xl flex items-center gap-3">
+            <span class="text-2xl font-bold text-accent font-display">3</span>
+            <div class="text-xs text-muted leading-tight font-medium">
+                Destinations<br/>Saved
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="max-w-6xl mx-auto px-6 md:px-10 pb-32">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <a href="/en/projects/jelajah-curug-bogor"
    class="group block bg-ink/5 dark:bg-white/[0.03] border border-ink/10 dark:border-white/10 rounded-3xl overflow-hidden hover:border-accent/40 hover:bg-ink/[0.08] dark:hover:bg-white/[0.06] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-accent/10 flex flex-col justify-between">
     <div>
         <div class="aspect-[4/3] bg-ink/10 dark:bg-white/5 overflow-hidden relative">
@@ -687,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <svg class="w-12 h-12 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                     </svg>
-                    <span class="text-xs font-medium">Foto Perjalanan</span>
+                    <span class="text-xs font-medium">Travel Photo</span>
                 </div>
             
             
@@ -729,10 +287,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
         
         <span class="text-xs font-semibold text-accent group-hover:translate-x-1 transition-transform duration-300 flex items-center gap-1">
-            Lihat &rarr;
+            View &rarr;
         </span>
     </div>
-</a>                    <a href="/projects/camping-gunung-pancar"
+</a>                            <a href="/en/projects/camping-gunung-pancar"
    class="group block bg-ink/5 dark:bg-white/[0.03] border border-ink/10 dark:border-white/10 rounded-3xl overflow-hidden hover:border-accent/40 hover:bg-ink/[0.08] dark:hover:bg-white/[0.06] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-accent/10 flex flex-col justify-between">
     <div>
         <div class="aspect-[4/3] bg-ink/10 dark:bg-white/5 overflow-hidden relative">
@@ -740,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <svg class="w-12 h-12 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                     </svg>
-                    <span class="text-xs font-medium">Foto Perjalanan</span>
+                    <span class="text-xs font-medium">Travel Photo</span>
                 </div>
             
             
@@ -782,10 +340,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
         
         <span class="text-xs font-semibold text-accent group-hover:translate-x-1 transition-transform duration-300 flex items-center gap-1">
-            Lihat &rarr;
+            View &rarr;
         </span>
     </div>
-</a>                    <a href="/projects/road-trip-pantai-selatan"
+</a>                            <a href="/en/projects/road-trip-pantai-selatan"
    class="group block bg-ink/5 dark:bg-white/[0.03] border border-ink/10 dark:border-white/10 rounded-3xl overflow-hidden hover:border-accent/40 hover:bg-ink/[0.08] dark:hover:bg-white/[0.06] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-accent/10 flex flex-col justify-between">
     <div>
         <div class="aspect-[4/3] bg-ink/10 dark:bg-white/5 overflow-hidden relative">
@@ -793,7 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <svg class="w-12 h-12 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                     </svg>
-                    <span class="text-xs font-medium">Foto Perjalanan</span>
+                    <span class="text-xs font-medium">Travel Photo</span>
                 </div>
             
             
@@ -835,34 +393,21 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
         
         <span class="text-xs font-semibold text-accent group-hover:translate-x-1 transition-transform duration-300 flex items-center gap-1">
-            Lihat &rarr;
+            View &rarr;
         </span>
     </div>
-</a>            </div>
-</section>
-
-
-<section class="max-w-6xl mx-auto px-6 md:px-10 py-28 text-center border-t border-ink/5">
-    <div class="max-w-3xl mx-auto border border-ink/10 rounded-3xl p-10 md:p-16 bg-gradient-to-b from-ink/5 to-transparent relative overflow-hidden">
-        <div class="absolute -top-24 -left-24 w-48 h-48 bg-accent/10 rounded-full blur-3xl pointer-events-none"></div>
-        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl mb-6 leading-tight font-bold">Punya rekomendasi spot healing seru?</h2>
-        <p class="text-muted text-base sm:text-lg mb-10 max-w-xl mx-auto">Saya selalu senang mendengar cerita perjalanan baru, menemukan destinasi alam yang tenang, atau bertukar rekomendasi tempat liburan.</p>
-        <a href="/contact"
-           class="inline-block px-10 py-4 rounded-full bg-accent text-paper hover:bg-accent-dark transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/20 font-medium tracking-wide">
-            Kirim Rekomendasi
-        </a>
-    </div>
-</section>
+</a>                    </div>
+    </section>
 
     </main>
 
     <footer class="border-t border-ink/5 mt-0 bg-ink/5">
     <div class="max-w-6xl mx-auto px-6 md:px-10 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
-        <p class="text-sm text-muted tracking-wide">© 2026 Thoriq Alfurqan M.L (oiq_s). Dibuat dengan cinta &amp; apresiasi alam.</p>
+        <p class="text-sm text-muted tracking-wide">© 2026 Thoriq Alfurqan M.L (oiq_s). Made with love &amp; appreciation for nature.</p>
         <div class="flex gap-8 text-sm tracking-wide">
             <a href="https://instagram.com/oiq_s" target="_blank" rel="noopener" class="text-muted hover:text-accent transition-colors">Instagram</a>
             <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="text-muted hover:text-accent transition-colors">WhatsApp</a>
-            <a href="/contact" class="text-muted hover:text-accent transition-colors">Kontak</a>
+            <a href="/en/contact" class="text-muted hover:text-accent transition-colors">Contact</a>
         </div>
     </div>
 </footer>
