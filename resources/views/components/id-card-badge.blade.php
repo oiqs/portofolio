@@ -1,36 +1,84 @@
-<div class="relative flex flex-col items-center justify-center select-none py-4 w-full max-w-[420px] mx-auto" id="id-card-wrapper">
+<div class="relative flex flex-col items-center justify-center select-none py-2 w-full max-w-[420px] mx-auto" id="id-card-wrapper">
     
-    {{-- ANCHOR CLIP & REEL (BAGIAN ATAS KLIP ID CARD) --}}
-    <div class="relative z-20 flex flex-col items-center pointer-events-none" id="reel-anchor">
-        {{-- Pocket / Clip Holder Box --}}
-        <div class="px-6 py-2 rounded-xl bg-accent text-paper shadow-md flex items-center justify-center border border-white/20 z-10 min-w-[70px]">
-            <span class="w-2.5 h-2.5 rounded-full bg-white animate-ping"></span>
+    {{-- REALISTIC FABRIC LANYARD & 3D RETRACTABLE REEL ASSEMBLY --}}
+    <div class="relative z-20 flex flex-col items-center pointer-events-none w-full" id="reel-anchor">
+        
+        {{-- 1. WOVEN FABRIC LANYARD STRAP (TALI FABRIC LANYARD DARI ATAS) --}}
+        <div class="relative flex justify-center items-center -mt-6 mb-0.5">
+            {{-- Left Strap Strand --}}
+            <div class="w-8 sm:w-9 h-18 sm:h-22 bg-gradient-to-b from-accent/90 via-accent to-accent-dark shadow-lg transform -rotate-12 translate-x-3.5 origin-top border-x border-white/30 dark:border-white/20 rounded-t-sm flex items-center justify-center text-[9px] font-bold text-white/90 tracking-widest uppercase select-none overflow-hidden">
+                <span class="[writing-mode:vertical-lr] rotate-180 opacity-90 font-mono tracking-wider">OIQS</span>
+            </div>
+            
+            {{-- Right Strap Strand --}}
+            <div class="w-8 sm:w-9 h-18 sm:h-22 bg-gradient-to-b from-accent/90 via-accent to-accent-dark shadow-lg transform rotate-12 -translate-x-3.5 origin-top border-x border-white/30 dark:border-white/20 rounded-t-sm flex items-center justify-center text-[9px] font-bold text-white/90 tracking-widest uppercase select-none overflow-hidden">
+                <span class="[writing-mode:vertical-lr] opacity-90 font-mono tracking-wider">TRIP</span>
+            </div>
+
+            {{-- 2. METALLIC STRAP SLEEVE CLAMP (PENJEPIT LOGAM LANYARD) --}}
+            <div class="absolute bottom-0 z-30 w-10 h-5 rounded-sm bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 border border-slate-400 shadow-md flex flex-col items-center justify-center">
+                <div class="w-8 h-1 bg-slate-500/40 rounded-sm border-t border-slate-600/50"></div>
+                <div class="w-8 h-1 bg-slate-500/40 rounded-sm border-t border-slate-600/50 mt-0.5"></div>
+            </div>
+        </div>
+
+        {{-- 3. CHROME METAL SWIVEL SNAP HOOK & D-RING (GANTOUNGAN HOOK STAINLESS) --}}
+        <div class="relative z-20 flex flex-col items-center -mt-0.5">
+            {{-- D-Ring Metallic Ring --}}
+            <div class="w-6 h-3 rounded-t-full border-2 border-slate-300 bg-gradient-to-b from-slate-200 via-slate-100 to-slate-400 shadow-sm"></div>
+            {{-- Swivel Lobster Hook --}}
+            <div class="w-4.5 h-5 -mt-1 rounded-b-md bg-gradient-to-b from-slate-100 via-slate-300 to-slate-500 border border-slate-400 shadow-md flex items-center justify-center">
+                <div class="w-1.5 h-3 bg-slate-600/50 rounded-full border border-slate-400/40"></div>
+            </div>
         </div>
         
-        {{-- Realistic 3D Retractable Reel Badge Button --}}
-        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-b from-slate-100 via-slate-200 to-slate-400 dark:from-slate-200 dark:via-slate-300 dark:to-slate-600 border-2 border-slate-300 dark:border-slate-500 shadow-xl -mt-4 flex items-center justify-center relative z-20" id="reel-button">
-            {{-- Inner Bevel & Core Circle --}}
-            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-b from-accent/30 via-accent/50 to-accent/80 border-2 border-white/80 dark:border-white/90 shadow-inner flex items-center justify-center">
-                {{-- Reel Cord Exit Hole --}}
-                <div class="w-3 h-3 rounded-full bg-slate-800 dark:bg-slate-900 border border-slate-600 shadow-inner relative flex items-center justify-center" id="reel-exit-hole">
+        {{-- 4. REALISTIC 3D RETRACTABLE BADGE REEL (GULUNGAN YO-YO ID CARD 3D) --}}
+        <div class="relative z-20 -mt-1 flex flex-col items-center">
+            {{-- Outer Reel Metallic Body --}}
+            <div class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-b from-slate-100 via-slate-300 to-slate-500 dark:from-slate-200 dark:via-slate-400 dark:to-slate-700 p-1 border border-slate-300 dark:border-slate-500 shadow-2xl flex items-center justify-center" id="reel-button">
+                
+                {{-- Rear Metallic Spring Clip (Pena Penjepit Belakang) --}}
+                <div class="absolute -right-1 top-1/2 -translate-y-1/2 w-2 h-10 bg-gradient-to-r from-slate-300 to-slate-500 rounded-r-md border border-slate-400 shadow-sm"></div>
+
+                {{-- Inner Bevel Disk & Epoxy Glossy Face --}}
+                <div class="w-full h-full rounded-full bg-gradient-to-b from-slate-900 via-slate-800 to-slate-950 p-1.5 border border-slate-700/80 shadow-inner flex items-center justify-center relative overflow-hidden">
+                    
+                    {{-- Glossy Epoxy Reflection Arc --}}
+                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/25 to-transparent rounded-full pointer-events-none"></div>
+
+                    {{-- Inner Metallic Emblem --}}
+                    <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-accent/90 via-accent to-accent-dark border-2 border-white/80 dark:border-white/90 shadow-md flex items-center justify-center text-white">
+                        {{-- Compass / Healing Emblem --}}
+                        <svg class="w-5 h-5 text-white drop-shadow-sm" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 13.5l1.8-4.5 4.5-1.8-1.8 4.5-4.5 1.8z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            {{-- 5. REEL STAINLESS CORD NOZZLE EXIT (CORONG OUTLET TALI RETRACTABLE) --}}
+            <div class="w-4 h-3.5 -mt-1 bg-gradient-to-b from-slate-300 via-slate-100 to-slate-500 rounded-b-md border border-slate-400 shadow-md flex items-center justify-center relative z-20" id="reel-exit-hole">
+                <div class="w-2 h-2 rounded-full bg-slate-950 border border-slate-700 shadow-inner flex items-center justify-center">
                     <div class="w-1 h-1 rounded-full bg-black"></div>
                 </div>
             </div>
         </div>
+
     </div>
 
-    {{-- DYNAMIC SVG NYLON RETRACTABLE CORD (REAL LIFE CORD) --}}
+    {{-- DYNAMIC SVG KEVLAR/NYLON RETRACTABLE CORD --}}
     <svg class="absolute inset-0 w-full h-full pointer-events-none overflow-visible z-15" id="reel-svg-overlay">
         <defs>
-            <filter id="cord-shadow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="1" dy="2" stdDeviation="1" flood-opacity="0.4" />
+            <filter id="cord-shadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="1.5" dy="2.5" stdDeviation="1.2" flood-opacity="0.5" />
             </filter>
         </defs>
         {{-- Retractable Thin Black/Nylon Cord Line --}}
         <line id="reel-nylon-cord" 
               x1="0" y1="0" x2="0" y2="0" 
-              stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" 
-              class="dark:stroke-slate-200" 
+              stroke="#0F172A" stroke-width="2.8" stroke-linecap="round" 
+              class="dark:stroke-slate-100" 
               filter="url(#cord-shadow)" />
     </svg>
 
@@ -38,21 +86,35 @@
     <div id="draggable-id-card" 
          class="relative z-10 w-full max-w-[340px] sm:max-w-[400px] cursor-grab active:cursor-grabbing origin-top transition-shadow duration-300 mt-2">
         
-        {{-- REAL LIFE CLEAR VINYL STRAP & METAL RIVET SNAP BUTTON --}}
-        <div class="absolute -top-7 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none" id="card-strap-attachment">
-            <div class="w-4 sm:w-5 h-8 bg-gradient-to-b from-white/90 via-white/60 to-white/95 dark:from-white/50 dark:to-white/70 border-x border-white/40 rounded-sm flex items-center justify-center shadow-md">
-                {{-- Metal Rivet Snap Button --}}
-                <div class="w-3 h-3 rounded-full bg-gradient-to-b from-slate-200 to-slate-400 border border-slate-500 shadow-inner flex items-center justify-center">
-                    <div class="w-1.5 h-1.5 rounded-full bg-slate-600"></div>
+        {{-- REAL LIFE TRANSPARENT VINYL STRAP & STAINLESS RIVET SNAP BUTTON --}}
+        <div class="absolute -top-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none" id="card-strap-attachment">
+            {{-- Clear Vinyl Strap Loop (PVC Transparan) --}}
+            <div class="w-5 sm:w-6 h-12 bg-white/50 dark:bg-white/20 backdrop-blur-md border border-white/70 dark:border-white/40 rounded-t-sm rounded-b-md flex flex-col items-center justify-between py-1 shadow-lg relative">
+                
+                {{-- Metallic Rivet Snap Button (Top Stud) --}}
+                <div class="w-3.5 h-3.5 rounded-full bg-gradient-to-b from-slate-100 via-slate-300 to-slate-500 border border-slate-400 shadow-md flex items-center justify-center relative z-10">
+                    <div class="w-1.5 h-1.5 rounded-full bg-slate-700"></div>
+                </div>
+                
+                {{-- Clear PVC Overlap Seam Line --}}
+                <div class="w-full h-[1px] bg-white/60"></div>
+
+                {{-- Metallic Rivet Base Stud --}}
+                <div class="w-3.5 h-3.5 rounded-full bg-gradient-to-b from-slate-200 via-slate-400 to-slate-600 border border-slate-500 shadow-inner flex items-center justify-center">
+                    <div class="w-1 h-1 rounded-full bg-slate-800"></div>
                 </div>
             </div>
         </div>
 
         {{-- ACRYLIC TRANSPARENT ID CARD HOLDER FRAME --}}
-        <div class="relative rounded-[2rem] p-4 sm:p-5 bg-white/20 dark:bg-slate-900/40 backdrop-blur-xl border-2 border-white/50 dark:border-white/20 shadow-2xl shadow-black/30 overflow-hidden group">
+        <div class="relative rounded-[2rem] p-4 sm:p-5 bg-white/20 dark:bg-slate-900/40 backdrop-blur-xl border-2 border-white/50 dark:border-white/20 shadow-2xl shadow-black/30 overflow-hidden group pt-7">
             
-            {{-- Acrylic Side & Top Clips Simulation --}}
-            <div class="absolute top-2.5 left-1/2 -translate-x-1/2 w-12 h-1.5 rounded-full bg-slate-400/40 dark:bg-white/30"></div>
+            {{-- Acrylic Top Center Oval Slot Hole Cutout (Lubang Gantung Slot ID Card) --}}
+            <div class="absolute top-3 left-1/2 -translate-x-1/2 w-12 h-3.5 rounded-full bg-slate-900/70 dark:bg-slate-950/80 border border-white/40 dark:border-white/20 shadow-inner flex items-center justify-center pointer-events-none">
+                <div class="w-10 h-2 rounded-full bg-black/60 border border-black/80"></div>
+            </div>
+
+            {{-- Acrylic Side Clip Rubber Bumper Simulation --}}
             <div class="absolute top-1/3 left-0 w-2 h-7 rounded-r-md bg-slate-400/40 dark:bg-white/30"></div>
             <div class="absolute top-1/3 right-0 w-2 h-7 rounded-l-md bg-slate-400/40 dark:bg-white/30"></div>
             <div class="absolute bottom-1/3 left-0 w-2 h-7 rounded-r-md bg-slate-400/40 dark:bg-white/30"></div>
