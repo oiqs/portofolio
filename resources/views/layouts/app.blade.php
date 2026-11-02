@@ -20,7 +20,7 @@
         }
     </script>
 </head>
-<body class="bg-paper text-ink transition-colors duration-500 relative">
+<body class="bg-paper text-ink transition-colors duration-500 relative overflow-x-hidden">
     <x-navbar />
 
     <main>

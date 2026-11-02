@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Admin User (Configure in .env for production: ADMIN_EMAIL & ADMIN_PASSWORD)
+        // Admin User
         User::updateOrCreate(
             ['email' => env('ADMIN_EMAIL', 'admin@thoriq.com')],
             [
@@ -23,57 +23,162 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Seed Projects
+        // Clear previous dummy projects
+        Project::truncate();
+
+        // Seed 4 Authentic Traveling & Healing Projects matching https://perjalanan-oiq.vercel.app/
         $projects = [
             [
-                'slug' => 'jelajah-curug-bogor',
-                'title' => 'Jelajah Curug & Ketenangan Bogor',
-                'description' => 'Petualangan menyusuri kesegaran air terjun dan suasana alam sejuk di Bogor.',
-                'year' => '2025',
-                'role' => 'Solo Trip & Nature',
-                'stack' => ['Curug', 'Trekking', 'Healing'],
-                'problem' => 'Rutinitas harian yang padat memerlukan tempat rileksasi sejenak di akhir pekan.',
-                'solution' => 'Melakukan trip singkat menyusuri jalur trekking air terjun alami dengan suasana yang hijau dan tenang.',
-                'impact' => 'Pikiran menjadi jauh lebih segar dan energi kembali terisi untuk menjalani hari.',
-                'location_address' => 'Curug 7 Cilember, Megamendung, Cisarua, Kabupaten Bogor, Jawa Barat 16750',
-                'location_map_url' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.090547631336!2d106.93605487499395!3d-6.635678493358826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69b671a5c6899b%3A0xb3ab3a8c7db7ec6b!2sCurug%207%20Cilember!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid',
+                'slug' => 'jelajah-pantai-gunungkidul',
+                'title' => 'PANTAI NGOBARAN',
+                'description' => 'Menjelajahi keunikan Pantai Ngobaran di pesisir selatan Yogyakarta, perpaduan eksotis antara tebing karang laut, deburan ombak, dan nuansa budaya pura bernuansa Bali.',
+                'year' => '2026',
+                'role' => 'Family Trip & Nature',
+                'location_address' => 'Daerah Istimewa Yogyakarta',
+                'location_map_url' => 'https://maps.google.com/maps?q=Daerah+Istimewa+Yogyakarta&t=&z=14&ie=UTF8&iwloc=&output=embed',
+                'cover_image' => 'projects/DcDGkdZ4QIh9OIvEWMTWLrU8Tb5ZruQgC1BSiWBl.jpg',
+                'stack' => [
+                    'Pantai Ngobaran',
+                    'Solo Trip',
+                    'Nature',
+                    'Sunset',
+                    'Pantai Gunungkidul',
+                    'Wisata Budaya',
+                    'Ocean View',
+                ],
+                'problem' => 'Rutinitas harian yang padat memicu keinginan untuk mencari suasana tenang di alam terbuka. Pesisir Gunungkidul dipilih untuk menikmati angin laut, menyegarkan pikiran, sekaligus mengeksplorasi spot lanskap tebing pantai yang unik.',
+                'solution' => 'Perjalanan bermotor menyusuri jalur perbukitan selatan langsung terbayar saat tiba di tepi tebing. Suasana pantai terasa sangat khas dengan keberadaan bangunan pura dan arca di atas karang, ditambah panorama laut lepas saat air mulai surut memperlihatkan alga hijau dan biota karang.',
+                'impact' => 'Waktu terbaik untuk berkunjung adalah sore hari menjelang matahari terbenam agar cuaca tidak terlalu terik dan siluet bangunan terlihat sangat menawan. Pastikan menggunakan alas kaki yang nyaman dan tidak licin jika ingin turun mendekati area karang.',
+                'gallery_images' => [
+                    'projects/gallery/I9PTvz3TZ0zyuHPeWDgYPNKXlOQNp2okoF8Djmfz.jpg',
+                    'projects/gallery/clK0tHW11jVpi7nDNxlfkset1oQyN7o1o1SfuMCH.jpg',
+                    'projects/gallery/PtZ0lMwD78uebmZkCNPbhwSJYY0Zfiw73aIrKHDa.jpg',
+                    'projects/gallery/yvha1SmzIOaplTqPMvJnCfrVTlOWlwTJbdcAgC6G.jpg',
+                    'projects/gallery/ilcoHHFvxvWW6xQtXos23JBhJeFpTsap3ZTD28RB.jpg',
+                    'projects/gallery/eiffBuqGMIDDAgG24J7q1EWYYzofsw7NcY1QbBdI.jpg',
+                    'projects/gallery/p2A1lRfrBZZho1uCnFzRk3NrPPVa34NALMehkHAT.jpg',
+                    'projects/gallery/8VSc4bFDvwCorItIyfYrguyGXt5PzZLxBAbWkcPk.jpg',
+                    'projects/gallery/qj8WWbLR6t3VCo6KEJMQ4eGEYpDn6U8sUr1XSlSa.jpg',
+                    'projects/gallery/LlBaRyft0iC69XnMgR964LsocimLnygR4YUu7DdR.jpg',
+                    'projects/gallery/6rCDTxqErhisRrmlT9OAtTcO24lDCU0Is6SzKKgT.jpg',
+                ],
                 'is_featured' => true,
             ],
             [
-                'slug' => 'camping-gunung-pancar',
-                'title' => 'Camping & Sunset Hutan Pinus',
-                'description' => 'Malam santai di tengah rimbunnya pohon pinus dengan udara malam yang menenangkan.',
-                'year' => '2024',
-                'role' => 'Camping & Relax',
-                'stack' => ['Camping', 'Hutan Pinus', 'Relax'],
-                'problem' => 'Mencari suasana malam yang sepi dan sejuk jauh dari hiruk-pikuk perkotaan.',
-                'solution' => 'Mendirikan tenda di tengah area hutan pinus, mengabadikan momen sunset dan api unggun.',
-                'impact' => 'Merasakan ketenangan hakiki dan pengalaman berkemah yang penuh kenangan indah.',
-                'location_address' => 'Taman Wisata Alam Gunung Pancar, Karang Tengah, Babakan Madang, Bogor, Jawa Barat 16810',
-                'location_map_url' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.6397368735235!2d106.90640397499342!3d-6.567085793426297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c73333333333%3A0x1111111111111111!2sGunung%20Pancar!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid',
+                'slug' => 'merbabu-euy-kapan-lagi',
+                'title' => 'GUNUNG MERBABU',
+                'description' => 'Pendakian Gunung Merbabu (3.142 mdpl) menyusuri sabana hijau yang luas dan panorama megah Gunung Merapi di atas awan.',
+                'year' => '2026',
+                'role' => 'Hiking Tektok',
+                'location_address' => 'GF56+CJJ, Dusun I, Selo, Kec. Selo, Kabupaten Boyolali, Jawa Tengah 57363',
+                'location_map_url' => 'https://maps.google.com/maps?q=GF56%2BCJJ%2C+Dusun+I%2C+Selo%2C+Kec.+Selo%2C+Kabupaten+Boyolali%2C+Jawa+Tengah+57363&t=&z=14&ie=UTF8&iwloc=&output=embed',
+                'cover_image' => 'projects/cqSYdBVJsAapRbn3thO9Dfm9gCuGFpjVcVMzPz6j.jpg',
+                'stack' => [
+                    'Hiking',
+                    'Pendakian',
+                    'Gunung Merbabu',
+                    'Sabana',
+                    'Nature',
+                    'Camping',
+                    'Sunrise',
+                ],
+                'problem' => 'Kebutuhan untuk melepas penat dari rutinitas harian dengan kembali ke alam bebas. Merbabu dipilih karena menawarkan pemandangan sabana terbuka yang asri dan jalur pendakian yang menantang namun ramah untuk dinikmati santai.',
+                'solution' => 'Memulai pendakian melewati trek berhutan pinus hingga akhirnya disambut hamparan perbukitan sabana hijau yang membentang luas. Momen terbaik terjadi saat beristirahat di area camp dan menikmati matahari terbit dengan siluet gagah Gunung Merapi tepat di seberang mata.',
+                'impact' => 'Fisik cukup terkuras di jalur menanjak berdebu, namun pemandangan laut awan di puncak membayar lunas semua lelah. Persiapan fisik, manajemen logistik air, serta perlengkapan penahan angin sangat krusial di jalur terbuka ini.',
+                'gallery_images' => [
+                    'projects/gallery/bP01cRYuC5LiiTNs9zG2RuYInQdZrl8wiHmnwAr8.jpg',
+                    'projects/gallery/c7bHAE3E3uqMpfGRNImPcYlwK34NRFxQsvUiCNrH.jpg',
+                    'projects/gallery/YBiECQJX9qwlIVzKrDyAlq61bLDFdrtTfRY0Orpl.jpg',
+                    'projects/gallery/pJDiB0dzkOhHzAMFdECsD7NbnepoSRLYnqhls7Rq.jpg',
+                    'projects/gallery/9RPQQOExO55wClg0KaoCzTqvhh8PMlMwLrnWX0Gf.jpg',
+                    'projects/gallery/yhV3vhHbwWdn4ZUZu4iUUGtxa1VZmhtkOCasMzdW.jpg',
+                    'projects/gallery/Q44yzXkZAzcPWWvRB4twmEfL45NATI5HWZFpaVHV.jpg',
+                    'projects/gallery/jlBOt8QG4FFfjSNX60ra45pL3tnaD8gLhSW9U5uy.jpg',
+                    'projects/gallery/752ThN3xO21gwf6CZmZ9mtyGV8IZzT5lqQThymMC.jpg',
+                    'projects/gallery/bi6O5adb7aPWCqCS4HCKSDmaRJK3yEnSCCtYbHe8.jpg',
+                    'projects/gallery/kH5jX3XLE2mUJfVnwPIF0HzliEtvlcOteCV6KCKE.jpg',
+                ],
                 'is_featured' => true,
             ],
             [
-                'slug' => 'road-trip-pantai-selatan',
-                'title' => 'Road Trip & Sunset Pantai Selatan',
-                'description' => 'Perjalanan menyusuri garis pantai indah dengan pemandangan ombak dan matahari terbenam.',
-                'year' => '2024',
-                'role' => 'Road Trip & Beach',
-                'stack' => ['Pantai', 'Road Trip', 'Sunset'],
-                'problem' => 'Keinginan menikmati angin laut dan pemandangan matahari terbenam dari tebing karang.',
-                'solution' => 'Menyusuri jalur pesisir pantai tersembunyi sambil menikmati pemandangan sunset sepanjang jalan.',
-                'impact' => 'Menghasilkan koleksi foto pemandangan indah dan kepuasan batin setelah melakukan perjalanan darat.',
-                'location_address' => 'Pantai Rancabuaya, Caringin, Kabupaten Garut, Jawa Barat 44154',
-                'location_map_url' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.762947123984!2d107.54589237499998!3d-7.556272992457497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e666060c5555555%3A0x8888888888888888!2sPantai%20Rancabuaya!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid',
+                'slug' => 'sumbing-euy',
+                'title' => 'GUNUNG SUMBING',
+                'description' => 'Pendakian menantang menuju atap tertinggi kedua di Jawa Tengah pada ketinggian 3.371 mdpl, menyuguhkan pesona kawah aktif, jalur savana terjal, dan panorama samudra awan yang megah.',
+                'year' => '2026',
+                'role' => 'Wisata Alam / Pendakian Gunung',
+                'location_address' => 'M25P+7XG, Jl. Raya Parakan - Wonosobo, Tedeng, Batursari, Kec. Kledung, Kabupaten Temanggung, Jawa Tengah 56255',
+                'location_map_url' => 'https://maps.google.com/maps?q=M25P%2B7XG%2C+Jl.+Raya+Parakan+-+Wonosobo%2C+Tedeng%2C+Batursari%2C+Kec.+Kledung%2C+Kabupaten+Temanggung%2C+Jawa+Tengah+56255&t=&z=14&ie=UTF8&iwloc=&output=embed',
+                'cover_image' => 'projects/haFTneddXQaeqDF9m8SLhlLsVHosQTUQDuRZl4pZ.jpg',
+                'stack' => [
+                    'Hiking',
+                    'Gunung Sumbing',
+                    'Summit',
+                    'Lautan Awan',
+                    'Savana',
+                ],
+                'problem' => 'Tertarik untuk menaklukkan salah satu jalur terberat dan terindah di Jawa Tengah, sekaligus menikmati lanskap kawah puncak dan hamparan savana Gunung Sumbing yang tersohor.',
+                'solution' => 'Menapaki jalur tanah berbatu yang menanjak konstan sejak awal lintasan, menembus kabut tipis dan udara dingin khas pegunungan. Ritme langkah diuji di jalur terjal batas vegetasi sebelum akhirnya disambut pemandangan bibir kawah dan hamparan samudra awan emas di puncak saat fajar merekah.',
+                'impact' => 'Gunung Sumbing menuntut ketahanan fisik dan persiapan logistik yang matang, terutama manajemen air karena sumber air cukup minim di beberapa jalur atas. Penggunaan trekking pole sangat krusial untuk menjaga lutut saat melintasi turunan berbatu yang licin.',
+                'gallery_images' => [
+                    'projects/gallery/UAXSh7Wv66sOZiXAAOsvLT0VFiuaY6YjCeoThRkh.jpg',
+                    'projects/gallery/Wz2ZAV5rpCpB0l4b2MDBLsa5ywVICae0Z1yHBItV.jpg',
+                    'projects/gallery/cQnFCORH5s64r0GqYKJYHOcbNhZgFgg5ogdRD0On.jpg',
+                    'projects/gallery/PUPdRfnPDHEObdp5RHfIGIhLzBkAsUnKq4hs7bdM.jpg',
+                    'projects/gallery/GIoyJuHwTHj9qSNzT6WVdQ9xMq12BptRYHVXP9L4.jpg',
+                    'projects/gallery/o3BGhXuhDgT7YIogFJMNeGgBoFfCBZ4fTRpGf71g.jpg',
+                    'projects/gallery/KPjKFN3R64YMW4A5a2dHXyPqRULqYRswSxf7BI97.jpg',
+                    'projects/gallery/P9Z2PPkKblBv0ZCCOHbVTntMgSeoFg5IOMXlZM8H.jpg',
+                    'projects/gallery/GpM1TVyAjH3UJrhDc27J2VfEGLzExDWGixiTlvGt.jpg',
+                    'projects/gallery/88TEvuHm6B15EGcEolVx43s9mbNtdlM7ERWTVG97.jpg',
+                    'projects/gallery/nVZrSbyoS3N3z20unZSir08Vzos6PWbYDS86gvF2.jpg',
+                    'projects/gallery/LshkAsZnzIG09HWfNdBMnLHEmjHWDqc6X7NmlKJh.jpg',
+                    'projects/gallery/dkebS2zuhtB5QG0LgR1ASelzlS2Q6JwYHgFzKQx4.jpg',
+                    'projects/gallery/QQCDOpQLpradt0qOAUmKabjVU6iE8B0UKVylRFtd.jpg',
+                    'projects/gallery/qs2JNGYsnWMyYuKHy3EyZBxMoHu193zqKOAJvcX2.jpg',
+                    'projects/gallery/7FjR2boyYIpYlcTeVFwA9lBLz2SnMjjM2fnH0fO0.jpg',
+                ],
+                'is_featured' => true,
+            ],
+            [
+                'slug' => 'hiking-gunung-lawu',
+                'title' => 'GUNUNG LAWU',
+                'description' => 'Menikmati keindahan gunung yang dikenal dengan gunung sakral yang terletak di perbatasan Provinsi Jawa Tengah dan Jawa Timur',
+                'year' => '2023',
+                'role' => 'Camping',
+                'location_address' => 'Jl. Tawangmangu-Plaosan, Kali Jumok, Sarangan, Kec. Plaosan, Kabupaten Magetan, Jawa Timur 63361',
+                'location_map_url' => 'https://maps.google.com/maps?q=Jl.+Tawangmangu-Plaosan%2C+Kali+Jumok%2C+Sarangan%2C+Kec.+Plaosan%2C+Kabupaten+Magetan%2C+Jawa+Timur+63361&t=&z=14&ie=UTF8&iwloc=&output=embed',
+                'cover_image' => 'projects/zikZTz2JYFMhzafRwStyQxisJTZcTnKZA5RNvfDa.jpg',
+                'stack' => [
+                    'Puncak',
+                    'Trekking',
+                    'Camp',
+                ],
+                'problem' => 'Keinginan untuk menguji ketahanan fisik sekaligus mencari ketenangan di ketinggian membawa langkah menuju Gunung Lawu—gunung yang sarat akan nilai historis, suasana sakral, serta panorama alam perbatasan Jawa Tengah dan Jawa Timur yang memukau.',
+                'solution' => 'Menempuh jalur pendakian dengan kontur berbatu dan hutan yang asri, merasakan dinginnya kabut yang perlahan turun, hingga mendirikan tenda di bawah langit malam bertabur bintang. Perjalanan dilanjutkan dengan summit attack menuju Hargo Dumilah untuk menyambut momen matahari terbit yang menghangatkan savana dan samudera awan.',
+                'impact' => 'Pendakian ini mengajarkan kesabaran, kerendahan hati, serta rasa hormat mendalam terhadap alam. Berdiri di salah satu puncak tertinggi di Pulau Jawa menjadi pengingat bahwa setiap perjuangan menanjak selalu terbayar lunas dengan lanskap yang menakjubkan.',
+                'gallery_images' => [
+                    'projects/gallery/V7YMhrbEONFnL9sRh7IVKCEyuBBPe6sGsKadk9Ii.jpg',
+                    'projects/gallery/SrFVuxtZnUglc7FpoVJUb8wW9MgDkJyNeaAXGqP8.jpg',
+                    'projects/gallery/TTOJSJcdPbV1c62sju9o7r90OolJ8sITh6oUfFEr.jpg',
+                    'projects/gallery/mRomhg7PcctKhJpdSp3175DKdi7CyzKTCFIftCW7.jpg',
+                    'projects/gallery/3LwVJHAYAe9P11HnmIUxqGWZ5qODBFFwayqOSziX.jpg',
+                    'projects/gallery/F9C3YXZx3YyJknndH1QHouvjkSXZwpDbqsCPflNn.jpg',
+                    'projects/gallery/H72QacqlwijYlp8u9ZWiWexggGcnh47uAJwGnZxg.jpg',
+                    'projects/gallery/MU9ndNvgFt41F5c3t1qLZtXXIp2oTflBlrXlQt0e.jpg',
+                    'projects/gallery/pi4ZTwNS3dJGRMfFSkMlF6twiQqdACSuQzmNL5C.jpg',
+                    'projects/gallery/nYfqkWZiyXMxqO4BXmNahctBs7kfPPEv4oa3LDC9.jpg',
+                    'projects/gallery/P9W7s04Oadb8j8qOawaCU4x4jbRpSU5AuKLPylgN.jpg',
+                ],
                 'is_featured' => true,
             ],
         ];
 
         foreach ($projects as $projectData) {
-            Project::updateOrCreate(['slug' => $projectData['slug']], $projectData);
+            Project::create($projectData);
         }
 
-        // Seed Skills / Hobi
+        // Clear and seed Skills / Hobi
+        Skill::truncate();
         $skills = [
             ['name' => 'Eksplorasi Alam & Camping', 'level' => 'Sangat Suka', 'order' => 1],
             ['name' => 'Fotografi Perjalanan', 'level' => 'Hobi', 'order' => 2],
@@ -84,10 +189,11 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($skills as $skillData) {
-            Skill::updateOrCreate(['name' => $skillData['name']], $skillData);
+            Skill::create($skillData);
         }
 
-        // Seed Timeline / Jejak Perjalanan
+        // Clear and seed Timeline / Jejak Perjalanan
+        Timeline::truncate();
         $timelines = [
             [
                 'year' => '2024 — Sekarang',
@@ -110,10 +216,7 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($timelines as $timelineData) {
-            Timeline::updateOrCreate(
-                ['year' => $timelineData['year'], 'title' => $timelineData['title']],
-                $timelineData
-            );
+            Timeline::create($timelineData);
         }
 
         // Seed Sample Contact Message
@@ -121,7 +224,7 @@ class DatabaseSeeder extends Seeder
             ['email' => 'traveler@example.com'],
             [
                 'name' => 'Budi Traveler',
-                'message' => 'Halo Thoriq! Trip ke Curug Bogor seru sekali. Apakah ada saran destinasi air terjun lainnya yang sejuk?',
+                'message' => 'Halo Thoriq! Rekomendasi spot hiking dan foto pemandangannya sangat keren! Ada rencana trip ke gunung mana lagi berikutnya?',
                 'is_read' => false,
             ]
         );
