@@ -1,5 +1,6 @@
 import './bootstrap';
 import { initLanyard } from './lanyard';
+import { initTopoBackground } from './topo-background';
 
 function bootLanyard() {
     const lanyardContainer = document.getElementById('lanyard-card-container');
@@ -30,6 +31,7 @@ function bootLanyard() {
 }
 
 function bootApp() {
+    initTopoBackground();
     bootLanyard();
     initHeroTypewriter();
     initSpiderReveal();

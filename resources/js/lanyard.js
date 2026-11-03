@@ -426,6 +426,15 @@ const paintFace = (canvas, image, color, fit) => {
   if (image) drawFitted(ctx, image, canvas.width, canvas.height, fit);
 };
 
+const THEME_ACCENT_COLORS = {
+  gold: [224, 184, 76],     // #E0B84C
+  blue: [59, 130, 246],     // #3B82F6
+  emerald: [16, 185, 129],  // #10B981
+  violet: [168, 85, 247],   // #A855F7
+  crimson: [249, 115, 22],  // #F97316
+  teal: [20, 184, 166],     // #14B8A6
+};
+
 const paintStrap = (canvas, image, color) => {
   const across = 192;
   const along = image ? Math.max(64, Math.round((image.width / image.height) * across)) : across * 2;
@@ -441,6 +450,47 @@ const paintStrap = (canvas, image, color) => {
     ctx.rotate(Math.PI / 2);
     ctx.drawImage(image, 0, 0, along, across);
     ctx.restore();
+
+    // Dynamically match text color on lanyard strap to the active web color theme
+    const themeName = (typeof document !== 'undefined' ? document.documentElement.getAttribute('data-color') : 'gold') || 'gold';
+    const targetColor = THEME_ACCENT_COLORS[themeName] || THEME_ACCENT_COLORS.gold;
+
+    if (themeName !== 'gold') {
+      try {
+        const imgData = ctx.getImageData(0, 0, across, along);
+        const data = imgData.data;
+        const xMin = 35;
+        const xMax = 155;
+
+        for (let y = 0; y < along; y++) {
+          const rowOffset = y * across * 4;
+          for (let x = xMin; x <= xMax; x++) {
+            const idx = rowOffset + x * 4;
+            const r = data[idx];
+            const g = data[idx + 1];
+            const b = data[idx + 2];
+
+            // Detect gold text pixels on strap
+            if (r > 75 && g > 55 && (r - b) > 22 && r >= g) {
+              const intensity = Math.min(1.0, r / 224);
+              const blend = Math.min(1.0, Math.max(0, ((r - b) - 22) / 40));
+
+              const destR = targetColor[0] * intensity;
+              const destG = targetColor[1] * intensity;
+              const destB = targetColor[2] * intensity;
+
+              data[idx] = Math.round(r * (1 - blend) + destR * blend);
+              data[idx + 1] = Math.round(g * (1 - blend) + destG * blend);
+              data[idx + 2] = Math.round(b * (1 - blend) + destB * blend);
+            }
+          }
+        }
+        ctx.putImageData(imgData, 0, 0);
+      } catch (err) {
+        // Fallback gracefully if pixel reading is blocked
+      }
+    }
+
     return along / across;
   }
   const ink = luminance(color) > 0.5 ? [0, 0, 0] : [1, 1, 1];
@@ -1294,6 +1344,11 @@ export function initLanyard(container, userOptions = {}) {
   };
   document.addEventListener('visibilitychange', onVisibility);
 
+  const onThemeColorChange = () => {
+    repaintStrap();
+  };
+  window.addEventListener('public-color-theme-changed', onThemeColorChange);
+
   resize();
 
   return () => {
@@ -1302,6 +1357,7 @@ export function initLanyard(container, userOptions = {}) {
     resizeObserver.disconnect();
     intersectionObserver.disconnect();
     document.removeEventListener('visibilitychange', onVisibility);
+    window.removeEventListener('public-color-theme-changed', onThemeColorChange);
     window.removeEventListener('pointermove', updatePointerPassThrough);
     window.removeEventListener('pointerdown', onWindowPointerDownCapture, { capture: true });
     canvas.removeEventListener('pointerdown', onPointerDown);

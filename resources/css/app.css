@@ -89,8 +89,14 @@
     --app-accent-dark: #0D9488;
   }
 
+  html {
+    background-color: var(--app-paper);
+    transition: background-color 500ms ease-out;
+  }
+
   body {
-    @apply bg-paper text-ink font-body antialiased selection:bg-accent/20 selection:text-accent transition-colors duration-500 ease-out;
+    @apply text-ink font-body antialiased selection:bg-accent/20 selection:text-accent transition-colors duration-500 ease-out;
+    background-color: transparent;
   }
 
   h1, h2, h3, h4, h5, h6 {

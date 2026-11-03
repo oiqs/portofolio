@@ -20,14 +20,17 @@
         }
     </script>
 </head>
-<body class="bg-paper text-ink transition-colors duration-500 relative overflow-x-hidden">
+<body class="text-ink transition-colors duration-500 relative overflow-x-hidden">
+    <x-topo-background />
     <x-navbar />
 
-    <main>
+    <main class="relative z-10">
         @yield('content')
     </main>
 
-    <x-footer />
+    <div class="relative z-10">
+        <x-footer />
+    </div>
 
     {{-- FLOATING COLOR PICKER IN BOTTOM LEFT --}}
     <x-color-picker />
