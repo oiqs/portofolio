@@ -10,16 +10,26 @@
         
         {{-- FOTO PROFIL (KIRI) --}}
         <div class="md:col-span-5 flex flex-col items-center text-center">
-            <div class="relative p-2.5 rounded-full border-2 border-accent/40 bg-ink/5 shadow-2xl shadow-accent/15 group max-w-[320px] sm:max-w-[380px] w-full">
+            <div id="about-portrait-stage" 
+                 class="about-portrait-stage relative p-2.5 rounded-full border-2 border-accent/40 bg-ink/5 shadow-2xl shadow-accent/15 group max-w-[320px] sm:max-w-[380px] w-full select-none cursor-crosshair"
+                 aria-label="{{ __('Foto Thoriq Alfurqan M.L') }}">
                 {{-- Decorative Glow Ring --}}
-                <div class="absolute inset-0 rounded-full bg-accent/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+                <div class="about-portrait-glow absolute inset-0 rounded-full bg-accent/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
                 
                 {{-- Frame Foto Bulat --}}
-                <div class="relative aspect-square rounded-full overflow-hidden border border-ink/10 bg-ink/10">
+                <div class="about-portrait relative aspect-square rounded-full overflow-hidden border border-ink/10 bg-ink/10">
+                    {{-- Base photo (Thoriq normal) --}}
                     <img src="{{ asset('images/profile.jpeg') }}" 
                          alt="Foto Thoriq Alfurqan M.L" 
-                         class="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-paper/30 via-transparent to-transparent opacity-60"></div>
+                         class="about-person-image w-full h-full object-cover filter contrast-105 transition-all duration-700">
+                    
+                    {{-- Secret Reveal photo (Spider-Man mountain) --}}
+                    <img src="{{ asset('images/profile-spiderman.jpg') }}" 
+                         alt="{{ __('Thoriq Spider-Man Edition') }}" 
+                         class="about-spider-image w-full h-full object-cover absolute inset-0"
+                         aria-hidden="true">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-paper/30 via-transparent to-transparent opacity-40 pointer-events-none"></div>
                 </div>
             </div>
         </div>
@@ -30,9 +40,9 @@
                 <p class="text-xs font-bold text-accent tracking-[0.2em] uppercase mb-3">{{ __('Tentang Saya') }}</p>
                 <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.15] mb-4">
                     {{ __('Cerita di balik') }} <br class="hidden sm:inline" />
-                    <span class="italic text-accent">{{ __('Setiap Perjalanan & Healing.') }}</span>
+                    <span>{{ __('Setiap Perjalanan & Healing.') }}</span>
                 </h1>
-                <p class="text-xl font-display text-accent/90 italic">Thoriq Alfurqan M.L (oiq_s)</p>
+                <p class="text-xl font-display text-accent/90 font-medium">Thoriq Alfurqan M.L (oiq_s)</p>
             </div>
 
             <div class="text-base sm:text-lg text-muted leading-relaxed space-y-4 pt-2">
@@ -95,7 +105,7 @@
         @foreach ($timeline as $item)
             <div class="grid md:grid-cols-12 gap-4 md:gap-8 items-start group">
                 <div class="md:col-span-3 md:text-right">
-                    <span class="inline-block px-3 py-1 rounded-full border border-accent/20 bg-accent/5 text-xs font-semibold text-accent tracking-wider uppercase mt-1">
+                    <span class="inline-block px-3 py-1 rounded-full border border-accent/20 bg-accent/5 text-xs font-mono font-semibold text-accent tracking-wider uppercase mt-1">
                         {{ $item['year'] }}
                     </span>
                 </div>

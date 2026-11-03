@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=DM+Mono:ital,wght@0,400;0,500;1,400;1,500&family=Figtree:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap');
 
 @import "tailwindcss";
 
@@ -8,8 +8,9 @@
   --color-muted: var(--app-muted);
   --color-accent: var(--app-accent);
   --color-accent-dark: var(--app-accent-dark);
-  --font-display: "Playfair Display", serif;
-  --font-body: "Inter", sans-serif;
+  --font-display: "Bricolage Grotesque", sans-serif;
+  --font-body: "Figtree", sans-serif;
+  --font-mono: "DM Mono", monospace;
 }
 
 @layer base {
@@ -93,11 +94,81 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply text-ink font-display tracking-tight;
+    @apply text-ink font-display tracking-tight font-bold not-italic;
   }
 
   svg {
     max-width: 100%;
     vertical-align: middle;
   }
+}
+
+/* TYPEWRITER CURSOR ANIMATION */
+@keyframes cursorBlink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.85em;
+  background-color: var(--app-accent);
+  margin-left: 4px;
+  vertical-align: baseline;
+  border-radius: 1px;
+}
+
+@media (min-width: 640px) {
+  .typewriter-cursor {
+    width: 5px;
+    margin-left: 6px;
+  }
+}
+
+.typewriter-cursor-blink {
+  animation: cursorBlink 0.9s infinite;
+}
+
+.typewriter-cursor-solid {
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+/* ABOUT PORTRAIT SPIDER-MAN REVEAL MECHANISM */
+.about-portrait-stage {
+  --hover-x: 50%;
+  --hover-y: 50%;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-portrait-stage:hover {
+  transform: translateY(-4px);
+}
+
+.about-spider-image {
+  opacity: 0;
+  pointer-events: none;
+  filter: saturate(1.15) contrast(1.08) drop-shadow(0 4px 20px rgba(220, 38, 38, 0.35));
+  -webkit-mask-image: radial-gradient(circle clamp(85px, 22vw, 125px) at var(--hover-x, 50%) var(--hover-y, 50%), #000 0%, #000 55%, transparent 100%);
+  mask-image: radial-gradient(circle clamp(85px, 22vw, 125px) at var(--hover-x, 50%) var(--hover-y, 50%), #000 0%, #000 55%, transparent 100%);
+  transition: opacity 0.22s ease-out;
+}
+
+.about-portrait-stage[data-spider-visible="true"] .about-spider-image,
+.about-portrait-stage.spider-hovered .about-spider-image {
+  opacity: 1 !important;
+  -webkit-mask-image: radial-gradient(circle clamp(85px, 22vw, 125px) at var(--hover-x, 50%) var(--hover-y, 50%), #000 0%, #000 55%, transparent 100%);
+  mask-image: radial-gradient(circle clamp(85px, 22vw, 125px) at var(--hover-x, 50%) var(--hover-y, 50%), #000 0%, #000 55%, transparent 100%);
+}
+
+.about-portrait-stage.spider-hovered .about-portrait-glow,
+.about-portrait-stage[data-spider-visible="true"] .about-portrait-glow {
+  background: radial-gradient(circle, rgba(225, 29, 72, 0.35) 0%, rgba(37, 99, 235, 0.22) 65%, transparent 85%);
+  opacity: 1 !important;
+  transition: opacity 0.4s ease-out;
 }

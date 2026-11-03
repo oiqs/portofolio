@@ -9,8 +9,8 @@
     {{-- KIRI: INFO --}}
     <div class="md:col-span-2">
         <p class="text-sm font-medium text-accent tracking-widest uppercase mb-6">{{ __('Kontak') }}</p>
-        <h1 class="font-display text-4xl md:text-5xl leading-[1.2] mb-8">
-            {{ __('Mari') }} <span class="italic text-accent">{{ __('berbicara.') }}</span>
+        <h1 class="font-display text-4xl md:text-5xl font-bold leading-[1.2] mb-8">
+            {{ __('Mari') }} {{ __('berbicara.') }}
         </h1>
         <p class="text-muted text-lg leading-relaxed mb-12">
             {{ __('Punya rekomendasi tempat healing menarik, destinasi traveling seru, atau sekadar ingin sapa dan berdiskusi? Kirim pesan lewat form di bawah!') }}

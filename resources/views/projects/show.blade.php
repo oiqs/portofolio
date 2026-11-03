@@ -33,7 +33,7 @@
     <div class="grid md:grid-cols-5 gap-12 items-end">
         <div class="md:col-span-4 space-y-4">
             @if(!empty($project['location_address']))
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs font-bold tracking-wider uppercase">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs font-mono font-bold tracking-wider uppercase">
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
@@ -48,8 +48,8 @@
 
         <div class="md:col-span-1 text-sm space-y-4 md:text-right border-t md:border-t-0 md:border-l border-ink/10 dark:border-white/10 pt-6 md:pt-0 md:pl-6">
             <div>
-                <p class="text-muted text-xs uppercase tracking-widest font-semibold mb-1">{{ __('Tahun Trip') }}</p>
-                <p class="font-bold text-accent text-lg">{{ $project['year'] }}</p>
+                <p class="text-muted text-xs uppercase tracking-widest font-mono font-semibold mb-1">{{ __('Tahun Trip') }}</p>
+                <p class="font-bold text-accent text-lg font-mono">{{ $project['year'] }}</p>
             </div>
             <div>
                 <p class="text-muted text-xs uppercase tracking-widest font-semibold mb-1">{{ __('Kategori Destinasi') }}</p>
@@ -57,8 +57,8 @@
             </div>
             @if ($totalPhotoCount > 0)
             <div>
-                <p class="text-muted text-xs uppercase tracking-widest font-semibold mb-1">{{ __('Total Dokumentasi') }}</p>
-                <span class="inline-block px-3 py-1 rounded-full bg-accent/10 border border-accent/30 text-accent font-bold text-xs">
+                <p class="text-muted text-xs uppercase tracking-widest font-mono font-semibold mb-1">{{ __('Total Dokumentasi') }}</p>
+                <span class="inline-block px-3 py-1 rounded-full bg-accent/10 border border-accent/30 text-accent font-mono font-bold text-xs">
                     {{ $totalPhotoCount }} {{ __('Foto HD') }}
                 </span>
             </div>
@@ -334,7 +334,7 @@
     {{-- TOP BAR LIGHTBOX --}}
     <div class="w-full flex items-center justify-between text-white/90 z-20 max-w-7xl mx-auto px-2">
         <div class="flex items-center gap-3">
-            <span class="px-3 py-1 rounded-full bg-accent/90 text-paper text-xs font-bold tracking-widest uppercase shadow-md" id="lightbox-counter">
+            <span class="px-3 py-1 rounded-full bg-accent/90 text-paper text-xs font-mono font-bold tracking-widest uppercase shadow-md" id="lightbox-counter">
                 1 / {{ $totalPhotoCount }}
             </span>
             <span class="text-white/30 hidden sm:inline">&bull;</span>

@@ -16,9 +16,13 @@
         {{-- TEKS HERO (KANAN) --}}
         <div class="md:col-span-7 flex flex-col justify-center space-y-6">
             <div>
-                <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
-                    {{ __('Hello, I\'m') }} <br/>
-                    <span class="text-accent italic font-normal">Thoriq Alfurqan M.L</span>
+                <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight min-h-[2.2em] sm:min-h-[2.1em]"
+                    id="hero-typewriter-heading"
+                    data-line1="{{ __('Hello, I\'m') }}"
+                    data-line2="Thoriq Alfurqan M.L"
+                    aria-label="{{ __('Hello, I\'m') }} Thoriq Alfurqan M.L">
+                    <span id="typewriter-line1">{{ __('Hello, I\'m') }}</span><br/>
+                    <span id="typewriter-line2">Thoriq Alfurqan M.L</span><span id="typewriter-cursor" class="typewriter-cursor typewriter-cursor-blink" aria-hidden="true"></span>
                 </h1>
             </div>
             
@@ -31,7 +35,7 @@
             
             {{-- Signature / Alias Badge --}}
             <div class="flex items-center gap-4 pt-2">
-                <div class="font-display italic text-2xl sm:text-3xl text-accent/90">
+                <div class="font-display text-2xl sm:text-3xl text-accent/90 font-medium">
                     AS <span class="font-bold underline decoration-accent/40 underline-offset-8">oiq_s</span>
                 </div>
             </div>
