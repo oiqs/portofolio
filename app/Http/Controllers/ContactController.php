@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
@@ -11,7 +12,12 @@ class ContactController extends Controller
 {
     public function index()
     {
-        return view('contact');
+        $comments = Comment::where('is_approved', true)
+            ->latest()
+            ->take(50)
+            ->get();
+
+        return view('contact', compact('comments'));
     }
 
     public function store(Request $request)

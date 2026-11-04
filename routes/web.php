@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LanguageController;
 
 // Admin Controllers
@@ -27,6 +28,10 @@ Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projec
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+// Comments / Guestbook API
+Route::get('/api/comments', [CommentController::class, 'index'])->name('comments.index');
+Route::post('/api/comments', [CommentController::class, 'store'])->name('comments.store');
 
 // Language Switcher
 Route::get('/lang/{lang}', [LanguageController::class, 'switchLang'])->name('lang.switch');
