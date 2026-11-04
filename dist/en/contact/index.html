@@ -254,7 +254,7 @@
 
         
         <form id="contact-form" method="POST" action="/contact" class="space-y-8">
-            <input type="hidden" name="_token" value="iMkYiHHqDbXsArR9j1RSPCsRlQHJmx6FLUp5TDXc" autocomplete="off">
+            <input type="hidden" name="_token" value="g0ZwnLem9rDtrdRcIJ5fSzx8C8ihUqsldITaKtXe" autocomplete="off">
             <div>
                 <label for="name" class="block text-sm font-medium tracking-wide mb-3">Full Name</label>
                 <input type="text" name="name" id="name" required value=""
@@ -311,12 +311,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnIcon = document.getElementById('btn-icon');
     const btnText = document.getElementById('btn-text');
 
-    function showAlert(type, text) {
+    // KONFIGURASI PENGIRIMAN DI VERCEL:
+    // Pilihan 1: Formspree (Rekomendasi - gratis + ada dashboard admin online)
+    // Daftar di https://formspree.io pakai email oiqgemink27@gmail.com, lalu masukkan Form ID Anda di bawah ini:
+    const FORMSPREE_ID = ''; // Contoh: 'xpwalzkq' atau 'https://formspree.io/f/xpwalzkq'
+
+    // Pilihan 2: Web3Forms (Akses key instan di https://web3forms.com)
+    const WEB3FORMS_KEY = ''; // Contoh: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890'
+
+    const ADMIN_EMAIL = 'oiqgemink27@gmail.com';
+    const ADMIN_WA = '628972189558';
+
+    function showAlert(type, htmlContent) {
         if (!alertBox) return;
         alertBox.className = type === 'success'
             ? 'mb-8 px-6 py-5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-medium transition-all duration-300'
             : 'mb-8 px-6 py-5 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 font-medium transition-all duration-300';
-        alertBox.textContent = text;
+        alertBox.innerHTML = htmlContent;
         alertBox.classList.remove('hidden');
         alertBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
@@ -344,39 +355,130 @@ document.addEventListener('DOMContentLoaded', function() {
             if (btnIcon) btnIcon.classList.add('hidden');
             if (btnText) btnText.textContent = 'Sending...';
 
-            const csrfInput = form.querySelector('input[name="_token"]');
-            const csrfToken = csrfInput ? csrfInput.value : '';
+            // Cek apakah sedang dijalankan di Localhost (Laragon) atau Vercel / Production
+            const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname) || 
+                            window.location.hostname.endsWith('.test') || 
+                            window.location.port !== '';
 
-            // 1. Submit to local/backend endpoint (saves to database contacts table for Admin Panel)
-            const backendPromise = fetch('/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                body: JSON.stringify({ name, email, message })
-            }).catch(() => null);
+            let success = false;
+            let successMsg = '';
 
-            // 2. Submit to FormSubmit.co endpoint (delivers real email directly to oiqgemink27@gmail.com on Vercel & anywhere)
-            const emailPromise = fetch('https://formsubmit.co/ajax/oiqgemink27@gmail.com', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: name,
-                    email: email,
-                    message: message,
-                    _subject: 'Pesan Baru Portofolio dari ' + name,
-                    _captcha: 'false',
-                    _template: 'table'
-                })
-            }).catch(() => null);
+            try {
+                if (isLocal) {
+                    // MODE LOKAL (LARAGON): Kirim ke backend Laravel & simpan ke Database MySQL (Panel Admin)
+                    const csrfInput = form.querySelector('input[name="_token"]');
+                    const csrfToken = csrfInput ? csrfInput.value : '';
 
-            // Wait for both to attempt
-            await Promise.allSettled([backendPromise, emailPromise]);
+                    const response = await fetch('/contact', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        body: JSON.stringify({ name, email, message })
+                    });
+
+                    if (response.ok) {
+                        const resData = await response.json();
+                        success = true;
+                        successMsg = resData.message || 'Pesan berhasil dikirim dan tersimpan di database Panel Admin!';
+                    } else {
+                        throw new Error('Gagal menyimpan ke database lokal (Status: ' + response.status + ')');
+                    }
+                } else {
+                    // MODE VERCEL (PRODUCTION):
+                    // 1. Coba kirim via Formspree jika diset
+                    if (FORMSPREE_ID && FORMSPREE_ID.trim() !== '') {
+                        const endpoint = FORMSPREE_ID.startsWith('http') 
+                            ? FORMSPREE_ID 
+                            : 'https://formspree.io/f/' + FORMSPREE_ID;
+
+                        const response = await fetch(endpoint, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({ name, email, message })
+                        });
+
+                        if (response.ok) {
+                            success = true;
+                            successMsg = 'Terima kasih! Pesan kamu berhasil dikirim ke email admin (oiqgemink27@gmail.com).';
+                        } else {
+                            throw new Error('Layanan Formspree error status: ' + response.status);
+                        }
+                    } else if (WEB3FORMS_KEY && WEB3FORMS_KEY.trim() !== '') {
+                        const response = await fetch('https://api.web3forms.com/submit', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                access_key: WEB3FORMS_KEY,
+                                name: name,
+                                email: email,
+                                message: message,
+                                subject: 'Pesan Baru Portofolio dari ' + name
+                            })
+                        });
+
+                        const resJson = await response.json();
+                        if (response.ok && resJson.success) {
+                            success = true;
+                            successMsg = 'Terima kasih! Pesan kamu berhasil dikirim ke email admin (oiqgemink27@gmail.com).';
+                        } else {
+                            throw new Error(resJson.message || 'Gagal mengirim via Web3Forms');
+                        }
+                    } else {
+                        // 2. Default Vercel: Kirim via Serverless API (/api/contact)
+                        const response = await fetch('/api/contact', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({ name, email, message })
+                        });
+
+                        if (response.ok) {
+                            const resData = await response.json();
+                            success = true;
+                            successMsg = resData.message || 'Terima kasih! Pesan kamu berhasil dikirim ke email admin (oiqgemink27@gmail.com).';
+                        } else {
+                            throw new Error('Gagal mengirim via serverless API (Status: ' + response.status + ')');
+                        }
+                    }
+                }
+            } catch (err) {
+                // Jika terjadi kegagalan jaringan atau server error
+                const waText = "Halo Thoriq! Saya *" + name + "* (" + email + ").\n\nPesan:\n" + message;
+                const waUrl = "https://wa.me/" + ADMIN_WA + "?text=" + encodeURIComponent(waText);
+                const mailUrl = "mailto:" + ADMIN_EMAIL + "?subject=" + encodeURIComponent("Pesan Portofolio dari " + name) + "&body=" + encodeURIComponent(message);
+
+                showAlert('error', `
+                    <div class="space-y-3">
+                        <p class="font-bold">⚠️ Pengiriman Otomatis Terkendala</p>
+                        <p class="text-sm opacity-90">Koneksi pengiriman otomatis tidak dapat menjangkau server saat ini. Anda dapat langsung mengirim pesan ini via:</p>
+                        <div class="flex flex-wrap items-center gap-3 pt-1">
+                            <a href="${waUrl}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-600 text-white font-semibold text-xs hover:bg-emerald-700 transition-all">
+                                <span>💬 Kirim via WhatsApp</span> &rarr;
+                            </a>
+                            <a href="${mailUrl}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-ink/10 dark:bg-white/10 text-ink dark:text-white font-semibold text-xs hover:bg-accent hover:text-white transition-all">
+                                <span>✉️ Kirim via Email</span> &rarr;
+                            </a>
+                        </div>
+                    </div>
+                `);
+
+                if (submitBtn) submitBtn.disabled = false;
+                if (btnSpinner) btnSpinner.classList.add('hidden');
+                if (btnIcon) btnIcon.classList.remove('hidden');
+                if (btnText) btnText.textContent = 'Send Message';
+                return;
+            }
 
             // Reset loading state
             if (submitBtn) submitBtn.disabled = false;
@@ -384,8 +486,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (btnIcon) btnIcon.classList.remove('hidden');
             if (btnText) btnText.textContent = 'Send Message';
 
-            form.reset();
-            showAlert('success', 'Thank you! Your message has been sent to admin email (oiqgemink27@gmail.com) and saved.');
+            if (success) {
+                form.reset();
+                showAlert('success', successMsg);
+            }
         });
     }
 });
