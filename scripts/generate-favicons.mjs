@@ -1,0 +1,114 @@
+import sharp from 'sharp';
+import fs from 'fs';
+import path from 'path';
+
+// Modern SVG of a hiker with a carrier backpack (pendaki gunung bawa tas keril)
+// Designed for maximum clarity and contrast at small sizes (16x16, 32x32, 64x64)
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E131F" />
+      <stop offset="100%" stop-color="#1A2333" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <linearGradient id="carrier" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+  </defs>
+
+  <!-- Circular Badge with Accent Border -->
+  <circle cx="32" cy="32" r="30" fill="url(#bg)" stroke="#FBBF24" stroke-width="2.5" />
+
+  <!-- Mountain Peaks in Background -->
+  <polygon points="8,48 22,28 34,42 46,25 56,48" fill="#243044" />
+  <polygon points="22,28 26,34 18,34" fill="#3B4C66" />
+  <polygon points="46,25 50,32 42,32" fill="#3B4C66" />
+
+  <!-- Sloping Trail Ground -->
+  <path d="M6,49 Q32,46 58,41 L58,56 Q32,60 6,56 Z" fill="#151C28" />
+  <path d="M6,49 Q32,46 58,41" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8" />
+
+  <!-- Carrier Backpack (Tas Keril Pendaki) -->
+  <!-- Rolled sleeping matras on top of carrier -->
+  <rect x="18" y="15" width="11" height="4.5" rx="2.25" fill="#38BDF8" />
+  <!-- Main Carrier Pack Body -->
+  <rect x="18.5" y="19" width="10" height="17" rx="3.5" fill="url(#carrier)" stroke="#0E131F" stroke-width="0.75" />
+  <!-- Compression straps on carrier -->
+  <line x1="19.5" y1="24" x2="27.5" y2="24" stroke="#A7F3D0" stroke-width="1.2" stroke-linecap="round" />
+  <line x1="19.5" y1="30" x2="27.5" y2="30" stroke="#A7F3D0" stroke-width="1.2" stroke-linecap="round" />
+
+  <!-- Hiker Silhouette -->
+  <!-- Head -->
+  <circle cx="33" cy="18" r="4" fill="url(#accent)" />
+  <!-- Hat Brim (Topi Rimba / Bucket Hat) -->
+  <path d="M27.5,17.5 Q33,14.5 38.5,17.5" stroke="#B45309" stroke-width="2" stroke-linecap="round" fill="none" />
+
+  <!-- Torso (leaning forward into the climb) -->
+  <path d="M28,22 L35.5,24.5 L33.5,36 L27,35 Z" fill="url(#accent)" />
+
+  <!-- Front Arm holding Trekking Pole -->
+  <path d="M33,24 L38,28.5 L40,34" stroke="url(#accent)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+
+  <!-- Trekking Pole (Tongkat Gunung) -->
+  <line x1="41" y1="26" x2="38" y2="47" stroke="#E2E8F0" stroke-width="1.8" stroke-linecap="round" />
+  <!-- Pole Grip/Handle -->
+  <line x1="41" y1="26" x2="40.3" y2="30" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" />
+
+  <!-- Legs in Walking/Climbing Stride -->
+  <!-- Lead Leg (stepping up on rock/ground) -->
+  <path d="M33,35.5 L38,40.5 L38,46.5" stroke="url(#accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  <!-- Trail Leg (pushing forward) -->
+  <path d="M29,35.5 L25,41 L22.5,47" stroke="url(#accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+
+  <!-- Hiking Boots -->
+  <path d="M37,46.5 L41,46.5" stroke="#78350F" stroke-width="3" stroke-linecap="round" />
+  <path d="M21,47 L25,47" stroke="#78350F" stroke-width="3" stroke-linecap="round" />
+</svg>`;
+
+async function main() {
+  const publicDir = path.resolve('public');
+  const distDir = path.resolve('dist');
+
+  // Save SVG
+  fs.writeFileSync(path.join(publicDir, 'favicon.svg'), svg, 'utf8');
+  console.log('Saved public/favicon.svg');
+
+  // Render PNGs at various resolutions
+  const sizes = [16, 32, 48, 64, 180, 192, 512];
+  for (const size of sizes) {
+    const filename = size === 180 ? 'apple-touch-icon.png' : `favicon-${size}x${size}.png`;
+    await sharp(Buffer.from(svg))
+      .resize(size, size)
+      .png()
+      .toFile(path.join(publicDir, filename));
+    console.log(`Generated public/${filename}`);
+  }
+
+  // Also standard favicon-32x32 as favicon.png
+  await sharp(Buffer.from(svg))
+    .resize(32, 32)
+    .png()
+    .toFile(path.join(publicDir, 'favicon.png'));
+
+  // Standard favicon.ico (Sharp can write png; modern browsers accept PNG-format favicon.ico or 32x32 PNG)
+  await sharp(Buffer.from(svg))
+    .resize(32, 32)
+    .png()
+    .toFile(path.join(publicDir, 'favicon.ico'));
+  console.log('Generated public/favicon.ico');
+
+  // Also sync to dist directory
+  if (fs.existsSync(distDir)) {
+    fs.copyFileSync(path.join(publicDir, 'favicon.svg'), path.join(distDir, 'favicon.svg'));
+    fs.copyFileSync(path.join(publicDir, 'favicon.ico'), path.join(distDir, 'favicon.ico'));
+    fs.copyFileSync(path.join(publicDir, 'favicon.png'), path.join(distDir, 'favicon.png'));
+    fs.copyFileSync(path.join(publicDir, 'apple-touch-icon.png'), path.join(distDir, 'apple-touch-icon.png'));
+    console.log('Synced favicons to dist/');
+  }
+}
+
+main().catch(console.error);

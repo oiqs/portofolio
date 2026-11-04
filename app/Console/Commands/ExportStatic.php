@@ -91,7 +91,18 @@ class ExportStatic extends Command
             }
 
             // Copy root static files
-            foreach (['favicon.ico', 'robots.txt'] as $file) {
+            $staticRootFiles = [
+                'favicon.ico',
+                'favicon.svg',
+                'favicon.png',
+                'favicon-16x16.png',
+                'favicon-32x32.png',
+                'favicon-48x48.png',
+                'favicon-64x64.png',
+                'apple-touch-icon.png',
+                'robots.txt',
+            ];
+            foreach ($staticRootFiles as $file) {
                 if (File::exists(public_path($file))) {
                     File::copy(public_path($file), $distDir . '/' . $file);
                 }
