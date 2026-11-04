@@ -193,61 +193,6 @@ class ExportStatic extends Command
         $html = str_replace('[[TOKEN_ID_LANG]]', $idTarget, $html);
         $html = str_replace('[[TOKEN_EN_LANG]]', $enTarget, $html);
 
-        // 5. Enhance Contact Form for static hosting (redirects to WhatsApp on submit)
-        if (str_contains($currentUri, 'contact')) {
-            $isEn = ($locale === 'en');
-            $alertMsg = $isEn
-                ? 'Thank you! Your message has been forwarded to WhatsApp.'
-                : 'Terima kasih! Pesan Anda telah dialihkan ke WhatsApp.';
-            $promptMsg = $isEn
-                ? 'Please complete all form fields.'
-                : 'Mohon lengkapi semua kolom formulir.';
-            $waPrefix = $isEn
-                ? 'Hello Thoriq! I am '
-                : 'Halo Thoriq! Saya ';
-
-            $contactJs = <<<HTML
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.querySelector('form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const messageInput = document.getElementById('message');
-
-            const name = nameInput ? nameInput.value.trim() : '';
-            const email = emailInput ? emailInput.value.trim() : '';
-            const message = messageInput ? messageInput.value.trim() : '';
-
-            if (!name || !email || !message) {
-                alert('{$promptMsg}');
-                return;
-            }
-
-            const waText = encodeURIComponent("{$waPrefix}*" + name + "* (" + email + ").\\n\\nPesan:\\n" + message);
-            const waUrl = "https://wa.me/6281234567890?text=" + waText;
-            window.open(waUrl, '_blank');
-
-            let alertBox = document.getElementById('static-contact-alert');
-            if (!alertBox) {
-                alertBox = document.createElement('div');
-                alertBox.id = 'static-contact-alert';
-                alertBox.className = 'mb-8 px-6 py-5 rounded-2xl bg-accent/10 border border-accent/20 text-accent font-medium';
-                contactForm.parentNode.insertBefore(alertBox, contactForm);
-            }
-            alertBox.textContent = '{$alertMsg}';
-            contactForm.reset();
-        });
-    }
-});
-</script>
-</body>
-HTML;
-            $html = str_replace('</body>', $contactJs, $html);
-        }
-
         return $html;
     }
 }
