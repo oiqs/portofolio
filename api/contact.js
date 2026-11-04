@@ -30,9 +30,8 @@ export default async function handler(req, res) {
 
         const adminEmail = process.env.ADMIN_EMAIL || 'oiqgemink27@gmail.com';
 
-        // 1. Submit ke FormSubmit via Vercel Cloud Server (Bebas dari blokir ISP Indonesia)
+        // 1. Submit ke FormSubmit via Vercel Cloud Server
         let emailDelivered = false;
-        let formSubmitDebug = null;
         try {
             const formSubmitRes = await fetch(`https://formsubmit.co/ajax/${adminEmail}`, {
                 method: 'POST',
@@ -50,21 +49,16 @@ export default async function handler(req, res) {
                 })
             });
 
-            const resText = await formSubmitRes.text();
-            formSubmitDebug = { status: formSubmitRes.status, body: resText };
             if (formSubmitRes.ok) {
                 emailDelivered = true;
             }
         } catch (err) {
             console.error('Error forwarding to FormSubmit:', err);
-            formSubmitDebug = { error: err.message };
         }
 
         return res.status(200).json({
             success: true,
-            message: 'Terima kasih! Pesan kamu berhasil dikirim ke email admin (oiqgemink27@gmail.com).',
-            emailDelivered: emailDelivered,
-            debug: formSubmitDebug,
+            message: 'Terima kasih! Pesan kamu berhasil dikirim.',
             contact: {
                 name,
                 email,
