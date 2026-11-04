@@ -448,51 +448,63 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Load extra local comments stored in browser
-    function loadLocalCachedComments() {
-        try {
-            const cached = JSON.parse(localStorage.getItem('user_public_comments') || '[]');
-            if (Array.isArray(cached) && cached.length > 0) {
-                cached.forEach(c => {
-                    const el = createCommentElement(c);
-                    if (commentsFeed && commentsFeed.firstChild) {
-                        commentsFeed.insertBefore(el, commentsFeed.firstChild);
-                    } else if (commentsFeed) {
-                        commentsFeed.appendChild(el);
-                    }
-                });
-                updateBadgeCount(cached.length);
-            }
-        } catch (e) {}
+    // Load public comments live from shared database
+    function renderComments(list) {
+        if (!commentsFeed) return;
+        commentsFeed.innerHTML = '';
+        if (!Array.isArray(list) || list.length === 0) {
+            commentsFeed.innerHTML = `
+                <div class="p-8 text-center text-muted text-sm border border-dashed border-ink/10 dark:border-white/10 rounded-2xl">
+                    {{ __('Belum ada komentar publik. Jadilah yang pertama berkomentar!') }}
+                </div>
+            `;
+            if (countBadge) countBadge.textContent = `0 {{ __('Komentar') }}`;
+            return;
+        }
+
+        list.forEach(item => {
+            commentsFeed.appendChild(createCommentElement({
+                name: item.name,
+                message: item.message,
+                avatar: item.avatar,
+                time_ago: item.time_ago || (item.created_at ? formatTimeAgo(new Date(item.created_at)) : 'Baru saja')
+            }));
+        });
+        if (countBadge) countBadge.textContent = `${list.length} {{ __('Komentar') }}`;
     }
 
-    loadLocalCachedComments();
-
-    // Fetch from Supabase if configured
-    if (SUPABASE_URL && SUPABASE_ANON_KEY) {
-        fetch(`${SUPABASE_URL}/rest/v1/comments?select=*&order=created_at.desc&limit=30`, {
-            headers: {
-                'apikey': SUPABASE_ANON_KEY,
-                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (Array.isArray(data) && data.length > 0 && commentsFeed) {
-                commentsFeed.innerHTML = '';
-                data.forEach(item => {
-                    commentsFeed.appendChild(createCommentElement({
-                        name: item.name,
-                        message: item.message,
-                        avatar: item.avatar,
-                        time_ago: formatTimeAgo(new Date(item.created_at))
-                    }));
-                });
-                if (countBadge) countBadge.textContent = `${data.length} {{ __('Komentar') }}`;
-            }
-        })
-        .catch(() => null);
+    function fetchPublicComments() {
+        if (SUPABASE_URL && SUPABASE_ANON_KEY) {
+            fetch(`${SUPABASE_URL}/rest/v1/comments?select=*&order=created_at.desc&limit=50`, {
+                headers: {
+                    'apikey': SUPABASE_ANON_KEY,
+                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (Array.isArray(data)) {
+                    renderComments(data);
+                }
+            })
+            .catch(() => null);
+        } else if (isLocal) {
+            fetch('/api/comments')
+            .then(res => res.json())
+            .then(res => {
+                if (res.status === 'success' && Array.isArray(res.data)) {
+                    renderComments(res.data);
+                }
+            })
+            .catch(() => null);
+        }
     }
+
+    // Initial fetch on page load
+    fetchPublicComments();
+
+    // Auto-sync polling every 10 seconds so any user sees other users' new comments automatically
+    setInterval(fetchPublicComments, 10000);
 
     function formatTimeAgo(date) {
         const seconds = Math.floor((new Date() - date) / 1000);
@@ -524,58 +536,59 @@ document.addEventListener('DOMContentLoaded', function() {
             if (commentIcon) commentIcon.classList.add('hidden');
             if (commentBtnText) commentBtnText.textContent = '{{ __("Mengirim...") }}';
 
-            const newComment = {
-                name: name,
-                message: message,
-                avatar: avatar,
-                time_ago: 'Baru saja',
-                created_at: new Date().toISOString()
-            };
+            let submitSuccess = false;
 
-            // 1. Optimistic UI update: Insert into comment feed immediately!
-            const newElement = createCommentElement(newComment);
-            if (commentsFeed && commentsFeed.firstChild) {
-                commentsFeed.insertBefore(newElement, commentsFeed.firstChild);
-            } else if (commentsFeed) {
-                commentsFeed.appendChild(newElement);
-            }
-            updateBadgeCount(1);
-
-            // 2. Save to localStorage so visitor can see it persistently
-            try {
-                const cached = JSON.parse(localStorage.getItem('user_public_comments') || '[]');
-                cached.unshift(newComment);
-                localStorage.setItem('user_public_comments', JSON.stringify(cached.slice(0, 30)));
-            } catch (e) {}
-
-            // 3. Post to Local Laravel API (if on localhost)
-            const csrfToken = document.querySelector('input[name="_token"]')?.value || '';
-            fetch('/api/comments', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                body: JSON.stringify({ name, message, avatar })
-            }).catch(() => null);
-
-            // 4. Post to Supabase (if configured)
+            // 1. Post to Supabase (Production Vercel)
             if (SUPABASE_URL && SUPABASE_ANON_KEY) {
-                fetch(`${SUPABASE_URL}/rest/v1/comments`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'apikey': SUPABASE_ANON_KEY,
-                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                        'Prefer': 'return=minimal'
-                    },
-                    body: JSON.stringify({
-                        name: name,
-                        message: message,
-                        avatar: avatar
-                    })
-                }).catch(() => null);
+                try {
+                    const response = await fetch(`${SUPABASE_URL}/rest/v1/comments`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'apikey': SUPABASE_ANON_KEY,
+                            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                            'Prefer': 'return=minimal'
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            message: message,
+                            avatar: avatar
+                        })
+                    });
+
+                    if (response.ok) {
+                        submitSuccess = true;
+                        fetchPublicComments();
+                    } else {
+                        throw new Error('Supabase status: ' + response.status);
+                    }
+                } catch (err) {
+                    showCommentAlert('error', 'Gagal menghubungkan ke database komentar Supabase.');
+                }
+            } else if (isLocal) {
+                // 2. Post to Localhost Laravel API
+                try {
+                    const response = await fetch('/api/comments', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({ name, message, avatar })
+                    });
+
+                    if (response.ok) {
+                        submitSuccess = true;
+                        fetchPublicComments();
+                    } else {
+                        throw new Error('Local API status: ' + response.status);
+                    }
+                } catch (err) {
+                    showCommentAlert('error', 'Gagal menyimpan ke database komentar lokal.');
+                }
+            } else {
+                // Di Vercel tapi SUPABASE_URL & SUPABASE_ANON_KEY belum diisi:
+                showCommentAlert('error', 'Database komentar publik online (Supabase) belum dihubungkan. Hubungkan SUPABASE_URL & SUPABASE_ANON_KEY agar semua user di internet bisa saling melihat komentar.');
             }
 
             // Reset UI
@@ -584,12 +597,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (commentIcon) commentIcon.classList.remove('hidden');
             if (commentBtnText) commentBtnText.textContent = '{{ __("Kirim Komentar") }}';
 
-            commentMessageInput.value = '';
-            showCommentAlert('success', '{{ __("Komentar kamu berhasil dikirim dan tampil di daftar!") }}');
-            
-            setTimeout(() => {
-                if (commentAlert) commentAlert.classList.add('hidden');
-            }, 5000);
+            if (submitSuccess) {
+                commentMessageInput.value = '';
+                showCommentAlert('success', '{{ __("Komentar kamu berhasil dikirim dan kini tampil untuk semua orang!") }}');
+                setTimeout(() => {
+                    if (commentAlert) commentAlert.classList.add('hidden');
+                }, 5000);
+            }
         });
     }
 

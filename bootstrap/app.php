@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectGuestsTo('/admin/login');
         $middleware->validateCsrfTokens(except: [
             'contact',
+            'api/*',
         ]);
         $middleware->web(append: [
             \App\Http\Middleware\SetLocaleMiddleware::class,
