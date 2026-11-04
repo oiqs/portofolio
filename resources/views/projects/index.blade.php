@@ -17,7 +17,7 @@
             </h1>
         </div>
 
-        <div class="shrink-0 bg-ink/5 dark:bg-white/5 border border-ink/10 dark:border-white/10 px-5 py-3 rounded-2xl flex items-center gap-3">
+        <div class="shrink-0 bg-white/80 dark:bg-[#121620]/90 backdrop-blur-xl border border-ink/10 dark:border-white/10 px-5 py-3 rounded-2xl flex items-center gap-3 shadow-sm">
             <span class="text-2xl font-bold text-accent font-mono">{{ count($projects) }}</span>
             <div class="text-xs text-muted leading-tight font-medium">
                 {{ __('Destinasi') }}<br/>{{ __('Tersimpan') }}

@@ -7,8 +7,12 @@
 @endphp
 
 <a href="{{ url('/projects/'.$project['slug']) }}"
-   class="group block bg-ink/5 dark:bg-white/[0.03] border border-ink/10 dark:border-white/10 rounded-3xl overflow-hidden hover:border-accent/40 hover:bg-ink/[0.08] dark:hover:bg-white/[0.06] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-accent/10 flex flex-col justify-between">
-    <div>
+   class="relative group block rounded-3xl border border-ink/10 dark:border-white/10 bg-white/85 dark:bg-[#121620]/90 backdrop-blur-xl shadow-lg shadow-black/5 dark:shadow-black/30 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-2xl hover:shadow-accent/15 flex flex-col justify-between">
+    
+    {{-- Ambient Accent Glow in Card (Gaya Filosofi Perjalanan) --}}
+    <div class="absolute -right-8 -bottom-8 w-36 h-36 bg-accent/10 dark:bg-accent/20 rounded-full blur-2xl group-hover:bg-accent/25 dark:group-hover:bg-accent/35 transition-all duration-500 pointer-events-none z-10"></div>
+
+    <div class="relative z-20">
         <div class="aspect-[4/3] bg-ink/10 dark:bg-white/5 overflow-hidden relative">
             @if (!empty($project['cover_image']))
                 <img src="{{ asset('storage/'.$project['cover_image']) }}" 
@@ -66,7 +70,7 @@
         </div>
     </div>
 
-    <div class="px-6 pb-6 pt-0 flex items-center justify-between border-t border-ink/5 dark:border-white/5 pt-4 mt-auto">
+    <div class="px-6 pb-6 pt-0 flex items-center justify-between border-t border-ink/5 dark:border-white/5 pt-4 mt-auto relative z-20">
         <div class="flex flex-wrap gap-1.5">
             @foreach (array_slice((array)$project['stack'], 0, 3) as $tech)
                 <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-ink/5 dark:bg-white/10 text-muted uppercase font-semibold tracking-wider">{{ $tech }}</span>

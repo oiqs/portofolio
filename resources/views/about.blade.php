@@ -79,14 +79,14 @@
 
     <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
         @foreach ($skills as $skill)
-            <div class="border border-ink/10 bg-ink/5 rounded-2xl p-6 hover:border-accent/40 hover:bg-ink/10 transition-all duration-500 hover:-translate-y-1 group">
+            <div class="border border-ink/10 dark:border-white/10 bg-white/85 dark:bg-[#121620]/90 backdrop-blur-xl shadow-md shadow-black/5 dark:shadow-black/25 rounded-2xl p-6 hover:border-accent/40 transition-all duration-500 hover:-translate-y-1 group">
                 <div class="flex items-center justify-between mb-4">
                     <span class="font-display text-xl font-semibold group-hover:text-accent transition-colors">{{ __($skill['name']) }}</span>
                     <span class="text-xs font-semibold px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent tracking-wide uppercase">
                         {{ __($skill['level']) }}
                     </span>
                 </div>
-                <div class="w-full bg-ink/10 h-1.5 rounded-full overflow-hidden">
+                <div class="w-full bg-ink/10 dark:bg-white/10 h-1.5 rounded-full overflow-hidden">
                     <div class="bg-accent h-full rounded-full transition-all duration-1000" style="width: {{ $skill['level'] === 'Sangat Suka' ? '95%' : ($skill['level'] === 'Favorit' ? '85%' : '75%') }}"></div>
                 </div>
             </div>
@@ -121,7 +121,7 @@
 
 {{-- CTA --}}
 <section class="max-w-6xl mx-auto px-6 md:px-10 py-28 text-center border-t border-ink/5">
-    <div class="max-w-3xl mx-auto border border-ink/10 rounded-3xl p-10 md:p-16 bg-gradient-to-b from-ink/5 to-transparent relative overflow-hidden">
+    <div class="max-w-3xl mx-auto border border-ink/10 dark:border-white/10 rounded-3xl p-10 md:p-16 bg-white/85 dark:bg-[#121620]/90 backdrop-blur-xl shadow-xl shadow-black/5 dark:shadow-black/30 relative overflow-hidden">
         <div class="absolute -top-24 -left-24 w-48 h-48 bg-accent/10 rounded-full blur-3xl pointer-events-none"></div>
         <h2 class="font-display text-3xl sm:text-4xl md:text-5xl mb-6 leading-tight">{{ __('Jelajahi Momen Perjalanan') }}</h2>
         <p class="text-muted text-base sm:text-lg mb-10 max-w-xl mx-auto">{{ __('Lihat catatan trip dan destinasi tempat-tempat healing favorit yang pernah saya kunjungi.') }}</p>

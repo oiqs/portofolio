@@ -33,7 +33,8 @@
     </div>
 
     {{-- KANAN: FORM --}}
-    <div class="md:col-span-3 bg-ink/5 border border-ink/5 rounded-3xl p-8 md:p-12">
+    <div class="md:col-span-3 bg-white/85 dark:bg-[#121620]/90 backdrop-blur-xl border border-ink/10 dark:border-white/10 shadow-xl shadow-black/5 dark:shadow-black/30 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+        <div class="absolute -right-16 -top-16 w-48 h-48 bg-accent/10 rounded-full blur-3xl pointer-events-none"></div>
 
         @if (session('success'))
             <div class="mb-8 px-6 py-5 rounded-2xl bg-accent/10 border border-accent/20 text-accent font-medium">

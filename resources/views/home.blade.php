@@ -78,8 +78,8 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         {{-- Pillar 1 --}}
-        <div class="relative group p-8 rounded-3xl border border-ink/10 bg-gradient-to-b from-ink/[0.04] to-ink/[0.01] dark:from-white/[0.03] dark:to-transparent backdrop-blur-md transition-all duration-500 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-xl hover:shadow-accent/5 overflow-hidden flex flex-col justify-between">
-            <div class="absolute -right-8 -top-8 w-28 h-28 bg-accent/10 rounded-full blur-2xl group-hover:bg-accent/20 transition-all duration-500 pointer-events-none"></div>
+        <div class="relative group p-8 rounded-3xl border border-ink/10 dark:border-white/10 bg-white/85 dark:bg-[#121620]/90 backdrop-blur-xl shadow-lg shadow-black/5 dark:shadow-black/30 transition-all duration-500 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-2xl hover:shadow-accent/15 overflow-hidden flex flex-col justify-between">
+            <div class="absolute -right-8 -top-8 w-28 h-28 bg-accent/10 dark:bg-accent/20 rounded-full blur-2xl group-hover:bg-accent/25 dark:group-hover:bg-accent/35 transition-all duration-500 pointer-events-none"></div>
             
             <div>
                 <div class="flex items-center justify-between mb-8">
@@ -102,8 +102,8 @@
         </div>
 
         {{-- Pillar 2 --}}
-        <div class="relative group p-8 rounded-3xl border border-ink/10 bg-gradient-to-b from-ink/[0.04] to-ink/[0.01] dark:from-white/[0.03] dark:to-transparent backdrop-blur-md transition-all duration-500 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-xl hover:shadow-accent/5 overflow-hidden flex flex-col justify-between">
-            <div class="absolute -right-8 -top-8 w-28 h-28 bg-accent/10 rounded-full blur-2xl group-hover:bg-accent/20 transition-all duration-500 pointer-events-none"></div>
+        <div class="relative group p-8 rounded-3xl border border-ink/10 dark:border-white/10 bg-white/85 dark:bg-[#121620]/90 backdrop-blur-xl shadow-lg shadow-black/5 dark:shadow-black/30 transition-all duration-500 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-2xl hover:shadow-accent/15 overflow-hidden flex flex-col justify-between">
+            <div class="absolute -right-8 -top-8 w-28 h-28 bg-accent/10 dark:bg-accent/20 rounded-full blur-2xl group-hover:bg-accent/25 dark:group-hover:bg-accent/35 transition-all duration-500 pointer-events-none"></div>
             
             <div>
                 <div class="flex items-center justify-between mb-8">
@@ -125,8 +125,8 @@
         </div>
 
         {{-- Pillar 3 --}}
-        <div class="relative group p-8 rounded-3xl border border-ink/10 bg-gradient-to-b from-ink/[0.04] to-ink/[0.01] dark:from-white/[0.03] dark:to-transparent backdrop-blur-md transition-all duration-500 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-xl hover:shadow-accent/5 overflow-hidden flex flex-col justify-between">
-            <div class="absolute -right-8 -top-8 w-28 h-28 bg-accent/10 rounded-full blur-2xl group-hover:bg-accent/20 transition-all duration-500 pointer-events-none"></div>
+        <div class="relative group p-8 rounded-3xl border border-ink/10 dark:border-white/10 bg-white/85 dark:bg-[#121620]/90 backdrop-blur-xl shadow-lg shadow-black/5 dark:shadow-black/30 transition-all duration-500 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-2xl hover:shadow-accent/15 overflow-hidden flex flex-col justify-between">
+            <div class="absolute -right-8 -top-8 w-28 h-28 bg-accent/10 dark:bg-accent/20 rounded-full blur-2xl group-hover:bg-accent/25 dark:group-hover:bg-accent/35 transition-all duration-500 pointer-events-none"></div>
             
             <div>
                 <div class="flex items-center justify-between mb-8">
@@ -173,7 +173,7 @@
 
 {{-- CTA PENUTUP --}}
 <section class="max-w-6xl mx-auto px-6 md:px-10 py-28 text-center border-t border-ink/5">
-    <div class="max-w-3xl mx-auto border border-ink/10 rounded-3xl p-10 md:p-16 bg-gradient-to-b from-ink/5 to-transparent relative overflow-hidden">
+    <div class="max-w-3xl mx-auto border border-ink/10 dark:border-white/10 rounded-3xl p-10 md:p-16 bg-white/85 dark:bg-[#121620]/90 backdrop-blur-xl shadow-xl shadow-black/5 dark:shadow-black/30 relative overflow-hidden">
         <div class="absolute -top-24 -left-24 w-48 h-48 bg-accent/10 rounded-full blur-3xl pointer-events-none"></div>
         <h2 class="font-display text-3xl sm:text-4xl md:text-5xl mb-6 leading-tight font-bold">{{ __('Punya rekomendasi spot healing seru?') }}</h2>
         <p class="text-muted text-base sm:text-lg mb-10 max-w-xl mx-auto">{{ __('Saya selalu senang mendengar cerita perjalanan baru, menemukan destinasi alam yang tenang, atau bertukar rekomendasi tempat liburan.') }}</p>
