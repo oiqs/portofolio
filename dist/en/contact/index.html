@@ -263,7 +263,7 @@
 
         
         <form id="contact-form" method="POST" action="/contact" class="space-y-8">
-            <input type="hidden" name="_token" value="3yqQpE8Kh5id5BWGqtBU9lCq5sDmFC4cXB1M4Kf4" autocomplete="off">
+            <input type="hidden" name="_token" value="HFvFgLENtXeLTVpgtuMuiQNAlZnuDyavSJlAiNNH" autocomplete="off">
             <div>
                 <label for="name" class="block text-sm font-medium tracking-wide mb-3">Full Name</label>
                 <input type="text" name="name" id="name" required value=""
@@ -410,7 +410,7 @@
                                             Thoriq Admin
                                         </h4>
                                         <span class="text-[11px] text-muted whitespace-nowrap">
-                                            29 minutes ago
+                                            22 hours ago
                                         </span>
                                     </div>
                                     <p class="text-sm text-ink/80 dark:text-gray-300 leading-relaxed break-words whitespace-pre-line">
@@ -512,9 +512,16 @@ document.addEventListener('DOMContentLoaded', function() {
     /* ====================================================================
        2. BUKU TAMU & KOMENTAR PUBLIK (SEPERTI ALFARI.MY.ID)
        ==================================================================== */
-    // Konfigurasi Supabase (Opsional - jika ingin sinkronisasi multi-user real-time di Vercel):
-    const SUPABASE_URL = "";       // Contoh: "https://your-project.supabase.co"
-    const SUPABASE_ANON_KEY = "";  // Contoh: "eyJhbGciOiJIUzI1NiIsIn..."
+    // Konfigurasi Supabase (Untuk sinkronisasi komentar publik online real-time di Vercel/hosting publik):
+    const SUPABASE_URL = "";
+    const SUPABASE_ANON_KEY = "";
+
+    // Deteksi apakah sedang di server lokal (Laragon / localhost / *.test)
+    const isLocal = window.location.hostname === 'localhost' || 
+                    window.location.hostname === '127.0.0.1' || 
+                    window.location.hostname.endsWith('.test') || 
+                    window.location.hostname.endsWith('.local') ||
+                    (window.location.port !== '' && window.location.port !== '80' && window.location.port !== '443');
 
     const commentForm = document.getElementById('public-comment-form');
     const commentNameInput = document.getElementById('comment-name');
@@ -568,11 +575,11 @@ document.addEventListener('DOMContentLoaded', function() {
         div.className = 'comment-card p-5 rounded-2xl bg-ink/[0.02] dark:bg-white/[0.02] border border-ink/5 dark:border-white/5 hover:border-accent/30 transition-all duration-300 animate-fadeIn';
         
         const avatarUrl = comment.avatar || `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(comment.name)}`;
-        const timeAgo = comment.time_ago || 'Baru saja';
+        const timeAgo = comment.time_ago || (comment.created_at ? formatTimeAgo(comment.created_at) : 'Baru saja');
 
         div.innerHTML = `
             <div class="flex items-start gap-4">
-                <img src="${avatarUrl}" alt="${escapeHtml(comment.name)}" class="w-11 h-11 rounded-2xl bg-accent/10 border border-accent/20 object-cover shrink-0 shadow-sm">
+                <img src="${avatarUrl}" alt="${escapeHtml(comment.name)}" class="w-11 h-11 rounded-2xl bg-accent/10 border border-accent/20 object-cover shrink-0 shadow-sm" loading="lazy">
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center justify-between gap-2 mb-1.5">
                         <h4 class="font-display font-bold text-sm tracking-wide text-ink dark:text-white truncate">
@@ -591,17 +598,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function escapeHtml(string) {
         const div = document.createElement('div');
-        div.textContent = string;
+        div.textContent = string || '';
         return div.innerHTML;
     }
 
-    function updateBadgeCount(increment = 1) {
-        if (!countBadge) return;
-        const currentText = countBadge.textContent;
-        const match = currentText.match(/\d+/);
-        if (match) {
-            const current = parseInt(match[0], 10);
-            countBadge.textContent = `${current + increment} Komentar`;
+    function formatTimeAgo(dateInput) {
+        try {
+            const date = dateInput instanceof Date ? dateInput : new Date(dateInput);
+            if (isNaN(date.getTime())) return 'Baru saja';
+            const seconds = Math.max(0, Math.floor((new Date() - date) / 1000));
+            if (seconds < 60) return 'Baru saja';
+            const minutes = Math.floor(seconds / 60);
+            if (minutes < 60) return `${minutes} menit lalu`;
+            const hours = Math.floor(minutes / 60);
+            if (hours < 24) return `${hours} jam lalu`;
+            const days = Math.floor(hours / 24);
+            return `${days} hari lalu`;
+        } catch (e) {
+            return 'Baru saja';
         }
     }
 
@@ -624,57 +638,52 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: item.name,
                 message: item.message,
                 avatar: item.avatar,
-                time_ago: item.time_ago || (item.created_at ? formatTimeAgo(new Date(item.created_at)) : 'Baru saja')
+                time_ago: item.time_ago || (item.created_at ? formatTimeAgo(item.created_at) : 'Baru saja')
             }));
         });
         if (countBadge) countBadge.textContent = `${list.length} Komentar`;
     }
 
-    function fetchPublicComments() {
+    async function fetchPublicComments() {
         if (SUPABASE_URL && SUPABASE_ANON_KEY) {
-            fetch(`${SUPABASE_URL}/rest/v1/comments?select=*&order=created_at.desc&limit=50`, {
-                headers: {
-                    'apikey': SUPABASE_ANON_KEY,
-                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+            try {
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/comments?select=*&order=created_at.desc&limit=50`, {
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    if (Array.isArray(data)) {
+                        renderComments(data);
+                    }
                 }
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (Array.isArray(data)) {
-                    renderComments(data);
-                }
-            })
-            .catch(() => null);
+            } catch (err) {
+                console.warn('Gagal memuat komentar dari Supabase:', err);
+            }
         } else if (isLocal) {
-            fetch('/api/comments')
-            .then(res => res.json())
-            .then(res => {
-                if (res.status === 'success' && Array.isArray(res.data)) {
-                    renderComments(res.data);
+            try {
+                const res = await fetch('/api/comments');
+                if (res.ok) {
+                    const json = await res.json();
+                    if (json.status === 'success' && Array.isArray(json.data)) {
+                        renderComments(json.data);
+                    }
                 }
-            })
-            .catch(() => null);
+            } catch (err) {
+                console.warn('Gagal memuat komentar dari backend lokal:', err);
+            }
         }
     }
 
-    // Initial fetch on page load
+    // Ambil komentar saat halaman dimuat
     fetchPublicComments();
 
-    // Auto-sync polling every 10 seconds so any user sees other users' new comments automatically
+    // Auto-polling setiap 10 detik agar pengunjung melihat komentar baru dari orang lain tanpa reload
     setInterval(fetchPublicComments, 10000);
 
-    function formatTimeAgo(date) {
-        const seconds = Math.floor((new Date() - date) / 1000);
-        if (seconds < 60) return 'Baru saja';
-        const minutes = Math.floor(seconds / 60);
-        if (minutes < 60) return `${minutes} menit lalu`;
-        const hours = Math.floor(minutes / 60);
-        if (hours < 24) return `${hours} jam lalu`;
-        const days = Math.floor(hours / 24);
-        return `${days} hari lalu`;
-    }
-
-    // Handle Comment Submit
+    // Form Submit Komentar
     if (commentForm) {
         commentForm.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -694,8 +703,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (commentBtnText) commentBtnText.textContent = 'Sending...';
 
             let submitSuccess = false;
+            let errorMessage = '';
 
-            // 1. Post to Supabase (Production Vercel)
+            // 1. Jika terhubung Supabase (Prioritas online multi-user):
             if (SUPABASE_URL && SUPABASE_ANON_KEY) {
                 try {
                     const response = await fetch(`${SUPABASE_URL}/rest/v1/comments`, {
@@ -715,51 +725,58 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     if (response.ok) {
                         submitSuccess = true;
-                        fetchPublicComments();
+                        await fetchPublicComments();
                     } else {
-                        throw new Error('Supabase status: ' + response.status);
+                        throw new Error('Supabase response status: ' + response.status);
                     }
                 } catch (err) {
-                    showCommentAlert('error', 'Gagal menghubungkan ke database komentar Supabase.');
+                    console.error('Supabase submit error:', err);
+                    errorMessage = 'Gagal menyimpan komentar ke server database Supabase.';
                 }
             } else if (isLocal) {
-                // 2. Post to Localhost Laravel API
+                // 2. Jika di localhost (Laragon / Laravel Backend):
                 try {
+                    const csrfToken = document.querySelector('input[name="_token"]')?.value || '';
                     const response = await fetch('/api/comments', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Accept': 'application/json'
+                            'Accept': 'application/json',
+                            ...(csrfToken ? { 'X-CSRF-TOKEN': csrfToken } : {})
                         },
                         body: JSON.stringify({ name, message, avatar })
                     });
 
                     if (response.ok) {
                         submitSuccess = true;
-                        fetchPublicComments();
+                        await fetchPublicComments();
                     } else {
-                        throw new Error('Local API status: ' + response.status);
+                        const errData = await response.json().catch(() => null);
+                        throw new Error(errData?.message || ('HTTP ' + response.status));
                     }
                 } catch (err) {
-                    showCommentAlert('error', 'Gagal menyimpan ke database komentar lokal.');
+                    console.error('Local API submit error:', err);
+                    errorMessage = 'Gagal menyimpan ke database lokal: ' + (err.message || 'Terjadi kesalahan');
                 }
             } else {
-                // Di Vercel tapi SUPABASE_URL & SUPABASE_ANON_KEY belum diisi:
-                showCommentAlert('error', 'Database komentar publik online (Supabase) belum dihubungkan. Hubungkan SUPABASE_URL & SUPABASE_ANON_KEY agar semua user di internet bisa saling melihat komentar.');
+                // 3. Di hosting publik (Vercel) namun Supabase belum dikonfigurasi:
+                errorMessage = 'Website online (Vercel) membutuhkan database cloud (Supabase) untuk menyimpan komentar publik antar pengunjung. Silakan isi SUPABASE_URL & SUPABASE_ANON_KEY.';
             }
 
-            // Reset UI
+            // Kembalikan status tombol
             if (commentSubmitBtn) commentSubmitBtn.disabled = false;
             if (commentSpinner) commentSpinner.classList.add('hidden');
             if (commentIcon) commentIcon.classList.remove('hidden');
             if (commentBtnText) commentBtnText.textContent = 'Post Comment';
 
             if (submitSuccess) {
-                commentMessageInput.value = '';
+                if (commentMessageInput) commentMessageInput.value = '';
                 showCommentAlert('success', 'Komentar kamu berhasil dikirim dan kini tampil untuk semua orang!');
                 setTimeout(() => {
                     if (commentAlert) commentAlert.classList.add('hidden');
                 }, 5000);
+            } else {
+                showCommentAlert('error', errorMessage || 'Gagal mengirim komentar. Silakan coba lagi.');
             }
         });
     }
