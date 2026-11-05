@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\SkillController as AdminSkillController;
 use App\Http\Controllers\Admin\TimelineController as AdminTimelineController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
+use App\Http\Controllers\Admin\CommentController as AdminCommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,4 +68,12 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('messages/{message}', [AdminContactController::class, 'show'])->name('messages.show');
     Route::post('messages/{message}/reply', [AdminContactController::class, 'reply'])->name('messages.reply');
     Route::delete('messages/{message}', [AdminContactController::class, 'destroy'])->name('messages.destroy');
+
+    // Buku Tamu & Komentar Publik
+    Route::get('comments', [AdminCommentController::class, 'index'])->name('comments.index');
+    Route::post('comments/{comment}/toggle', [AdminCommentController::class, 'toggleApproval'])->name('comments.toggle');
+    Route::delete('comments/{comment}', [AdminCommentController::class, 'destroy'])->name('comments.destroy');
+
+    // Sinkronisasi Data dari Vercel Online
+    Route::post('sync-web', [AdminCommentController::class, 'syncWeb'])->name('sync.web');
 });

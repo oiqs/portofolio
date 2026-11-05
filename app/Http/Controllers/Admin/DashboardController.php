@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Skill;
 use App\Models\Timeline;
 use App\Models\Contact;
+use App\Models\Comment;
 
 class DashboardController extends Controller
 {
@@ -17,9 +18,11 @@ class DashboardController extends Controller
         $totalTimelines = Timeline::count();
         $totalMessages = Contact::count();
         $unreadMessages = Contact::where('is_read', false)->count();
+        $totalComments = Comment::count();
 
         $recentProjects = Project::latest()->take(5)->get();
         $recentMessages = Contact::latest()->take(5)->get();
+        $recentComments = Comment::latest()->take(5)->get();
 
         return view('admin.dashboard', compact(
             'totalProjects',
@@ -27,8 +30,10 @@ class DashboardController extends Controller
             'totalTimelines',
             'totalMessages',
             'unreadMessages',
+            'totalComments',
             'recentProjects',
-            'recentMessages'
+            'recentMessages',
+            'recentComments'
         ));
     }
 }

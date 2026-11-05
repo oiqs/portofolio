@@ -81,6 +81,18 @@
                         <span class="px-2 py-0.5 rounded-full bg-red-500 text-white text-[11px] font-bold">{{ $unreadCount }}</span>
                     @endif
                 </a>
+
+                <a href="{{ route('admin.comments.index') }}" 
+                   class="flex items-center justify-between px-4 py-3 rounded-xl font-medium text-sm transition-all {{ request()->routeIs('admin.comments.*') ? 'bg-accent text-paper font-semibold shadow-md shadow-accent/20' : 'text-muted hover:bg-ink/5 hover:text-ink' }}">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5 shrink-0" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg>
+                        <span>Buku Tamu / Komentar</span>
+                    </div>
+                    @php $commentTotal = \App\Models\Comment::count(); @endphp
+                    @if ($commentTotal > 0)
+                        <span class="px-2 py-0.5 rounded-full bg-accent/20 text-accent text-[11px] font-bold">{{ $commentTotal }}</span>
+                    @endif
+                </a>
             </nav>
         </div>
 
@@ -112,6 +124,19 @@
             </div>
             
             <div class="flex items-center gap-3">
+                {{-- SINKRON DARI WEB VERCEL --}}
+                <form method="POST" action="{{ route('admin.sync.web') }}" class="inline">
+                    @csrf
+                    <button type="submit" 
+                            class="px-3 py-2 rounded-xl border border-ink/10 hover:border-accent/40 bg-ink/[0.02] hover:bg-accent/10 text-muted hover:text-accent transition-all flex items-center gap-2 text-xs font-semibold" 
+                            title="Tarik komentar dan pesan masuk terbaru dari website Vercel">
+                        <svg class="w-4 h-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                        <span class="hidden sm:inline">Tarik Data Web</span>
+                    </button>
+                </form>
+
                 {{-- COLOR THEME PICKER BUTTON IN ADMIN HEADER --}}
                 <div class="relative" id="admin-color-palette-dropdown">
                     <button onclick="toggleAdminColorPicker(event)" 
