@@ -272,6 +272,26 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 
+    // Deteksi lingkungan: localhost / Laragon / subpath
+    const isLocal = window.location.hostname === 'localhost' || 
+                    window.location.hostname === '127.0.0.1' || 
+                    window.location.hostname.endsWith('.test') || 
+                    window.location.hostname.endsWith('.local') ||
+                    (window.location.port !== '' && window.location.port !== '80' && window.location.port !== '443');
+
+    // Endpoint API kontak dinamis (mendukung Laragon localhost subpath /portofolio/public/contact maupun hosting Vercel /api/contact)
+    const contactApiUrl = (function() {
+        const path = window.location.pathname;
+        const subpathIndex = path.indexOf('/public');
+        if (subpathIndex !== -1) {
+            return path.substring(0, subpathIndex + 7) + '/contact';
+        }
+        if (isLocal) {
+            return '/contact';
+        }
+        return '/api/contact';
+    })();
+
     /* ====================================================================
        1. FORM KONTAK PRIBADI (EMAIL & BACKEND)
        ==================================================================== */
@@ -312,43 +332,61 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const csrfToken = contactForm.querySelector('input[name="_token"]')?.value || '';
 
-            // Post to backend (Localhost Laravel)
-            const backendPromise = fetch('{{ url("/contact") }}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                body: JSON.stringify({ name, email, message })
-            }).catch(() => null);
+            // 1. Post ke backend (Localhost Laravel MySQL atau Vercel Serverless)
+            let backendSuccess = false;
+            try {
+                const backendRes = await fetch(contactApiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        ...(csrfToken ? { 'X-CSRF-TOKEN': csrfToken } : {})
+                    },
+                    body: JSON.stringify({ name, email, message })
+                });
+                if (backendRes.ok) {
+                    backendSuccess = true;
+                }
+            } catch (e) {
+                console.error('Contact backend error:', e);
+            }
 
-            // Post to FormSubmit for direct email delivery to oiqgemink27@gmail.com
-            const emailPromise = fetch('https://formsubmit.co/ajax/oiqgemink27@gmail.com', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: name,
-                    email: email,
-                    message: message,
-                    _subject: 'Pesan Baru Portofolio dari ' + name,
-                    _captcha: 'false',
-                    _template: 'table'
-                })
-            }).catch(() => null);
-
-            await Promise.allSettled([backendPromise, emailPromise]);
+            // 2. Post to FormSubmit for direct email delivery to oiqgemink27@gmail.com
+            let emailSuccess = false;
+            try {
+                const emailRes = await fetch('https://formsubmit.co/ajax/oiqgemink27@gmail.com', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        message: message,
+                        _subject: 'Pesan Baru Portofolio dari ' + name,
+                        _captcha: 'false',
+                        _template: 'table'
+                    })
+                });
+                if (emailRes.ok) {
+                    emailSuccess = true;
+                }
+            } catch (e) {
+                console.error('FormSubmit error:', e);
+            }
 
             if (submitBtn) submitBtn.disabled = false;
             if (btnSpinner) btnSpinner.classList.add('hidden');
             if (btnIcon) btnIcon.classList.remove('hidden');
             if (btnText) btnText.textContent = '{{ __("Kirim Pesan") }}';
 
-            contactForm.reset();
-            showContactAlert('success', '{{ __("Terima kasih! Pesan kamu berhasil dikirim ke email admin (oiqgemink27@gmail.com) dan tersimpan.") }}');
+            if (backendSuccess || emailSuccess) {
+                contactForm.reset();
+                showContactAlert('success', '{{ __("Terima kasih! Pesan kamu berhasil dikirim ke email admin (oiqgemink27@gmail.com) dan tersimpan.") }}');
+            } else {
+                showContactAlert('error', '{{ __("Gagal mengirim pesan. Silakan coba lagi beberapa saat lagi.") }}');
+            }
         });
     }
 
