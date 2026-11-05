@@ -355,16 +355,19 @@ document.addEventListener('DOMContentLoaded', function() {
     /* ====================================================================
        2. BUKU TAMU & KOMENTAR PUBLIK (SEPERTI ALFARI.MY.ID)
        ==================================================================== */
-    // Konfigurasi Supabase (Untuk sinkronisasi komentar publik online real-time di Vercel/hosting publik):
+    // Konfigurasi Supabase (Untuk sinkronisasi online real-time jika disediakan):
     const SUPABASE_URL = "{{ env('SUPABASE_URL', '') }}";
     const SUPABASE_ANON_KEY = "{{ env('SUPABASE_ANON_KEY', '') }}";
 
-    // Deteksi apakah sedang di server lokal (Laragon / localhost / *.test)
-    const isLocal = window.location.hostname === 'localhost' || 
-                    window.location.hostname === '127.0.0.1' || 
-                    window.location.hostname.endsWith('.test') || 
-                    window.location.hostname.endsWith('.local') ||
-                    (window.location.port !== '' && window.location.port !== '80' && window.location.port !== '443');
+    // Endpoint API dinamis (Mendukung localhost Laragon subpath maupun hosting Vercel)
+    const commentsApiUrl = (function() {
+        const path = window.location.pathname;
+        const subpathIndex = path.indexOf('/public');
+        if (subpathIndex !== -1) {
+            return path.substring(0, subpathIndex + 7) + '/api/comments';
+        }
+        return '/api/comments';
+    })();
 
     const commentForm = document.getElementById('public-comment-form');
     const commentNameInput = document.getElementById('comment-name');
@@ -488,6 +491,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     async function fetchPublicComments() {
+        // 1. Prioritas Supabase jika diisi
         if (SUPABASE_URL && SUPABASE_ANON_KEY) {
             try {
                 const res = await fetch(`${SUPABASE_URL}/rest/v1/comments?select=*&order=created_at.desc&limit=50`, {
@@ -500,23 +504,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     const data = await res.json();
                     if (Array.isArray(data)) {
                         renderComments(data);
+                        return;
                     }
                 }
             } catch (err) {
-                console.warn('Gagal memuat komentar dari Supabase:', err);
+                console.warn('Gagal memuat dari Supabase:', err);
             }
-        } else if (isLocal) {
-            try {
-                const res = await fetch('/api/comments');
-                if (res.ok) {
-                    const json = await res.json();
-                    if (json.status === 'success' && Array.isArray(json.data)) {
-                        renderComments(json.data);
-                    }
+        }
+
+        // 2. Fetch via Endpoint API (Laravel MySQL atau Vercel Serverless Function)
+        try {
+            const res = await fetch(commentsApiUrl, {
+                headers: { 'Accept': 'application/json' }
+            });
+            if (res.ok) {
+                const json = await res.json();
+                if (json.status === 'success' && Array.isArray(json.data)) {
+                    renderComments(json.data);
                 }
-            } catch (err) {
-                console.warn('Gagal memuat komentar dari backend lokal:', err);
             }
+        } catch (err) {
+            console.warn('Gagal memuat komentar dari API:', err);
         }
     }
 
@@ -548,7 +556,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let submitSuccess = false;
             let errorMessage = '';
 
-            // 1. Jika terhubung Supabase (Prioritas online multi-user):
+            // 1. Jika terhubung Supabase
             if (SUPABASE_URL && SUPABASE_ANON_KEY) {
                 try {
                     const response = await fetch(`${SUPABASE_URL}/rest/v1/comments`, {
@@ -559,51 +567,40 @@ document.addEventListener('DOMContentLoaded', function() {
                             'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
                             'Prefer': 'return=minimal'
                         },
-                        body: JSON.stringify({
-                            name: name,
-                            message: message,
-                            avatar: avatar
-                        })
+                        body: JSON.stringify({ name, message, avatar })
                     });
-
                     if (response.ok) {
                         submitSuccess = true;
-                        await fetchPublicComments();
-                    } else {
-                        throw new Error('Supabase response status: ' + response.status);
                     }
                 } catch (err) {
                     console.error('Supabase submit error:', err);
-                    errorMessage = 'Gagal menyimpan komentar ke server database Supabase.';
                 }
-            } else if (isLocal) {
-                // 2. Jika di localhost (Laragon / Laravel Backend):
-                try {
-                    const csrfToken = document.querySelector('input[name="_token"]')?.value || '';
-                    const response = await fetch('/api/comments', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json',
-                            ...(csrfToken ? { 'X-CSRF-TOKEN': csrfToken } : {})
-                        },
-                        body: JSON.stringify({ name, message, avatar })
-                    });
+            }
 
-                    if (response.ok) {
-                        submitSuccess = true;
-                        await fetchPublicComments();
-                    } else {
-                        const errData = await response.json().catch(() => null);
-                        throw new Error(errData?.message || ('HTTP ' + response.status));
-                    }
-                } catch (err) {
-                    console.error('Local API submit error:', err);
-                    errorMessage = 'Gagal menyimpan ke database lokal: ' + (err.message || 'Terjadi kesalahan');
+            // 2. Kirim ke API comments (Laravel lokal MySQL atau Vercel Serverless Function)
+            try {
+                const csrfToken = document.querySelector('input[name="_token"]')?.value || '';
+                const response = await fetch(commentsApiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        ...(csrfToken ? { 'X-CSRF-TOKEN': csrfToken } : {})
+                    },
+                    body: JSON.stringify({ name, message, avatar })
+                });
+
+                if (response.ok) {
+                    submitSuccess = true;
+                } else if (!submitSuccess) {
+                    const errData = await response.json().catch(() => null);
+                    errorMessage = errData?.message || ('Gagal mengirim (HTTP ' + response.status + ')');
                 }
-            } else {
-                // 3. Di hosting publik (Vercel) namun Supabase belum dikonfigurasi:
-                errorMessage = 'Website online (Vercel) membutuhkan database cloud (Supabase) untuk menyimpan komentar publik antar pengunjung. Silakan isi SUPABASE_URL & SUPABASE_ANON_KEY.';
+            } catch (err) {
+                console.error('API submit error:', err);
+                if (!submitSuccess) {
+                    errorMessage = 'Kendala jaringan saat mengirim komentar.';
+                }
             }
 
             // Kembalikan status tombol
@@ -615,6 +612,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (submitSuccess) {
                 if (commentMessageInput) commentMessageInput.value = '';
                 showCommentAlert('success', '{{ __("Komentar kamu berhasil dikirim dan kini tampil untuk semua orang!") }}');
+                await fetchPublicComments();
                 setTimeout(() => {
                     if (commentAlert) commentAlert.classList.add('hidden');
                 }, 5000);
