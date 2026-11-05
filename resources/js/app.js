@@ -1,6 +1,7 @@
 import './bootstrap';
 import { initLanyard } from './lanyard';
 import { initTopoBackground } from './topo-background';
+import { initScrollAnimations } from './scroll-animations';
 
 function bootLanyard() {
     const lanyardContainer = document.getElementById('lanyard-card-container');
@@ -35,6 +36,7 @@ function bootApp() {
     bootLanyard();
     initHeroTypewriter();
     initSpiderReveal();
+    initScrollAnimations();
 }
 
 function initHeroTypewriter() {
