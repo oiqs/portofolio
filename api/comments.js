@@ -1,7 +1,23 @@
 import fs from 'fs';
 
-// Seed default comments
+// Seed default comments (tetap ada meskipun serverless function restart / cold start)
 const DEFAULT_COMMENTS = [
+    {
+        id: 3,
+        name: "Raul",
+        message: "Kapan praunya",
+        avatar: "https://api.dicebear.com/7.x/adventurer/svg?seed=raul",
+        created_at: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
+        time_ago: "30 menit lalu"
+    },
+    {
+        id: 2,
+        name: "joko",
+        message: "mana palonya",
+        avatar: "https://api.dicebear.com/7.x/adventurer/svg?seed=joko",
+        created_at: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
+        time_ago: "45 menit lalu"
+    },
     {
         id: 1,
         name: "Thoriq Admin",

@@ -503,6 +503,41 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Local Storage Helper untuk memastikan komentar pengunjung tidak hilang meski server Vercel restart
+    function getLocalUserComments() {
+        try {
+            const raw = localStorage.getItem('oiq_user_comments');
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed)) return parsed;
+            }
+        } catch (e) {}
+        return [];
+    }
+
+    function saveLocalUserComment(comment) {
+        try {
+            const list = getLocalUserComments();
+            list.unshift(comment);
+            localStorage.setItem('oiq_user_comments', JSON.stringify(list.slice(0, 50)));
+        } catch (e) {}
+    }
+
+    function mergeComments(serverList) {
+        const localList = getLocalUserComments();
+        const combined = [...localList, ...(Array.isArray(serverList) ? serverList : [])];
+        const seen = new Set();
+        const result = [];
+        for (const item of combined) {
+            const key = `${(item.name || '').trim().toLowerCase()}|${(item.message || '').trim().toLowerCase()}`;
+            if (!seen.has(key)) {
+                seen.add(key);
+                result.push(item);
+            }
+        }
+        return result;
+    }
+
     // Load public comments live from shared database
     function renderComments(list) {
         if (!commentsFeed) return;
@@ -529,6 +564,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     async function fetchPublicComments() {
+        let serverComments = null;
+
         // 1. Prioritas Supabase jika diisi
         if (SUPABASE_URL && SUPABASE_ANON_KEY) {
             try {
@@ -541,8 +578,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (res.ok) {
                     const data = await res.json();
                     if (Array.isArray(data)) {
-                        renderComments(data);
-                        return;
+                        serverComments = data;
                     }
                 }
             } catch (err) {
@@ -551,19 +587,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // 2. Fetch via Endpoint API (Laravel MySQL atau Vercel Serverless Function)
-        try {
-            const res = await fetch(commentsApiUrl, {
-                headers: { 'Accept': 'application/json' }
-            });
-            if (res.ok) {
-                const json = await res.json();
-                if (json.status === 'success' && Array.isArray(json.data)) {
-                    renderComments(json.data);
+        if (!serverComments) {
+            try {
+                const res = await fetch(commentsApiUrl, {
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (res.ok) {
+                    const json = await res.json();
+                    if (json.status === 'success' && Array.isArray(json.data)) {
+                        serverComments = json.data;
+                    }
                 }
+            } catch (err) {
+                console.warn('Gagal memuat komentar dari API:', err);
             }
-        } catch (err) {
-            console.warn('Gagal memuat komentar dari API:', err);
         }
+
+        // Gabungkan komentar server dengan komentar lokal pengunjung
+        const finalComments = mergeComments(serverComments || []);
+        renderComments(finalComments);
     }
 
     // Ambil komentar saat halaman dimuat
@@ -648,6 +690,16 @@ document.addEventListener('DOMContentLoaded', function() {
             if (commentBtnText) commentBtnText.textContent = '{{ __("Kirim Komentar") }}';
 
             if (submitSuccess) {
+                // Simpan ke local storage browser agar tidak hilang di perangkat pengguna
+                saveLocalUserComment({
+                    id: Date.now(),
+                    name: name,
+                    message: message,
+                    avatar: avatar,
+                    created_at: new Date().toISOString(),
+                    time_ago: 'Baru saja'
+                });
+
                 if (commentMessageInput) commentMessageInput.value = '';
                 showCommentAlert('success', '{{ __("Komentar kamu berhasil dikirim dan kini tampil untuk semua orang!") }}');
                 await fetchPublicComments();
