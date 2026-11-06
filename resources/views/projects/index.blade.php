@@ -7,10 +7,7 @@
 <section class="max-w-6xl mx-auto px-6 md:px-10 pt-24 pb-16">
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs font-bold tracking-[0.2em] uppercase mb-4">
-                <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
-                {{ __('Dokumentasi Traveling') }}
-            </div>
+            <p class="text-xs font-bold text-accent tracking-[0.25em] uppercase mb-3">{{ __('Galeri Perjalanan') }}</p>
             
             <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] max-w-3xl">
                 {{ __('Kumpulan Destinasi & Momen Trip Pilihan') }}
