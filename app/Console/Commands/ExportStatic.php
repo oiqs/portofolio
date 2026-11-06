@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Project;
+use App\Models\Comment;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -139,6 +140,9 @@ class ExportStatic extends Command
                 }
             }
 
+            // 6. Synchronize approved comments to api/comments.js for Vercel
+            $this->syncCommentsToVercelApi();
+
             $this->info('✅ Bilingual static export completed successfully in dist/!');
             return Command::SUCCESS;
         } finally {
@@ -205,5 +209,40 @@ class ExportStatic extends Command
         $html = str_replace('[[TOKEN_EN_LANG]]', $enTarget, $html);
 
         return $html;
+    }
+
+    protected function syncCommentsToVercelApi(): void
+    {
+        $apiFile = base_path('api/comments.js');
+        if (!File::exists($apiFile)) {
+            return;
+        }
+
+        $comments = Comment::where('is_approved', true)
+            ->latest()
+            ->take(50)
+            ->get();
+
+        $commentsArray = $comments->map(function ($c) {
+            return [
+                'id' => $c->id,
+                'name' => $c->name,
+                'message' => $c->message,
+                'avatar' => $c->avatar ?: ('https://api.dicebear.com/7.x/adventurer/svg?seed=' . urlencode($c->name)),
+                'created_at' => $c->created_at ? $c->created_at->toISOString() : now()->toISOString(),
+            ];
+        })->values()->toArray();
+
+        $json = json_encode($commentsArray, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+        $content = File::get($apiFile);
+        $pattern = '/const DEFAULT_COMMENTS = \[[\s\S]*?\];/';
+        $replacement = "const DEFAULT_COMMENTS = " . $json . ";";
+
+        if (preg_match($pattern, $content)) {
+            $content = preg_replace($pattern, $replacement, $content, 1);
+            File::put($apiFile, $content);
+            $this->info("💬 Synced " . count($commentsArray) . " database comments into api/comments.js for Vercel!");
+        }
     }
 }

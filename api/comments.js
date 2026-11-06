@@ -1,30 +1,41 @@
 import fs from 'fs';
 
-// Seed default comments (tetap ada meskipun serverless function restart / cold start)
+// Seed default comments (tersinkronkan dengan database portofolio lokal)
 const DEFAULT_COMMENTS = [
     {
-        id: 3,
-        name: "Raul",
-        message: "Kapan praunya",
-        avatar: "https://api.dicebear.com/7.x/adventurer/svg?seed=raul",
-        created_at: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
-        time_ago: "30 menit lalu"
+        "id": 7,
+        "name": "Sun",
+        "message": "Deyymmmm",
+        "avatar": "https://api.dicebear.com/7.x/adventurer/svg?seed=Sun",
+        "created_at": "2026-11-05T13:28:41.000000Z"
     },
     {
-        id: 2,
-        name: "joko",
-        message: "mana palonya",
-        avatar: "https://api.dicebear.com/7.x/adventurer/svg?seed=joko",
-        created_at: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
-        time_ago: "45 menit lalu"
+        "id": 4,
+        "name": "cah mumet",
+        "message": "haoo",
+        "avatar": "https://api.dicebear.com/7.x/adventurer/svg?seed=cah%20mumet",
+        "created_at": "2026-11-05T13:13:38.000000Z"
     },
     {
-        id: 1,
-        name: "Thoriq Admin",
-        message: "Halo selamat datang di portofolio saya!",
-        avatar: "https://api.dicebear.com/7.x/adventurer/svg?seed=Thoriq+Admin",
-        created_at: new Date(Date.now() - 22 * 3600 * 1000).toISOString(),
-        time_ago: "22 jam yang lalu"
+        "id": 5,
+        "name": "Raul",
+        "message": "Kapan praunya",
+        "avatar": "https://api.dicebear.com/7.x/adventurer/svg?seed=raul",
+        "created_at": "2026-11-05T13:13:38.000000Z"
+    },
+    {
+        "id": 6,
+        "name": "joko",
+        "message": "mana palonya",
+        "avatar": "https://api.dicebear.com/7.x/adventurer/svg?seed=joko",
+        "created_at": "2026-11-05T13:13:38.000000Z"
+    },
+    {
+        "id": 1,
+        "name": "Thoriq Admin",
+        "message": "Halo selamat datang di portofolio saya!",
+        "avatar": "https://api.dicebear.com/7.x/adventurer/svg?seed=Thoriq+Admin",
+        "created_at": "2026-11-04T13:03:28.000000Z"
     }
 ];
 
@@ -36,7 +47,20 @@ function getStoredComments() {
             const data = fs.readFileSync(TMP_FILE, 'utf8');
             const parsed = JSON.parse(data);
             if (Array.isArray(parsed) && parsed.length > 0) {
-                return parsed;
+                // Gabungkan komentar yang ada di /tmp dengan DEFAULT_COMMENTS
+                const map = new Map();
+                for (const c of parsed) {
+                    if (c && c.name && c.message) {
+                        map.set(`${c.name.trim().toLowerCase()}|${c.message.trim().toLowerCase()}`, c);
+                    }
+                }
+                for (const c of DEFAULT_COMMENTS) {
+                    const key = `${c.name.trim().toLowerCase()}|${c.message.trim().toLowerCase()}`;
+                    if (!map.has(key)) {
+                        map.set(key, c);
+                    }
+                }
+                return Array.from(map.values()).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             }
         }
     } catch (e) {}
@@ -105,8 +129,7 @@ export default async function handler(req, res) {
                 name: name.trim().slice(0, 100),
                 message: message.trim().slice(0, 1000),
                 avatar: cleanAvatar,
-                created_at: new Date().toISOString(),
-                time_ago: 'Baru saja'
+                created_at: new Date().toISOString()
             };
 
             // Simpan ke Supabase jika terhubung
@@ -135,6 +158,25 @@ export default async function handler(req, res) {
             const list = getStoredComments();
             list.unshift(newComment);
             saveComments(list.slice(0, 50));
+
+            // Kirim notifikasi email ke admin via FormSubmit
+            const adminEmail = process.env.ADMIN_EMAIL || 'oiqgemink27@gmail.com';
+            try {
+                fetch(`https://formsubmit.co/ajax/${adminEmail}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: newComment.name,
+                        message: newComment.message,
+                        _subject: `Komentar Baru Buku Tamu dari ${newComment.name}`,
+                        _captcha: 'false',
+                        _template: 'table'
+                    })
+                }).catch(() => null);
+            } catch (err) {}
 
             return res.status(201).json({
                 status: 'success',

@@ -46,30 +46,47 @@ class CommentController extends Controller
         $syncedComments = 0;
         $syncedContacts = 0;
 
-        // 1. Ambil Komentar dari Vercel
+        // 1. Ambil Komentar dari Supabase atau Vercel API
         try {
-            $response = Http::timeout(10)->get('https://perjalanan-oiq.vercel.app/api/comments');
-            if ($response->successful()) {
-                $data = $response->json();
-                $commentsList = $data['data'] ?? [];
+            $supabaseUrl = env('SUPABASE_URL');
+            $supabaseKey = env('SUPABASE_ANON_KEY');
+            $commentsList = [];
 
-                foreach ($commentsList as $item) {
-                    if (empty($item['name']) || empty($item['message'])) continue;
+            if ($supabaseUrl && $supabaseKey) {
+                $sbRes = Http::withHeaders([
+                    'apikey' => $supabaseKey,
+                    'Authorization' => "Bearer {$supabaseKey}",
+                ])->timeout(10)->get("{$supabaseUrl}/rest/v1/comments?select=*&order=created_at.desc&limit=50");
 
-                    $exists = Comment::where('name', $item['name'])
-                        ->where('message', $item['message'])
-                        ->exists();
+                if ($sbRes->successful()) {
+                    $commentsList = $sbRes->json() ?? [];
+                }
+            }
 
-                    if (!$exists) {
-                        Comment::create([
-                            'name' => $item['name'],
-                            'message' => $item['message'],
-                            'avatar' => $item['avatar'] ?? null,
-                            'is_approved' => true,
-                            'created_at' => !empty($item['created_at']) ? $item['created_at'] : now(),
-                        ]);
-                        $syncedComments++;
-                    }
+            if (empty($commentsList)) {
+                $response = Http::timeout(10)->get('https://perjalanan-oiq.vercel.app/api/comments');
+                if ($response->successful()) {
+                    $data = $response->json();
+                    $commentsList = $data['data'] ?? [];
+                }
+            }
+
+            foreach ($commentsList as $item) {
+                if (empty($item['name']) || empty($item['message'])) continue;
+
+                $exists = Comment::where('name', $item['name'])
+                    ->where('message', $item['message'])
+                    ->exists();
+
+                if (!$exists) {
+                    Comment::create([
+                        'name' => $item['name'],
+                        'message' => $item['message'],
+                        'avatar' => $item['avatar'] ?? null,
+                        'is_approved' => true,
+                        'created_at' => !empty($item['created_at']) ? $item['created_at'] : now(),
+                    ]);
+                    $syncedComments++;
                 }
             }
         } catch (\Throwable $e) {

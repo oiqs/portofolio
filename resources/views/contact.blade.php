@@ -62,7 +62,7 @@
                 <label for="email" class="block text-sm font-medium tracking-wide mb-3">{{ __('Alamat Email') }}</label>
                 <input type="email" name="email" id="email" required value="{{ old('email') }}"
                     class="w-full px-5 py-4 rounded-xl border border-ink/10 bg-transparent focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none transition-all placeholder:text-muted/50"
-                    placeholder="email@domain.com">
+                    placeholder="email@gmail.com">
                 @error('email')
                     <p class="text-sm text-red-400 mt-2">{{ $message }}</p>
                 @enderror
@@ -204,8 +204,8 @@
                                         <h4 class="font-display font-bold text-sm tracking-wide text-ink dark:text-white truncate">
                                             {{ $item->name }}
                                         </h4>
-                                        <span class="text-[11px] text-muted whitespace-nowrap">
-                                            {{ $item->created_at->diffForHumans() }}
+                                        <span class="text-[11px] text-muted whitespace-nowrap" data-created-at="{{ $item->created_at ? $item->created_at->toISOString() : '' }}">
+                                            {{ $item->created_at ? $item->created_at->diffForHumans() : 'Baru saja' }}
                                         </span>
                                     </div>
                                     <p class="text-sm text-ink/80 dark:text-gray-300 leading-relaxed break-words whitespace-pre-line">
@@ -459,7 +459,8 @@ document.addEventListener('DOMContentLoaded', function() {
         div.className = 'comment-card p-5 rounded-2xl bg-ink/[0.02] dark:bg-white/[0.02] border border-ink/5 dark:border-white/5 hover:border-accent/30 transition-all duration-300 animate-fadeIn';
         
         const avatarUrl = comment.avatar || `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(comment.name)}`;
-        const timeAgo = comment.time_ago || (comment.created_at ? formatTimeAgo(comment.created_at) : 'Baru saja');
+        const isEn = document.documentElement.lang === 'en' || window.location.pathname.startsWith('/en');
+        const timeAgo = comment.created_at ? formatTimeAgo(comment.created_at) : (comment.time_ago || (isEn ? 'Just now' : 'Baru saja'));
 
         div.innerHTML = `
             <div class="flex items-start gap-4">
@@ -491,13 +492,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const date = dateInput instanceof Date ? dateInput : new Date(dateInput);
             if (isNaN(date.getTime())) return 'Baru saja';
             const seconds = Math.max(0, Math.floor((new Date() - date) / 1000));
-            if (seconds < 60) return 'Baru saja';
+            const isEn = document.documentElement.lang === 'en' || window.location.pathname.startsWith('/en');
+
+            if (seconds < 60) return isEn ? 'Just now' : 'Baru saja';
             const minutes = Math.floor(seconds / 60);
-            if (minutes < 60) return `${minutes} menit lalu`;
+            if (minutes < 60) return isEn ? `${minutes} minute${minutes > 1 ? 's' : ''} ago` : `${minutes} menit yang lalu`;
             const hours = Math.floor(minutes / 60);
-            if (hours < 24) return `${hours} jam lalu`;
+            if (hours < 24) return isEn ? `${hours} hour${hours > 1 ? 's' : ''} ago` : `${hours} jam yang lalu`;
             const days = Math.floor(hours / 24);
-            return `${days} hari lalu`;
+            if (days < 30) return isEn ? `${days} day${days > 1 ? 's' : ''} ago` : `${days} hari yang lalu`;
+            const months = Math.floor(days / 30);
+            if (months < 12) return isEn ? `${months} month${months > 1 ? 's' : ''} ago` : `${months} bulan yang lalu`;
+            const years = Math.floor(days / 365);
+            return isEn ? `${years} year${years > 1 ? 's' : ''} ago` : `${years} tahun yang lalu`;
         } catch (e) {
             return 'Baru saja';
         }
@@ -535,7 +542,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 result.push(item);
             }
         }
-        return result;
+        return result.sort((a, b) => {
+            const timeA = a.created_at ? new Date(a.created_at).getTime() : 0;
+            const timeB = b.created_at ? new Date(b.created_at).getTime() : 0;
+            return timeB - timeA;
+        });
     }
 
     // Load public comments live from shared database
@@ -554,10 +565,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         list.forEach(item => {
             commentsFeed.appendChild(createCommentElement({
+                id: item.id,
                 name: item.name,
                 message: item.message,
                 avatar: item.avatar,
-                time_ago: item.time_ago || (item.created_at ? formatTimeAgo(item.created_at) : 'Baru saja')
+                created_at: item.created_at,
+                time_ago: item.time_ago
             }));
         });
         if (countBadge) countBadge.textContent = `${list.length} {{ __('Komentar') }}`;
@@ -607,6 +620,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const finalComments = mergeComments(serverComments || []);
         renderComments(finalComments);
     }
+
+    // Perbarui waktu relatif awal pada komentar bawaan HTML
+    document.querySelectorAll('#comments-feed .comment-card [data-created-at]').forEach(span => {
+        const dt = span.getAttribute('data-created-at');
+        if (dt) {
+            span.textContent = formatTimeAgo(dt);
+        }
+    });
 
     // Ambil komentar saat halaman dimuat
     fetchPublicComments();
