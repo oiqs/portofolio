@@ -241,24 +241,9 @@
                 <h3 class="font-display text-3xl sm:text-4xl font-bold">{{ __('Hal Yang Saya Sukai') }}</h3>
             </div>
 
-            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($skills as $index => $skill)
-                    <div class="scroll-reveal border border-ink/10 dark:border-white/10 bg-white/85 dark:bg-[#121620]/90 backdrop-blur-xl shadow-md shadow-black/5 dark:shadow-black/25 rounded-2xl p-6 hover:border-accent/40 transition-all duration-500 hover:-translate-y-1 group"
-                         data-scroll="fade-up" data-scroll-delay="{{ ($index % 3) * 100 }}">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="font-display text-xl font-semibold group-hover:text-accent transition-colors">{{ __($skill['name'] ?? $skill->name ?? '') }}</span>
-                            <span class="text-xs font-semibold px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent tracking-wide uppercase">
-                                {{ __($skill['level'] ?? $skill->level ?? '') }}
-                            </span>
-                        </div>
-                        <div class="w-full bg-ink/10 dark:bg-white/10 h-1.5 rounded-full overflow-hidden">
-                            @php
-                                $lvl = $skill['level'] ?? $skill->level ?? '';
-                                $width = ($lvl === 'Sangat Suka') ? '95%' : (($lvl === 'Favorit') ? '85%' : '75%');
-                            @endphp
-                            <div class="bg-accent h-full rounded-full transition-all duration-1000" style="width: {{ $width }}"></div>
-                        </div>
-                    </div>
+                    <x-hobby-card :skill="$skill" :index="$index" class="scroll-reveal" data-scroll="fade-up" :data-scroll-delay="($index % 3) * 100" />
                 @endforeach
             </div>
         </div>

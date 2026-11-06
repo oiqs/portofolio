@@ -77,19 +77,9 @@
         <h2 class="font-display text-3xl sm:text-4xl">{{ __('Hal Yang Saya Sukai') }}</h2>
     </div>
 
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-        @foreach ($skills as $skill)
-            <div class="border border-ink/10 dark:border-white/10 bg-white/85 dark:bg-[#121620]/90 backdrop-blur-xl shadow-md shadow-black/5 dark:shadow-black/25 rounded-2xl p-6 hover:border-accent/40 transition-all duration-500 hover:-translate-y-1 group">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="font-display text-xl font-semibold group-hover:text-accent transition-colors">{{ __($skill['name']) }}</span>
-                    <span class="text-xs font-semibold px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent tracking-wide uppercase">
-                        {{ __($skill['level']) }}
-                    </span>
-                </div>
-                <div class="w-full bg-ink/10 dark:bg-white/10 h-1.5 rounded-full overflow-hidden">
-                    <div class="bg-accent h-full rounded-full transition-all duration-1000" style="width: {{ $skill['level'] === 'Sangat Suka' ? '95%' : ($skill['level'] === 'Favorit' ? '85%' : '75%') }}"></div>
-                </div>
-            </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        @foreach ($skills as $index => $skill)
+            <x-hobby-card :skill="$skill" :index="$index" />
         @endforeach
     </div>
 </section>
